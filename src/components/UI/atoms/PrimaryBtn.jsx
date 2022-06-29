@@ -4,9 +4,7 @@ import { Button } from "@mui/material";
 
 export default function PrimaryBtn ({buttonLabel,onClickCallback }) {
   return (
-    <div>
-      <Button variant="contained" onClick={onClickCallback}>{buttonLabel}</Button>
-    </div>
+      <Button sx={{display: 'block', width: '100%'}} variant="contained" onClick={onClickCallback}>{buttonLabel}</Button>
   );
 }
 
