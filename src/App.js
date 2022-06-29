@@ -1,28 +1,19 @@
 import "./App.css";
-
 import React from "react";
 import axios from "axios";
+import Login from './components/pages/Login.jsx'
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
 
-const BACKEND_URL =
-  process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
-
-// TEST - TO REMOVE
-const testReq = () => {
-  axios.get(`${BACKEND_URL}/test`).then((result) => {
-    console.log(result);
-  });
-};
+// const BACKEND_URL =
+//   process.env.REACT_APP_BACKEND_URL || "http://localhost:3004";
 
 function App() {
   return (
-    <div className="App">
-      <button type="button" onClick={testReq}>
-        Test!
-      </button>
-    </div>
+      <div className="App" >
+        <Login />      
+      </div>
   );
 }
 
