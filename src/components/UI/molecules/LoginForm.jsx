@@ -12,7 +12,6 @@ export default function LoginForm () {
         display: 'inline-flex',
         flexDirection: 'column',
         rowGap: '10px',
-        width: '70%'
       }}
       >
         <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} />
