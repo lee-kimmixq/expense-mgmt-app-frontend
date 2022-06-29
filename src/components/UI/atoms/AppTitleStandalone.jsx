@@ -3,9 +3,7 @@ import React from "react";
 
 export default function AppTitleStandalone () {
   return (
-    <div>
       <h1>make cents</h1>
-    </div>
   );
 }
 
