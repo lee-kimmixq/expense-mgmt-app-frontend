@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from "@mui/material/CssBaseline";
+import Container from '@mui/material/Container';
+
 
 const theme = createTheme({
   palette: {
@@ -36,7 +38,9 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-        <App />
+        <Container maxWidth="sm">
+          <App />
+        </Container>
     </ ThemeProvider>
   </React.StrictMode>
 );
