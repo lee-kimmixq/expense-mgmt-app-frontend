@@ -5,7 +5,6 @@ import { TextField } from "@mui/material";
 export default function InputField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange}) {
 
   return (
-    <div>
       <TextField 
         id={fieldName}
         label={fieldLabel}
@@ -13,8 +12,8 @@ export default function InputField ({fieldName, fieldType, isRequired, fieldLabe
         helperText={fieldHelperText}
         onChange={handleChange}
         required={isRequired}
+        size="small"
         />
-    </div>
   );
 }
 
