@@ -38,9 +38,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-        <Container maxWidth="sm">
           <App />
-        </Container>
     </ ThemeProvider>
   </React.StrictMode>
 );
