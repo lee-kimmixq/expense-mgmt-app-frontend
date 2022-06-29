@@ -3,11 +3,41 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from "@mui/material/CssBaseline";
+
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#5948D3',
+      contrastText: '#EFEFEF',
+    },
+    secondary: {
+      main: '#CF65F2',
+    },
+    background: {
+      default: '#262431',
+    },
+    text: {
+      primary: '#EFEFEF',
+      disabled: '#B4B4B4',
+      secondary: '#B4B4B4',
+      hint: '#EFEFEF',
+    },
+    info: {
+      main: '#CF65F2',
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline enableColorScheme />
+        <App />
+    </ ThemeProvider>
   </React.StrictMode>
 );
 
