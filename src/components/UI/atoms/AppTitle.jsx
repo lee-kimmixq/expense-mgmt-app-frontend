@@ -4,8 +4,8 @@ import React from "react";
 export default function AppTitle () {
   return (
     <div>
-      <h1 style={{textDecoration:'line-through'}}>make sense</h1>
-      <h1>make cents</h1>
+      <h1 style={{textDecoration:'line-through', fontWeight: 'normal', margin:0}}>make sense</h1>
+      <h1 style={{marginTop:'-10px'}}>make cents</h1>
     </div>
   );
 }
