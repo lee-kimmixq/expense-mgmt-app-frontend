@@ -29,6 +29,14 @@ const theme = createTheme({
       main: '#CF65F2',
     },
   },
+  typography: {
+    fontFamily: 'Poppins',
+    fontSize: 15,
+    button: {
+      textTransform: 'none',
+      fontSize: 15,
+    },
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
