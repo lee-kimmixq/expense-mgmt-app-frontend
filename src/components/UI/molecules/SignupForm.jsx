@@ -19,7 +19,7 @@ export default function SignupForm () {
         <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'email'} isRequired={true}/>
         <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'password'} isRequired={true}/>
         <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'re-type password'} isRequired={true}/>
-        <PrimaryBtn buttonLabel={'Create Account'} />
+        <PrimaryBtn marginTop={'20px'} buttonLabel={'Create Account'} />
       </Box>
       
   );
