@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "@mui/material";
 // import axios from "axios";
 
-export default function PrimaryBtn ({buttonLabel,onClickCallback }) {
+export default function PrimaryBtn ({buttonLabel,onClickCallback, marginTop }) {
   return (
-      <Button sx={{display: 'block', width: '100%'}} variant="contained" onClick={onClickCallback}>{buttonLabel}</Button>
+      <Button sx={{display: 'block', width: '100%', marginTop: {marginTop}}} variant="contained" onClick={onClickCallback}>{buttonLabel}</Button>
   );
 }
 

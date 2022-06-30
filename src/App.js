@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import axios from "axios";
-import Login from './components/pages/Login.jsx'
+import SignupForm from "./components/UI/molecules/SignupForm";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
       <div className="App" >
-        <Login />      
+        <SignupForm />      
       </div>
   );
 }
