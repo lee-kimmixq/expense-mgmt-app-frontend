@@ -5,6 +5,6 @@ import { Tab } from "@mui/material";
 export default function NavTab ({tabName, tabValue}) {
 
   return (
-      <Tab value={tabName} label={tabValue} />
+      <Tab value={tabValue} label={tabName} />
   );
 }
