@@ -1,8 +1,10 @@
 import "./App.css";
 import React from "react";
 import axios from "axios";
-// import ListTxn from "./components/UI/organisms/ListTxn.jsx"
-import Dashboard from "./components/pages/Dashboard.jsx"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './components/pages/Dashboard.jsx';
+import Login from './components/pages/Login.jsx';
+import Signup from './components/pages/Signup';
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -12,9 +14,18 @@ axios.defaults.withCredentials = true;
 
 function App() {
   return (
-      <div className="App" >
-        <Dashboard />      
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            {/* <Route path="/" element={<App />}> */}
+              <Route path="home" element={<Dashboard />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+            {/* </Route> */}
+          </Routes>
+        </BrowserRouter>
       </div>
+      
   );
 }
 
