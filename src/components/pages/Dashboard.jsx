@@ -5,6 +5,8 @@ import Box from "@mui/material/Box"
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx"
 import LinkTxt from "../UI/atoms/LinkTxt.jsx";
+import NavBar from "../UI/organisms/NavBar.jsx"
+
 // import axios from "axios";
 
 export default function Login () {
@@ -64,6 +66,7 @@ export default function Login () {
       <ExpIncNav />
       <ListTxn txns={testTxns}/>
       <LinkTxt linkText={'View all'} linkURL={'#'} />
+      <NavBar />
     </Box>
   );
 }
