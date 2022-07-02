@@ -3,7 +3,7 @@ import React from "react";
 
 export default function PageHeader ({pageTitle}) {
   return (
-      <h1>{pageTitle}</h1>
+      <h1 className="page-header">{pageTitle}</h1>
   );
 }
 
