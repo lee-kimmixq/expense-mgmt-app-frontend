@@ -13,6 +13,7 @@ export default function ExpIncNav ({tabName, tabValue}) {
   return (
     <Box>
       <Tabs
+        variant="fullWidth"
         value={value}
         onChange={handleChange}
         textColor="secondary"
