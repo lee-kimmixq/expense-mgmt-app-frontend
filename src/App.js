@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import axios from "axios";
 import Signup from "./components/pages/Signup.jsx";
+import Login from "./components/pages/Login.jsx";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -11,9 +12,9 @@ axios.defaults.withCredentials = true;
 
 function App() {
   return (
-      <div className="App" >
-        <Signup />      
-      </div>
+    <div className="App">
+      <Login />
+    </div>
   );
 }
 
