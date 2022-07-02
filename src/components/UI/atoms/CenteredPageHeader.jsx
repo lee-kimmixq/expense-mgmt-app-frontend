@@ -1,9 +1,9 @@
 import React from "react";
 // import axios from "axios";
 
-export default function AppTitleStandalone () {
+export default function CenteredPageHeader ({text}) {
   return (
-      <h1>make cents</h1>
+      <h1>{text}</h1>
   );
 }
 
