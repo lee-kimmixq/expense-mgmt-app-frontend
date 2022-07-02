@@ -10,6 +10,38 @@ import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 export default function Login () {
   const username = 'Robert';
   const total = '$1,289.03'
+  const testTxns = [
+    {
+      id: 1,
+      catName: 'fnb',
+      txnName: 'KFC',
+      amount: '$34',
+    },
+    {
+      id: 2,
+      catName: 'transport',
+      txnName: 'Grab',
+      amount: '$11',
+    },
+    {
+      id: 3,
+      catName: 'fnb',
+      txnName: 'KFC',
+      amount: '$34',
+    },
+    {
+      id: 4,
+      catName: 'transport',
+      txnName: 'Grab',
+      amount: '$11',
+    },
+    {
+      id: 5,
+      catName: 'fnb',
+      txnName: 'KFC',
+      amount: '$34',
+    },
+  ]
 
   return (
     <Box
@@ -30,7 +62,7 @@ export default function Login () {
       </Box>
       <TotalValuePrimary value={total} />
       <ExpIncNav />
-      <ListTxn />
+      <ListTxn txns={testTxns}/>
       <LinkTxt linkText={'View all'} linkURL={'#'} />
     </Box>
   );
