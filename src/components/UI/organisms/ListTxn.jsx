@@ -22,6 +22,24 @@ export default function ListTxn () {
       txnName: 'Grab',
       amount: '$11',
     },
+    {
+      id: 3,
+      catName: 'fnb',
+      txnName: 'KFC',
+      amount: '$34',
+    },
+    {
+      id: 4,
+      catName: 'transport',
+      txnName: 'Grab',
+      amount: '$11',
+    },
+    {
+      id: 5,
+      catName: 'fnb',
+      txnName: 'KFC',
+      amount: '$34',
+    },
   ]
 
   const txnList = testTxns.length === 0 ? <p>No Transactions Available</p> : testTxns.map((txn) => (
