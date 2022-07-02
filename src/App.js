@@ -3,6 +3,8 @@ import React from "react";
 import axios from "axios";
 import Signup from "./components/pages/Signup.jsx";
 import Login from "./components/pages/Login.jsx";
+// import ListTxn from "./components/UI/organisms/ListTxn.jsx"
+import Dashboard from "./components/pages/Dashboard.jsx";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;

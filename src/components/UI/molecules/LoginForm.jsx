@@ -14,6 +14,7 @@ export default function LoginForm () {
         rowGap: '10px',
       }}
       >
+
         <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} />
         <InputField fieldName={'loginPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true}/>
         <PrimaryBtn buttonLabel={'Login'} />
