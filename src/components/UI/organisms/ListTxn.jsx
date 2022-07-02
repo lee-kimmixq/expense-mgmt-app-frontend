@@ -24,4 +24,4 @@ export default function ListTxn ({textValue}) {
         </ListItem>,
     </List>  
   );
-}
+};
