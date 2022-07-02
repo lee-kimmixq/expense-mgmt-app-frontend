@@ -11,7 +11,11 @@ export default function ListTxn ({textValue}) {
 
   return (
     <List dense={true}>
-        <ListItem>
+        <ListItem
+          secondaryAction={
+            <ListTxnText ege="end" textValue={'$34'}/>
+          }
+        >
           <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
             <ListItemAvatar>
             <CategoryAvatar categoryName={'fnb'}/>
@@ -19,7 +23,6 @@ export default function ListTxn ({textValue}) {
           <ListTxnText textValue={'test'}/>
           </Box>
           <Box>
-            <ListTxnText ege="end" textValue={'$34'}/>
           </Box>
         </ListItem>,
     </List>  
