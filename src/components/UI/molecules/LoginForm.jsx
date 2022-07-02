@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box"
 // import axios from "axios";
 
 export default function LoginForm () {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <Box
       component="form"
