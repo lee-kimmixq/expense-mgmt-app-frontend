@@ -9,7 +9,7 @@
   height: 896px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   background: linear-gradient(180deg, #322f42 0%, #262431 100%);
 }
 

@@ -52,6 +52,7 @@ export default function Login () {
         flexDirection: 'column',
         rowGap: '10px',
         width: '70%',
+        marginTop: '10vmin'
       }}
     >
       

@@ -15,7 +15,8 @@ export default function TxnForm () {
           display: 'inline-flex',
           flexDirection: 'column',
           rowGap: '10px',
-          width: '60%',
+          width: '70%',
+          justifyContent: 'center',
         }}
       >
       {/* <CenteredPageHeader text={'Get Started'} /> */}

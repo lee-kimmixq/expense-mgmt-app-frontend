@@ -11,29 +11,29 @@ import TxnDate from "../atoms/TxnDate.jsx";
 export default function ListTxnsByDate ({txns}) {
 
   const txnList = txns.length === 0 ? <p>No Transactions Available</p> : txns.map((txn) => (
-    <ListItem
-      disableGutters
-      secondaryAction={
-        <ListTxnText ege="end" textValue={txn.amount}/>
-      }
-      key={`txn${txn.id}`}
-    >
-      <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-        <ListItemAvatar>
-          <CategoryAvatar categoryName={txn.catName}/>
-        </ListItemAvatar>
-        <ListTxnText textValue={txn.txnName}/>
-      </Box>
-    </ListItem>
+    <Box>
+      <TxnDate dateValue={'22 June 2022'} />
+      <ListItem
+        disableGutters
+        secondaryAction={
+          <ListTxnText ege="end" textValue={txn.amount}/>
+        }
+        key={`txn${txn.id}`}
+      >
+        <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+          <ListItemAvatar>
+            <CategoryAvatar categoryName={txn.catName}/>
+          </ListItemAvatar>
+          <ListTxnText textValue={txn.txnName}/>
+        </Box>
+      </ListItem>
+    </Box>
+    
   ));
 
   return (
-    <Box>
-      <TxnDate dateValue={'22 June 2022'} />
       <List dense>
           {txnList}
-      </List>  
-    </Box>
-    
+      </List>
   );
 };

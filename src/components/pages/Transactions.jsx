@@ -49,6 +49,7 @@ export default function Transactions () {
         flexDirection: 'column',
         rowGap: '10px',
         width: '70%',
+        marginTop: '10vmin'
       }}
     >
       
