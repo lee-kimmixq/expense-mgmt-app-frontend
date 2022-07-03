@@ -22,7 +22,7 @@ function App() {
               <Route path="home" element={<Dashboard />} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
-              <Route path="add" element={<TxnForm />} />
+              <Route path="txn/add" element={<TxnForm />} />
             {/* </Route> */}
           </Routes>
         </BrowserRouter>
