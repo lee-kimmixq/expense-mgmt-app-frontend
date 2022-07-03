@@ -4,6 +4,7 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
+import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
 
 // import axios from "axios";
 
@@ -48,12 +49,21 @@ export default function Transactions () {
         display: 'inline-flex',
         flexDirection: 'column',
         rowGap: '10px',
-        width: '70%',
+        width: '80%',
         marginTop: '10vmin'
       }}
     >
-      
-      <PageHeader pageTitle={`Transactions`} />
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
+        <PageHeader pageTitle={`Transactions`} />
+        <Box>
+          <GenerateIcon name={'tune'} />
+          <GenerateIcon name={'sort'} />
+        </Box>
+      </Box>
       <TxnsNav />
       <ListTxnsByDate txns={testTxns} />
       <NavBar />

@@ -15,7 +15,7 @@ export default function TxnForm () {
           display: 'inline-flex',
           flexDirection: 'column',
           rowGap: '10px',
-          width: '70%',
+          width: '80%',
           justifyContent: 'center',
         }}
       >
