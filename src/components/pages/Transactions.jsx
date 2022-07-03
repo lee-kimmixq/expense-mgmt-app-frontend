@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box"
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import NavBar from "../UI/organisms/NavBar.jsx"
+import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 
 // import axios from "axios";
 
@@ -18,7 +19,7 @@ export default function Transactions () {
     >
       
       <PageHeader pageTitle={`Transactions`} />
-      
+      <TxnsNav />
       <NavBar />
     </Box>
   );
