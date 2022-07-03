@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/pages/Dashboard.jsx';
 import Login from './components/pages/Login.jsx';
 import Signup from './components/pages/Signup';
-import AddTxn from "./components/pages/AddTxn";
+import TxnForm from "./components/pages/TxnForm";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -22,7 +22,7 @@ function App() {
               <Route path="home" element={<Dashboard />} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
-              <Route path="add" element={<AddTxn />} />
+              <Route path="add" element={<TxnForm />} />
             {/* </Route> */}
           </Routes>
         </BrowserRouter>

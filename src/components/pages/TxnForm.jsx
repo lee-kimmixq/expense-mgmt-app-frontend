@@ -5,9 +5,10 @@ import AddTxnForm from "../UI/molecules/AddTxnForm.jsx";
 import UploadReceiptBtn from "../UI/molecules/UploadReceiptBtn.jsx";
 import GenerateIconLarge from "../UI/atoms/GenerateIconLarge.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
+import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 // import axios from "axios";
 
-export default function AddTxn () {
+export default function TxnForm () {
   return (
     <Box
       sx={{
@@ -22,6 +23,7 @@ export default function AddTxn () {
       <UploadReceiptBtn />
       <AddTxnForm />
       <NavBar />  
+      <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} />
     </Box>
       
   );
