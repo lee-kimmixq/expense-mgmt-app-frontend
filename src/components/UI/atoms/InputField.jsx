@@ -1,6 +1,5 @@
 import React from "react";
 import { TextField } from "@mui/material";
-// import axios from "axios";
 
 export default function InputField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange, fieldValue}) {
 
@@ -9,6 +8,7 @@ export default function InputField ({fieldName, fieldType, isRequired, fieldLabe
         InputLabelProps={{ 
           required: false,
          }}
+        // sx={{input: {textAlign: 'center'}}}
         id={fieldName}
         label={fieldLabel}
         type={fieldType}

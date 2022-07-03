@@ -51,7 +51,7 @@ export default function Login () {
         display: 'inline-flex',
         flexDirection: 'column',
         rowGap: '10px',
-        width: '70%',
+        width: '80%',
         marginTop: '10vmin'
       }}
     >
