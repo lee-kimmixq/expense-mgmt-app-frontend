@@ -8,10 +8,11 @@ export default function Login () {
   return (
     <Box
     sx={{
-        display: 'inline-flex',
-        flexDirection: 'column',
-        rowGap: '10px',
-        width: '60%',
+      display: 'inline-flex',
+      flexDirection: 'column',
+      rowGap: '10px',
+      width: '70%',
+      justifyContent: 'center',
       }}
     >
     <AppTitle />

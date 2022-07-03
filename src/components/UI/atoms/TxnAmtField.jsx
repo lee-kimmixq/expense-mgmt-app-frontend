@@ -9,12 +9,13 @@ export default function TxnAmtField ({fieldName, fieldType, isRequired, fieldLab
         InputLabelProps={{ 
           required: false,
          }}
-         InputProps={{
+        InputProps={{
           style: {
             fontWeight: 'bolder',
             fontSize: 'xx-large',
           }
          }}
+        // sx={{input: {textAlign: 'center'}}}
         id={fieldName}
         label={fieldLabel}
         type={fieldType}

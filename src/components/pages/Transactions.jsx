@@ -1,17 +1,15 @@
 import React from "react";
-import ExpIncNav from "../UI/molecules/ExpIncNav.jsx";
-import ListTxn from "../UI/organisms/ListTxn.jsx";
 import Box from "@mui/material/Box"
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
-import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx"
-import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
+import TxnsNav from "../UI/molecules/TxnsNav.jsx";
+import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
+import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
 
 // import axios from "axios";
 
-export default function Login () {
-  const username = 'Robert';
-  const total = '$1,289.03'
+export default function Transactions () {
+
   const testTxns = [
     {
       id: 1,
@@ -55,18 +53,19 @@ export default function Login () {
         marginTop: '10vmin'
       }}
     >
-      
-      <PageHeader pageTitle={`Hello ${username}`} />
       <Box sx={{
-        // width: 300,
-        width: '100%',
-        height: 200,
-        backgroundColor: 'primary.dark'}}>
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
+        <PageHeader pageTitle={`Transactions`} />
+        <Box>
+          <GenerateIcon name={'tune'} />
+          <GenerateIcon name={'sort'} />
+        </Box>
       </Box>
-      <TotalValuePrimary value={total} />
-      <ExpIncNav />
-      <ListTxn txns={testTxns}/>
-      <LinkTxt linkText={'View all'} linkURL={'#'} />
+      <TxnsNav />
+      <ListTxnsByDate txns={testTxns} />
       <NavBar />
     </Box>
   );
