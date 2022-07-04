@@ -9,7 +9,7 @@ import NavBar from "../UI/organisms/NavBar.jsx"
 
 // import axios from "axios";
 
-export default function Login () {
+export default function Dashboard () {
   const username = 'Robert';
   const total = '$1,289.03'
   const testTxns = [
