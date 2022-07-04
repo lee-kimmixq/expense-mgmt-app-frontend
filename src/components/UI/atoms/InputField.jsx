@@ -16,7 +16,7 @@ export default function InputField ({fieldName, fieldType, isRequired, fieldLabe
         helperText={fieldHelperText}
         onChange={handleChange}
         required={isRequired}
-        defaultValue={fieldValue}
+        // defaultValue={fieldValue}
         size="small"
         />
   );
