@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Alert from "@mui/material/Alert";
@@ -15,9 +16,11 @@ export default function SignupForm () {
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
   const [shouldFetch, setShouldFetch] = useState(false); 
 
+  let navigate = useNavigate();
+
   const onSuccess = (data) => {
     setShouldFetch(false);
-    if (data.signup) console.log('yay');
+    if (data.signup) navigate("/login", { replace: true });
   }
 
   const onError = (error) => {
