@@ -1,47 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box"
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
 import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
-
-// import axios from "axios";
+import { firstDay, lastDay } from "../../utils/getMonthFirstLastDate.mjs"
+import fetcherGet from "../../utils/fetcherGet.mjs"
+import useSWR from "swr";
 
 export default function Transactions () {
+  const [txns, setTxns] = useState([]);
+  const [shouldFetch, setShouldFetch] = useState(true);
 
-  const testTxns = [
-    {
-      id: 1,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-    {
-      id: 2,
-      catName: 'transport',
-      txnName: 'Grab',
-      amount: '$11',
-    },
-    {
-      id: 3,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-    {
-      id: 4,
-      catName: 'transport',
-      txnName: 'Grab',
-      amount: '$11',
-    },
-    {
-      id: 5,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-  ]
+  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDay}&txnDateMax=${lastDay}`] : null, fetcherGet);
+
+  if (data) {
+    setShouldFetch(false);
+    setTxns(data.transactions);
+    console.log(data);
+  }
 
   return (
     <Box
@@ -65,7 +43,7 @@ export default function Transactions () {
         </Box>
       </Box>
       <TxnsNav />
-      <ListTxnsByDate txns={testTxns} />
+      <ListTxnsByDate txns={txns} />
       <NavBar />
     </Box>
   );

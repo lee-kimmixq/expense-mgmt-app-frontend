@@ -12,19 +12,19 @@ export default function ListTxnsByDate ({txns}) {
 
   const txnList = txns.length === 0 ? <p>No Transactions Available</p> : txns.map((txn) => (
     <Box>
-      <TxnDate dateValue={'22 June 2022'} />
+      <TxnDate dateValue={txn.txnDate} />
       <ListItem
         disableGutters
         secondaryAction={
-          <ListTxnText ege="end" textValue={txn.amount}/>
+          <ListTxnText ege="end" textValue={`$${txn.amount}`}/>
         }
-        key={`txn${txn.id}`}
+        // key={`txn${txn.id}`}
       >
         <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
           <ListItemAvatar>
-            <CategoryAvatar categoryName={txn.catName}/>
+            <CategoryAvatar categoryName={txn.categories[0].name}/>
           </ListItemAvatar>
-          <ListTxnText textValue={txn.txnName}/>
+          <ListTxnText textValue={txn.title}/>
         </Box>
       </ListItem>
     </Box>
