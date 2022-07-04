@@ -39,7 +39,7 @@ export default function AddTxnForm ({ txnId }) {
       setShouldFetch(false);
       console.log(data);
       setAmount(data.amount);
-      setTxnDate(new Date(txnDate));
+      setTxnDate(new Date(data.txnDate));
       setTitle(data.title);
       setCategoryId(data.categories[0].id);
     }
