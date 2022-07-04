@@ -8,10 +8,12 @@ import ListTxnText from "../atoms/ListTxnText.jsx";
 import TxnDate from "../atoms/TxnDate.jsx";
 
 export default function ListTxnsByDate ({txns}) {
-
-  const txnList = txns.length === 0 ? <p>No Transactions Available</p> : txns.map((txn) => (
+  let previousDate = "";
+  const txnList = txns.length === 0 ? <p>No Transactions Available</p> : txns.map((txn) => { 
+    const currentDate = new Date(txn.txnDate).toLocaleDateString('en-gb', { year:"numeric", month:"short", day:"numeric"});
+    const listItemJsx = (
     <Box>
-      <TxnDate dateValue={new Date(txn.txnDate).toLocaleDateString('en-gb', { year:"numeric", month:"short", day:"numeric"})} />
+      {previousDate !== currentDate && <TxnDate dateValue={new Date(txn.txnDate).toLocaleDateString('en-gb', { year:"numeric", month:"short", day:"numeric"})} />}
       <ListItem
         disableGutters
         secondaryAction={
@@ -26,9 +28,11 @@ export default function ListTxnsByDate ({txns}) {
           <ListTxnText textValue={txn.title}/>
         </Box>
       </ListItem>
-    </Box>
-    
-  ));
+    </Box> 
+    )
+    previousDate = currentDate;
+    return listItemJsx;
+  });
 
   return (
       <List dense>
