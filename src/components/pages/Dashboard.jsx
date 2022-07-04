@@ -12,19 +12,31 @@ import useSWR from "swr";
 
 export default function Dashboard () {
   const [username, setUsername] = useState("");
-  const [total, setTotal] = useState("");
-  const [txns, setTxns] = useState([]);
-  const [shouldFetch, setShouldFetch] = useState(true);
+  const [totalExpense, setTotalExpense] = useState("");
+  const [totalIncome, setTotalIncome] = useState("");
+  const [expenseTxns, setExpenseTxns] = useState([]);
+  const [incomeTxns, setIncomeTxns] = useState([]);
+  const [shouldFetchExp, setShouldFetchExp] = useState(true);
+  const [shouldFetchInc, setShouldFetchInc] = useState(true);
+  const [tabFocus, setTabFocus] = useState("one");
 
-  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);  
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
 
+  if (expenseData) {
+    console.log(expenseData);
+    setShouldFetchExp(false);
+    setUsername(expenseData.user);
+    setTotalExpense(`$${expenseData.totalAmount}`);
+    setExpenseTxns(expenseData.transactions);
+  }
 
-  if (data) {
-    console.log(data);
-    setShouldFetch(false);
-    setUsername(data.user);
-    setTotal(`$${data.totalAmount}`);
-    setTxns(data.transactions);
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
+
+  if (incomeData) {
+    console.log(incomeData);
+    setShouldFetchInc(false);
+    setTotalIncome(`$${incomeData.totalAmount}`);
+    setIncomeTxns(incomeData.transactions);
   }
 
   return (
@@ -45,9 +57,9 @@ export default function Dashboard () {
         height: 200,
         backgroundColor: 'primary.dark'}}>
       </Box>
-      <TotalValuePrimary value={total} />
-      <ExpIncNav />
-      <ListTxn txns={txns}/>
+      <TotalValuePrimary value={tabFocus === "one" ? totalExpense : totalIncome} />
+      <ExpIncNav setTabFocus={setTabFocus}/>
+      <ListTxn txns={tabFocus === "one" ? expenseTxns : incomeTxns}/>
       <LinkTxt linkText={'View all'} linkURL={'#'} />
       <NavBar />
     </Box>
