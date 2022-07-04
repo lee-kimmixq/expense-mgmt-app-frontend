@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Alert from "@mui/material/Alert";
@@ -14,6 +14,7 @@ export default function LoginForm () {
   const [isError, setIsError] = useState(false);
 
   let navigate = useNavigate();
+  let location = useLocation();
 
   const onSuccess = (data) => {
     setShouldFetch(false);
@@ -50,6 +51,7 @@ export default function LoginForm () {
       }}
       >
         {isError && <Alert severity={'error'} sx={{marginBottom: '10px', textAlign: 'left', fontSize: '0.8em'}}>Wrong username or password!</Alert>}
+        {location.state.signupSuccess && <Alert severity={'success'} sx={{marginBottom: '10px', textAlign: 'left', fontSize: '0.8em'}}>Successfully signed up!</Alert>}
         <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange}/>
         <InputField fieldName={'loginPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange}/>
         <PrimaryBtn buttonLabel={'Login'} onClickCallback={handleLoginFormSubmit}/>
