@@ -20,7 +20,7 @@ export default function SignupForm () {
 
   const onSuccess = (data) => {
     setShouldFetch(false);
-    if (data.signup) navigate("/login", { replace: true });
+    if (data.signup) navigate("/login", { replace: true, state: {signupSuccess: true} });
   }
 
   const onError = (error) => {
