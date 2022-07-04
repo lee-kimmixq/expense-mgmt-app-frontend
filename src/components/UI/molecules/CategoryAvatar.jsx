@@ -12,7 +12,7 @@ export default function CategoryAvatar ({categoryName}) {
       icon: 'directions_car_icon',
     },
     {
-      name: 'fnb',
+      name: 'Food & Drinks',
       color: deepPurple[500],
       icon: 'restaurant',
     },
