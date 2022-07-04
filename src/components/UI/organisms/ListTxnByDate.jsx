@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -19,14 +20,16 @@ export default function ListTxnsByDate ({txns}) {
         secondaryAction={
           <ListTxnText ege="end" textValue={`$${txn.amount}`}/>
         }
-        // key={`txn${txn.id}`}
+        key={`txn${txn.id}`}
       >
-        <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-          <ListItemAvatar>
-            <CategoryAvatar categoryName={txn.categories[0].name}/>
-          </ListItemAvatar>
-          <ListTxnText textValue={txn.title}/>
-        </Box>
+        <Link to={`/txns/${txn.id}`}>
+          <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+            <ListItemAvatar>
+              <CategoryAvatar categoryName={txn.categories[0].name}/>
+            </ListItemAvatar>
+            <ListTxnText textValue={txn.title}/>
+          </Box>
+        </Link>
       </ListItem>
     </Box> 
     )
