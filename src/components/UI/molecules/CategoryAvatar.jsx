@@ -20,7 +20,17 @@ export default function CategoryAvatar ({categoryName}) {
       name: 'Shopping',
       color: deepPurple[500], // TODO change colour
       icon: 'shopping_bag',
-    }
+    },
+    {
+      name: 'Investments',
+      color: deepPurple[500], // TODO change colour
+      icon: 'trending_up',
+    },
+    {
+      name: 'Salaries',
+      color: green[500], // TODO change colour
+      icon: 'work',
+    },
   ]
 
   const category = categories.filter(category => category.name === categoryName);
