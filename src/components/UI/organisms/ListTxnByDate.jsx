@@ -1,5 +1,4 @@
 import React from "react";
-// import axios from "axios";
 import List from '@mui/material/List';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -12,7 +11,7 @@ export default function ListTxnsByDate ({txns}) {
 
   const txnList = txns.length === 0 ? <p>No Transactions Available</p> : txns.map((txn) => (
     <Box>
-      <TxnDate dateValue={txn.txnDate} />
+      <TxnDate dateValue={new Date(txn.txnDate).toLocaleDateString('en-gb', { year:"numeric", month:"short", day:"numeric"})} />
       <ListItem
         disableGutters
         secondaryAction={
