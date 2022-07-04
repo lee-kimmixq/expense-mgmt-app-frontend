@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ExpIncNav from "../UI/molecules/ExpIncNav.jsx";
 import ListTxn from "../UI/organisms/ListTxn.jsx";
 import Box from "@mui/material/Box"
@@ -6,44 +6,26 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx"
 import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
-
-// import axios from "axios";
+import { firstDay, lastDay } from "../../utils/getMonthFirstLastDate.mjs"
+import fetcherGet from "../../utils/fetcherGet.mjs"
+import useSWR from "swr";
 
 export default function Dashboard () {
-  const username = 'Robert';
-  const total = '$1,289.03'
-  const testTxns = [
-    {
-      id: 1,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-    {
-      id: 2,
-      catName: 'transport',
-      txnName: 'Grab',
-      amount: '$11',
-    },
-    {
-      id: 3,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-    {
-      id: 4,
-      catName: 'transport',
-      txnName: 'Grab',
-      amount: '$11',
-    },
-    {
-      id: 5,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-  ]
+  const [username, setUsername] = useState("");
+  const [total, setTotal] = useState("");
+  const [txns, setTxns] = useState([]);
+  const [shouldFetch, setShouldFetch] = useState(true);
+
+  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);  
+
+
+  if (data) {
+    console.log(data);
+    setShouldFetch(false);
+    setUsername(data.user);
+    setTotal(`$${data.totalAmount}`);
+    setTxns(data.transactions);
+  }
 
   return (
     <Box
@@ -65,7 +47,7 @@ export default function Dashboard () {
       </Box>
       <TotalValuePrimary value={total} />
       <ExpIncNav />
-      <ListTxn txns={testTxns}/>
+      <ListTxn txns={txns}/>
       <LinkTxt linkText={'View all'} linkURL={'#'} />
       <NavBar />
     </Box>
