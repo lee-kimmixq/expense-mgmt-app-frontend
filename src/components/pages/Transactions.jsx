@@ -13,7 +13,7 @@ export default function Transactions () {
   const [txns, setTxns] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
 
-  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDay}&txnDateMax=${lastDay}`] : null, fetcherGet);
+  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDay}&txnDateMax=${lastDay}`] : null, fetcherGet);
 
   if (data) {
     setShouldFetch(false);
