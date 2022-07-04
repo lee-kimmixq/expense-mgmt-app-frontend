@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import useSWR from "swr";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
 
-export default function AddTxnForm ({ isNewTxn }) {
+export default function AddTxnForm ({ txnId }) {
   // to determine current date to prefill default date value when adding txn
   const curr = new Date();
   curr.setDate(curr.getDate() + 3);
