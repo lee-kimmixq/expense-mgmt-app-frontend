@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box";
@@ -9,12 +9,36 @@ import TextField from '@mui/material/TextField';
 
 // import axios from "axios";
 
-export default function AddTxnForm () {
-
+export default function AddTxnForm ({ isNewTxn }) {
   // to determine current date to prefill default date value when adding txn
   const curr = new Date();
   curr.setDate(curr.getDate() + 3);
   const date = curr.toISOString().substring(0,10);
+
+  const [amount, setAmount] = useState("0.00");
+  const [txnDate, setTxnDate] = useState(date);
+  const [title, setTitle] = useState("");
+  const [categoryId, setCategoryId] = useState("1"); // set as default 1 for now
+
+  const handleAmountChange = (e) => {
+    setAmount(e.target.value);
+  }
+
+  const handleTxnDateChange = (e) => {
+    setTxnDate(e.target.value);
+  }
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  }
+
+  const handleCategoryIdChange = (e) => {
+    setCategoryId(e.target.value);
+  }
+
+  const handleFormSubmit = () => {
+    console.log(amount, title, categoryId, txnDate);
+  }
 
   return (
     <Box
@@ -25,9 +49,9 @@ export default function AddTxnForm () {
         rowGap: '15px',
       }}
       >
-        <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={'0.00'} isRequired={true}/>
-        <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={date} isRequired={true}/>
-        <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'Expense Name'} isRequired={true}/>
+        <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
+        <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={txnDate} isRequired={true} handleChange={handleTxnDateChange}/>
+        <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
         <TextField
           defaultValue=""
           label="Category"
@@ -46,7 +70,7 @@ export default function AddTxnForm () {
             <MenuItem value={4}>Option 4</MenuItem>
         </TextField>
     
-        <PrimaryBtn buttonLabel={'Save'} />
+        <PrimaryBtn buttonLabel={'Save'} onClickCallback={handleFormSubmit}/>
       </Box>
       
   );
