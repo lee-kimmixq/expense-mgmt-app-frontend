@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box";
@@ -9,8 +10,11 @@ import TextField from '@mui/material/TextField';
 import useSWR from "swr";
 import fetcherGet from "../../../utils/fetcherGet.mjs";
 import fetcherPut from "../../../utils/fetcherPut.mjs";
+import fetcherPost from "../../../utils/fetcherPost.mjs";
 
 export default function AddTxnForm ({ txnId }) {
+  let navigate = useNavigate();
+  
   // to determine current date to prefill default date value when adding txn
   const curr = new Date();
   // curr.setDate(curr.getDate() + 3);
@@ -25,6 +29,8 @@ export default function AddTxnForm ({ txnId }) {
   const [shouldFetch, setShouldFetch] = useState(true); 
 
   const postUrl = txnId === "add" ? `http://localhost:3004/transactions` : `http://localhost:3004/transactions/${txnId}`
+
+  const fetcher = txnId === "add" ? fetcherPost : fetcherPut;
 
   if (txnId !== "add") {
     const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions/${txnId}`] : null, fetcherGet);
@@ -42,14 +48,15 @@ export default function AddTxnForm ({ txnId }) {
 
   const onSuccess = (data) => {
     setShouldPost(false);
-    if (data.success) console.log(data); // on success
+    if (txnId === "add" && data) navigate(`/txns/${data.newTxn.id}`, { replace: true });; // on success
+    if (txnId !== "add" && data) console.log(data); // on success
   }
 
   const onError = (error) => {
     setShouldPost(false);
   }
 
-  useSWR(shouldPost ? [postUrl, { amount, txnDate, title, categoryId }] : null, fetcherPut, {onSuccess, onError});
+  useSWR(shouldPost ? [postUrl, { amount, txnDate, title, categoryId }] : null, fetcher, {onSuccess, onError});
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
