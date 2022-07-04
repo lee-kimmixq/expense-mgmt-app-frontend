@@ -9,6 +9,8 @@ import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 // import axios from "axios";
 
 export default function TxnForm () {
+  const isNewTxn = window.location.pathname.split('/')[2] === "add";
+
   return (
     <Box
       sx={{
@@ -22,9 +24,9 @@ export default function TxnForm () {
       {/* <CenteredPageHeader text={'Get Started'} /> */}
       <GenerateIconLarge name={'paid'}/>
       <UploadReceiptBtn />
-      <AddTxnForm />
+      <AddTxnForm isNewTxn={isNewTxn}/>
       <NavBar />  
-      <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} />
+      {!isNewTxn && <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} />}
     </Box>
       
   );
