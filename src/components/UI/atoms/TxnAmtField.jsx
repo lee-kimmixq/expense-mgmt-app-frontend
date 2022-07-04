@@ -22,7 +22,7 @@ export default function TxnAmtField ({fieldName, fieldType, isRequired, fieldLab
         helperText={fieldHelperText}
         onChange={handleChange}
         required={isRequired}
-        defaultValue={fieldValue}
+        value={fieldValue}
         size="small"
         />
   );
