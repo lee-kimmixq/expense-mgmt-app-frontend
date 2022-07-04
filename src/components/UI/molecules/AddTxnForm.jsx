@@ -7,37 +7,56 @@ import MenuItem from '@mui/material/MenuItem';
 import ListSubheader from '@mui/material/ListSubheader';
 import TextField from '@mui/material/TextField';
 import useSWR from "swr";
-import fetcherPost from "../../../utils/fetcherPost.mjs";
+import fetcherGet from "../../../utils/fetcherGet.mjs";
+import fetcherPut from "../../../utils/fetcherPut.mjs";
 
 export default function AddTxnForm ({ txnId }) {
   // to determine current date to prefill default date value when adding txn
   const curr = new Date();
-  curr.setDate(curr.getDate() + 3);
-  const date = curr.toISOString().substring(0,10);
+  // curr.setDate(curr.getDate() + 3);
+  // const date = curr.toISOString().substring(0,10);
+  var tzOffset = (new Date()).getTimezoneOffset() * 60000;
 
   const [amount, setAmount] = useState("0.00");
-  const [txnDate, setTxnDate] = useState(date);
+  const [txnDate, setTxnDate] = useState(curr);
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("1"); // set as default 1 for now
-  const [shouldFetch, setShouldFetch] = useState(false); 
+  const [shouldPost, setShouldPost] = useState(false); 
+  const [shouldFetch, setShouldFetch] = useState(true); 
+
+  const postUrl = txnId === "add" ? `http://localhost:3004/transactions` : `http://localhost:3004/transactions/${txnId}`
+
+  if (txnId !== "add") {
+    const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions/${txnId}`] : null, fetcherGet);
+    
+    if (data) {
+      setShouldFetch(false);
+      console.log(data);
+      setAmount(data.amount);
+      setTxnDate(new Date(txnDate));
+      setTitle(data.title);
+      setCategoryId(data.categories[0].id);
+    }
+  }
+
 
   const onSuccess = (data) => {
-    setShouldFetch(false);
-    if (data) console.log(data);
+    setShouldPost(false);
+    if (data.success) console.log(data); // on success
   }
 
   const onError = (error) => {
-    setShouldFetch(false);
+    setShouldPost(false);
   }
 
-  useSWR(shouldFetch ? [`http://localhost:3004/transactions`, { amount, txnDate, title, categoryId }] : null, fetcherPost, {onSuccess, onError});
+  useSWR(shouldPost ? [postUrl, { amount, txnDate, title, categoryId }] : null, fetcherPut, {onSuccess, onError});
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
   }
 
-  const handleTxnDateChange = (e) => {
-    setTxnDate(e.target.value);
+  const handleTxnDateChange = (e) => { // only works if use datepicker
+    setTxnDate(new Date(e.target.value));
   }
 
   const handleTitleChange = (e) => {
@@ -49,7 +68,7 @@ export default function AddTxnForm ({ txnId }) {
   }
 
   const handleFormSubmit = () => {
-    setShouldFetch(true);
+    setShouldPost(true);
   }
 
   return (
@@ -62,7 +81,7 @@ export default function AddTxnForm ({ txnId }) {
       }}
       >
         <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
-        <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={txnDate} isRequired={true} handleChange={handleTxnDateChange}/>
+        <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
         <TextField
           defaultValue=""
