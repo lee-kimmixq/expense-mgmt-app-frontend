@@ -6,8 +6,8 @@ import TxnAmtField from "../atoms/TxnAmtField.jsx";
 import MenuItem from '@mui/material/MenuItem';
 import ListSubheader from '@mui/material/ListSubheader';
 import TextField from '@mui/material/TextField';
-
-// import axios from "axios";
+import useSWR from "swr";
+import fetcherPost from "../../../utils/fetcherPost.mjs";
 
 export default function AddTxnForm ({ isNewTxn }) {
   // to determine current date to prefill default date value when adding txn
@@ -19,6 +19,18 @@ export default function AddTxnForm ({ isNewTxn }) {
   const [txnDate, setTxnDate] = useState(date);
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("1"); // set as default 1 for now
+  const [shouldFetch, setShouldFetch] = useState(false); 
+
+  const onSuccess = (data) => {
+    setShouldFetch(false);
+    if (data) console.log(data);
+  }
+
+  const onError = (error) => {
+    setShouldFetch(false);
+  }
+
+  useSWR(shouldFetch ? [`http://localhost:3004/transactions`, { amount, txnDate, title, categoryId }] : null, fetcherPost, {onSuccess, onError});
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -32,12 +44,12 @@ export default function AddTxnForm ({ isNewTxn }) {
     setTitle(e.target.value);
   }
 
-  const handleCategoryIdChange = (e) => {
+  const handleCategoryIdChange = (e) => { // not yet linked to category input
     setCategoryId(e.target.value);
   }
 
   const handleFormSubmit = () => {
-    console.log(amount, title, categoryId, txnDate);
+    setShouldFetch(true);
   }
 
   return (
