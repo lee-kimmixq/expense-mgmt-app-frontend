@@ -7,11 +7,12 @@ export default function InputField ({fieldName, fieldType, isRequired, fieldLabe
       <TextField 
         InputLabelProps={{ 
           required: false,
-         }}
+        }}
         // sx={{input: {textAlign: 'center'}}}
         id={fieldName}
         label={fieldLabel}
         type={fieldType}
+        value={fieldValue}
         helperText={fieldHelperText}
         onChange={handleChange}
         required={isRequired}
