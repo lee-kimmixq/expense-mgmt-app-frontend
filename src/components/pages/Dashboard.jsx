@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ExpIncNav from "../UI/molecules/ExpIncNav.jsx";
 import ListTxn from "../UI/organisms/ListTxn.jsx";
 import Box from "@mui/material/Box"
@@ -6,44 +6,38 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx"
 import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
+import { firstDay, lastDay } from "../../utils/getMonthFirstLastDate.mjs"
+import fetcherGet from "../../utils/fetcherGet.mjs"
+import useSWR from "swr";
 
-// import axios from "axios";
+export default function Dashboard () {
+  const [username, setUsername] = useState("");
+  const [totalExpense, setTotalExpense] = useState("");
+  const [totalIncome, setTotalIncome] = useState("");
+  const [expenseTxns, setExpenseTxns] = useState([]);
+  const [incomeTxns, setIncomeTxns] = useState([]);
+  const [shouldFetchExp, setShouldFetchExp] = useState(true);
+  const [shouldFetchInc, setShouldFetchInc] = useState(true);
+  const [tabFocus, setTabFocus] = useState("one");
 
-export default function Login () {
-  const username = 'Robert';
-  const total = '$1,289.03'
-  const testTxns = [
-    {
-      id: 1,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-    {
-      id: 2,
-      catName: 'transport',
-      txnName: 'Grab',
-      amount: '$11',
-    },
-    {
-      id: 3,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-    {
-      id: 4,
-      catName: 'transport',
-      txnName: 'Grab',
-      amount: '$11',
-    },
-    {
-      id: 5,
-      catName: 'fnb',
-      txnName: 'KFC',
-      amount: '$34',
-    },
-  ]
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
+
+  if (expenseData) {
+    console.log(expenseData);
+    setShouldFetchExp(false);
+    setUsername(expenseData.user);
+    setTotalExpense(`$${expenseData.totalAmount}`);
+    setExpenseTxns(expenseData.transactions);
+  }
+
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`http://localhost:3004/transactions?fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
+
+  if (incomeData) {
+    console.log(incomeData);
+    setShouldFetchInc(false);
+    setTotalIncome(`$${incomeData.totalAmount}`);
+    setIncomeTxns(incomeData.transactions);
+  }
 
   return (
     <Box
@@ -63,10 +57,10 @@ export default function Login () {
         height: 200,
         backgroundColor: 'primary.dark'}}>
       </Box>
-      <TotalValuePrimary value={total} />
-      <ExpIncNav />
-      <ListTxn txns={testTxns}/>
-      <LinkTxt linkText={'View all'} linkURL={'#'} />
+      <TotalValuePrimary value={tabFocus === "one" ? totalExpense : totalIncome} />
+      <ExpIncNav setTabFocus={setTabFocus}/>
+      <ListTxn txns={tabFocus === "one" ? expenseTxns : incomeTxns}/>
+      <LinkTxt linkText={'View all'} linkURL={'/txns'} />
       <NavBar />
     </Box>
   );
