@@ -9,8 +9,8 @@
   height: 896px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(180deg, #322F42 0%, #262431 100%)
+  align-items: stretch;
+  background: linear-gradient(180deg, #322f42 0%, #262431 100%);
 }
 
 .App-logo {
@@ -50,4 +50,10 @@
 
 .page-header {
   text-align: left;
+}
+
+.txn-date {
+  text-align: left;
+  color: #B4B4B4;
+  font-size: medium;
 }
