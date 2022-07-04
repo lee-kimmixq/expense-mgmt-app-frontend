@@ -60,7 +60,7 @@ export default function Dashboard () {
       <TotalValuePrimary value={tabFocus === "one" ? totalExpense : totalIncome} />
       <ExpIncNav setTabFocus={setTabFocus}/>
       <ListTxn txns={tabFocus === "one" ? expenseTxns : incomeTxns}/>
-      <LinkTxt linkText={'View all'} linkURL={'#'} />
+      <LinkTxt linkText={'View all'} linkURL={'/txns'} />
       <NavBar />
     </Box>
   );
