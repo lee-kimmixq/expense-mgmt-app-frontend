@@ -64,7 +64,7 @@ export default function SignupForm () {
         rowGap: '10px',
       }}
       >
-        {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match!'} />}
+        {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match'} />}
         <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'username'} isRequired={true} handleChange={handleUsernameChange}/>
         <InputField fieldName={'signupMobile'} fieldType={'tel'} fieldAttribute={'required'} fieldLabel={'contact number'} isRequired={true} handleChange={handleContactChange}/>
         <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'email'} isRequired={true} handleChange={handleEmailChange}/>
