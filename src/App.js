@@ -8,8 +8,8 @@ import Signup from "./components/pages/Signup";
 import TxnForm from "./components/pages/TxnForm";
 import Transactions from "./components/pages/Transactions";
 import Account from "./components/pages/Account";
-import { AuthProvider } from "./contexts/AuthContext.js";
-import PrivateRoute from "./components/PrivateRoute.js";
+import { AuthProvider } from "./authentication/AuthContext.js";
+import PrivateRoute from "./authentication/PrivateRoute.js";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
