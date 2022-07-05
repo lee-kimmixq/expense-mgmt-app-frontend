@@ -6,7 +6,7 @@ import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx";
 import useSWR from "swr";
 import fetcherDelete from "../../utils/fetcherDelete.mjs";
-import { useAuth } from "../../contexts/AuthContext.js"
+import { useAuth } from "../../authentication/AuthContext.js"
 
 export default function Account () {
   const [shouldFetch, setShouldFetch] = useState(false);

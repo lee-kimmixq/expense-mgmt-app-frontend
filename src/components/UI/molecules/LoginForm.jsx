@@ -6,7 +6,7 @@ import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
-import { useAuth } from "../../../contexts/AuthContext.js"
+import { useAuth } from "../../../authentication/AuthContext.js"
 
 export default function LoginForm () {
   const [email, setEmail] = useState("");
