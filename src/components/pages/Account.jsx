@@ -16,7 +16,6 @@ export default function Account () {
 
   const onSuccess = (data) => {
     setShouldFetch(false);
-    console.log(data);
     if (data.logout) login().then(() => {navigate("/login", { replace: true }) });
   }
 
