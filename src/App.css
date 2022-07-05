@@ -57,3 +57,13 @@
   color: #B4B4B4;
   font-size: medium;
 }
+
+.link {
+  color: #EFEFEF;
+}
+.link:hover {
+   color: #CF65F2
+}
+.link:visited {
+   color: #EFEFEF
+}
