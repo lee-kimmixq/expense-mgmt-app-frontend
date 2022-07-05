@@ -15,22 +15,22 @@ export default function ListTxnsByDate ({txns}) {
     const listItemJsx = (
     <Box>
       {previousDate !== currentDate && <TxnDate dateValue={new Date(txn.txnDate).toLocaleDateString('en-gb', { year:"numeric", month:"short", day:"numeric"})} />}
-      <ListItem
-        disableGutters
-        secondaryAction={
-          <ListTxnText ege="end" textValue={`$${txn.amount}`}/>
-        }
-        key={`txn${txn.id}`}
-      >
-        <Link to={`/txns/${txn.id}`} style={{ textDecoration: 'none' }} className={'link'}>
-          <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-            <ListItemAvatar>
-              <CategoryAvatar categoryName={txn.categories[0].name}/>
-            </ListItemAvatar>
-            <ListTxnText textValue={txn.title}/>
-          </Box>
-        </Link>
-      </ListItem>
+      <Link to={`/txns/${txn.id}`} style={{ textDecoration: 'none' }} className={'link'}>
+        <ListItem
+          disableGutters
+          secondaryAction={
+            <ListTxnText ege="end" textValue={`$${txn.amount}`}/>
+          }
+          key={`txn${txn.id}`}
+        >
+            <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+              <ListItemAvatar>
+                <CategoryAvatar categoryName={txn.categories[0].name}/>
+              </ListItemAvatar>
+              <ListTxnText textValue={txn.title}/>
+            </Box>
+        </ListItem>
+      </Link>
     </Box> 
     )
     previousDate = currentDate;
