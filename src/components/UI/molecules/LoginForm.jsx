@@ -5,7 +5,7 @@ import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
-import AlertSnackbar from "../atoms/AlertSnackbar";
+import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
 
 export default function LoginForm () {
   const [email, setEmail] = useState("");

@@ -9,7 +9,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function AlertSnackbar ({alertSeverity, alertLabel, displayAlert}) {
  
   const [open, setOpen] = React.useState(displayAlert);
-  // setOpen(displayAlert);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -19,8 +18,10 @@ export default function AlertSnackbar ({alertSeverity, alertLabel, displayAlert}
   };
 
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-      <Alert onClose={handleClose} severity={alertSeverity} sx={{ width: '100%' }}>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
+    sx={{ bottom: { xs: 90, sm: 0 } }}
+    > 
+      <Alert onClose={handleClose} severity={alertSeverity} sx={{ width: '100%' }} >
         {alertLabel}
       </Alert>
     </Snackbar>
