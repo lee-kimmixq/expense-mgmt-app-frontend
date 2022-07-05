@@ -1,13 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-export default function MonthPicker ({textValue}) {
-
-    const [value, setValue] = React.useState(new Date());
-
+export default function MonthPicker ({ month, setMonth }) {
 
   return (
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -21,9 +18,9 @@ export default function MonthPicker ({textValue}) {
           minDate={new Date('2012-03-01')}
           maxDate={new Date('2023-06-01')}
           
-          value={value}
+          value={month}
           onChange={(newValue) => {
-            setValue(newValue);
+            setMonth(newValue);
           }}
           renderInput={(params) => <TextField {...params} variant="standard" helperText={null} sx={{input: {textAlign: 'center'}}}/>}
         />

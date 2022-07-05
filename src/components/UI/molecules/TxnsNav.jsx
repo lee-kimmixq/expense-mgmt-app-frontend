@@ -5,15 +5,23 @@ import MonthPicker from "../atoms/MonthPicker";
 
 // import axios from "axios";
 
-export default function TxnsNav () {
+export default function TxnsNav ({ month, setMonth }) {
+  const selectPreviousMonth = () => {
+    setMonth(new Date(month.setMonth(month.getMonth()-1)));
+  }
+
+  const selectNextMonth = () => {
+    setMonth(new Date(month.setMonth(month.getMonth()+1)));
+  }
+
   return (
     <Box
       sx={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}
     >
-        <GenerateIcon name={'arrow_back_ios_new'} />
-        <MonthPicker />
-        <GenerateIcon name={'arrow_forward_ios'} />
-      </Box>
+        <Box onClick={selectPreviousMonth}><GenerateIcon name={'arrow_back_ios_new'} /></Box>
+        <MonthPicker month={month} setMonth={setMonth} />
+        <Box onClick={selectNextMonth}><GenerateIcon name={'arrow_forward_ios'} /></Box>
+    </Box>
       
   );
 }

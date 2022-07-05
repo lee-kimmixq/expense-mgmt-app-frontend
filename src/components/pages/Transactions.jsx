@@ -12,6 +12,7 @@ import useSWR from "swr";
 export default function Transactions () {
   const [txns, setTxns] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
+  const [month, setMonth] = useState(new Date());
 
   const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDay}&txnDateMax=${lastDay}`] : null, fetcherGet);
 
@@ -42,7 +43,7 @@ export default function Transactions () {
           <GenerateIcon name={'sort'} />
         </Box>
       </Box>
-      <TxnsNav />
+      <TxnsNav month={month} setMonth={setMonth}/>
       <ListTxnsByDate txns={txns} />
       <NavBar />
     </Box>
