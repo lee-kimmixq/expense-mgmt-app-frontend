@@ -1,12 +1,34 @@
-import React from "react";
-import LoginForm from "../UI/molecules/LoginForm.jsx";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import Box from "@mui/material/Box"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx";
-// import axios from "axios";
+import useSWR from "swr";
+import fetcherDelete from "../../utils/fetcherDelete.mjs";
+import { useAuth } from "../../authentication/AuthContext.js"
 
 export default function Account () {
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  let navigate = useNavigate();
+  const { login } = useAuth();
+
+  const onSuccess = (data) => {
+    setShouldFetch(false);
+    if (data.logout) login().then(() => {navigate("/login", { replace: true }) });
+  }
+
+  const onError = (error) => {
+    setShouldFetch(false);
+  }
+
+  useSWR(shouldFetch ? [`http://localhost:3004/logout`] : null, fetcherDelete, {onSuccess, onError});
+
+  const handleLogOutSubmit = () => {
+    setShouldFetch(true);
+  }
+
   return (
     <Box
     sx={{
@@ -25,7 +47,7 @@ export default function Account () {
           <PageHeader pageTitle={`Account`} />
           <Box>
             <PrimaryBtn buttonLabel={'Logout'} icon={'logout'}
-            // onClickCallback={handleLogOutSubmit} 
+            onClickCallback={handleLogOutSubmit} 
             />
           </Box>
         </Box>
