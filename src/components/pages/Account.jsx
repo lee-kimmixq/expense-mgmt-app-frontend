@@ -6,16 +6,18 @@ import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx";
 import useSWR from "swr";
 import fetcherDelete from "../../utils/fetcherDelete.mjs";
+import { useAuth } from "../../contexts/AuthContext.js"
 
 export default function Account () {
   const [shouldFetch, setShouldFetch] = useState(false);
 
   let navigate = useNavigate();
+  const { login } = useAuth();
 
   const onSuccess = (data) => {
     setShouldFetch(false);
     console.log(data);
-    if (data.logout) navigate("/login", { replace: true });
+    if (data.logout) login().then(() => {navigate("/login", { replace: true }) });
   }
 
   const onError = (error) => {
