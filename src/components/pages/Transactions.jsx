@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box"
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import NavBar from "../UI/organisms/NavBar.jsx"
@@ -14,7 +14,9 @@ export default function Transactions () {
   const [shouldFetch, setShouldFetch] = useState(true);
   const [month, setMonth] = useState(new Date());
 
-  console.log(getMonthFirstLastDate(month));
+  useEffect(() => {
+    setShouldFetch(true)
+  }, [month]);
 
   const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}`] : null, fetcherGet);
 
