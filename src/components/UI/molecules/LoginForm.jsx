@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
+import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
 import { useAuth } from "../../../authentication/AuthContext.js"
 
 export default function LoginForm () {
@@ -55,8 +55,8 @@ export default function LoginForm () {
         rowGap: '10px',
       }}
       >
-        {isError && <Alert severity={'error'} sx={{marginBottom: '10px', textAlign: 'left', fontSize: '0.8em'}}>Wrong username or password!</Alert>}
-        {signupSuccess && <Alert severity={'success'} sx={{marginBottom: '10px', textAlign: 'left', fontSize: '0.8em'}}>Successfully signed up!</Alert>}
+        {isError && <AlertSnackbar alertSeverity={'error'} alertLabel={'Wrong username or password'} displayAlert={true}/>}
+        {signupSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Sign up successful'} displayAlert={true}/>}
         <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange}/>
         <InputField fieldName={'loginPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange}/>
         <PrimaryBtn buttonLabel={'Login'} onClickCallback={handleLoginFormSubmit}/>

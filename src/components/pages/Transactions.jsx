@@ -8,6 +8,8 @@ import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
 import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
 import fetcherGet from "../../utils/fetcherGet.mjs"
 import useSWR from "swr";
+import { useLocation } from "react-router-dom";
+import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
 
 export default function Transactions () {
   const [txns, setTxns] = useState([]);
@@ -26,6 +28,13 @@ export default function Transactions () {
     console.log(data);
   }
 
+  let location = useLocation(); 
+  let txnAddSuccess = false;
+  let txnDeleteSuccess = false;
+  if (location.state && location.state.txnAddSuccess) txnAddSuccess = true;
+  if (location.state && location.state.txnDeleteSuccess) txnDeleteSuccess = true;
+
+
   return (
     <Box
     sx={{
@@ -36,6 +45,8 @@ export default function Transactions () {
         marginTop: '10vmin'
       }}
     >
+      {txnAddSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction added'} displayAlert={true}/>}
+      {txnDeleteSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction deleted'} displayAlert={true}/>}
       <Box sx={{
         display: 'flex',
         alignItems: 'center',

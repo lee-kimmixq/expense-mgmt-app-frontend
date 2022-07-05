@@ -17,7 +17,7 @@ export default function TxnForm () {
   const handleTxnDelete = () => {
     axios.delete(`http://localhost:3004/transactions/${txnId}`)
       .then(({ data }) => {
-        if(data.success) navigate("/txns", { replace: true });
+        if(data.success) navigate("/txns", { replace: true, state: {txnDeleteSuccess: true}});
       })
   }
 
