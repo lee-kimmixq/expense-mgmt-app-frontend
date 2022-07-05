@@ -22,7 +22,7 @@ export default function ListTxnsByDate ({txns}) {
         }
         key={`txn${txn.id}`}
       >
-        <Link to={`/txns/${txn.id}`}>
+        <Link to={`/txns/${txn.id}`} style={{ textDecoration: 'none' }}>
           <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
             <ListItemAvatar>
               <CategoryAvatar categoryName={txn.categories[0].name}/>
