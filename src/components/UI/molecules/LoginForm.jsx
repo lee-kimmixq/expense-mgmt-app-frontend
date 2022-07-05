@@ -5,7 +5,7 @@ import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
-import FormAlert from "../atoms/FormAlert";
+import AlertSnackbar from "../atoms/AlertSnackbar";
 
 export default function LoginForm () {
   const [email, setEmail] = useState("");
@@ -52,8 +52,8 @@ export default function LoginForm () {
         rowGap: '10px',
       }}
       >
-        {isError && <FormAlert alertSeverity={'error'} alertLabel={'Wrong username or password'}/>}
-        {signupSuccess && <FormAlert alertSeverity={'success'} alertLabel={'Sign up successful'}/>}
+        {isError && <AlertSnackbar alertSeverity={'error'} alertLabel={'Wrong username or password'} displayAlert={true}/>}
+        {signupSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Sign up successful'} displayAlert={true}/>}
         <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange}/>
         <InputField fieldName={'loginPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange}/>
         <PrimaryBtn buttonLabel={'Login'} onClickCallback={handleLoginFormSubmit}/>
