@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box"
 import useSWR from "swr";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
+import FormAlert from "../atoms/FormAlert";
 
 export default function SignupForm () {
   const [username, setUsername] = useState("");
@@ -64,7 +64,7 @@ export default function SignupForm () {
         rowGap: '10px',
       }}
       >
-        {!isPasswordMatch && <Alert severity={'warning'} sx={{marginBottom: '10px', textAlign: 'left', fontSize: '0.8em'}}>Passwords do not match!</Alert>}
+        {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match!'} />}
         <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'username'} isRequired={true} handleChange={handleUsernameChange}/>
         <InputField fieldName={'signupMobile'} fieldType={'tel'} fieldAttribute={'required'} fieldLabel={'contact number'} isRequired={true} handleChange={handleContactChange}/>
         <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'email'} isRequired={true} handleChange={handleEmailChange}/>
