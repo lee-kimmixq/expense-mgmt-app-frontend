@@ -11,6 +11,8 @@ import useSWR from "swr";
 import fetcherGet from "../../../utils/fetcherGet.mjs";
 import fetcherPut from "../../../utils/fetcherPut.mjs";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
+import AlertSnackbar from "../atoms//AlertSnackbar.jsx";
+
 
 export default function AddTxnForm ({ txnId }) {
   let navigate = useNavigate();
@@ -27,6 +29,7 @@ export default function AddTxnForm ({ txnId }) {
   const [categoryId, setCategoryId] = useState("1"); // set as default 1 for now
   const [shouldPost, setShouldPost] = useState(false); 
   const [shouldFetch, setShouldFetch] = useState(true); 
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const postUrl = txnId === "add" ? `http://localhost:3004/transactions` : `http://localhost:3004/transactions/${txnId}`
 
@@ -48,8 +51,11 @@ export default function AddTxnForm ({ txnId }) {
 
   const onSuccess = (data) => {
     setShouldPost(false);
-    if (txnId === "add" && data) navigate(`/txns/${data.newTxn.id}`, { replace: true });; // on success
-    if (txnId !== "add" && data) console.log(data); // on success
+    if (txnId === "add" && data) navigate(`/txns`, { replace: true, state: {txnAddSuccess: true} });; // on success
+    if (txnId !== "add" && data) {
+      console.log(data)
+      if (data.success) setIsSuccess(true);
+    }; // on success
   }
 
   const onError = (error) => {
@@ -87,6 +93,7 @@ export default function AddTxnForm ({ txnId }) {
         rowGap: '15px',
       }}
       >
+        {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true}/>}
         <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
