@@ -5,7 +5,7 @@ import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
 import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
-import { firstDay, lastDay } from "../../utils/getMonthFirstLastDate.mjs"
+import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
 import fetcherGet from "../../utils/fetcherGet.mjs"
 import useSWR from "swr";
 
@@ -14,7 +14,9 @@ export default function Transactions () {
   const [shouldFetch, setShouldFetch] = useState(true);
   const [month, setMonth] = useState(new Date());
 
-  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDay}&txnDateMax=${lastDay}`] : null, fetcherGet);
+  console.log(getMonthFirstLastDate(month));
+
+  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}`] : null, fetcherGet);
 
   if (data) {
     setShouldFetch(false);

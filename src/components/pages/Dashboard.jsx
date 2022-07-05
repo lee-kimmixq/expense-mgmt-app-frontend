@@ -6,7 +6,7 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx"
 import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
-import { firstDay, lastDay } from "../../utils/getMonthFirstLastDate.mjs"
+import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
 import fetcherGet from "../../utils/fetcherGet.mjs"
 import useSWR from "swr";
 
@@ -19,6 +19,8 @@ export default function Dashboard () {
   const [shouldFetchExp, setShouldFetchExp] = useState(true);
   const [shouldFetchInc, setShouldFetchInc] = useState(true);
   const [tabFocus, setTabFocus] = useState("one");
+
+  const { firstDay, lastDay } = getMonthFirstLastDate();
 
   const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
 
