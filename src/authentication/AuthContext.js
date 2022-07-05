@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
+import useSWR from "swr";
+import fetcherGet from "../utils/fetcherGet.mjs";
 
 const AuthContext = createContext();
 
@@ -7,7 +9,23 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [auth, setAuth] = useState(false);
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const [auth, setAuth] = useState(null);
+
+  const onSuccess = (data) => {
+    setShouldFetch(false);
+    setAuth(true);
+  };
+
+  const onError = (error) => {
+    setShouldFetch(false);
+    setAuth(false);
+  };
+
+  useSWR(shouldFetch ? [`http://localhost:3004/checkAuth`] : null, fetcherGet, {
+    onSuccess,
+    onError,
+  });
 
   const login = () => {
     return new Promise((res) => {
