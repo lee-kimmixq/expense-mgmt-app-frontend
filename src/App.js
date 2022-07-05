@@ -7,6 +7,7 @@ import Login from "./components/pages/Login.jsx";
 import Signup from "./components/pages/Signup";
 import TxnForm from "./components/pages/TxnForm";
 import Transactions from "./components/pages/Transactions";
+import Account from "./components/pages/Account";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -26,6 +27,7 @@ function App() {
           <Route path="txns/add" element={<TxnForm />} />
           <Route path="txns/:id" element={<TxnForm />} />
           <Route path="txns" element={<Transactions />} />
+          <Route path="account" element={<Account />} />
           {/* </Route> */}
         </Routes>
       </BrowserRouter>
