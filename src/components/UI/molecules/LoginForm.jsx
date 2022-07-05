@@ -6,6 +6,7 @@ import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
 import fetcherPost from "../../../utils/fetcherPost.mjs";
+import { useAuth } from "../../../contexts/AuthContext.js"
 
 export default function LoginForm () {
   const [email, setEmail] = useState("");
@@ -18,10 +19,12 @@ export default function LoginForm () {
   let signupSuccess = false;
   if (location.state && location.state.signupSuccess) signupSuccess = true;
 
+  const { login } = useAuth();
+
   const onSuccess = (data) => {
     setShouldFetch(false);
     setIsError(false);
-    if (data.login) navigate("/home", { replace: true });
+    if (data.login) login().then(() => {navigate("/home", { replace: true }) });
   }
 
   const onError = (error) => {
