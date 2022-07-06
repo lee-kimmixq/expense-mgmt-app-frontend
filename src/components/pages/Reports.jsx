@@ -6,12 +6,14 @@ import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
 import fetcherGet from "../../utils/fetcherGet.mjs"
 import useSWR from "swr";
+import ReportsNav from "../UI/molecules/ReportsNav.jsx";
 
 
 export default function Reports () {
   const [txns, setTxns] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
   const [month, setMonth] = useState(new Date());
+  const [tabFocus, setTabFocus] = useState("date");
 
   useEffect(() => {
     setShouldFetch(true)
@@ -36,8 +38,9 @@ export default function Reports () {
       }}
     >
     <PageHeader pageTitle={`Reports`} />
-    
     <TxnsNav month={month} setMonth={setMonth}/>
+    <ReportsNav setTabFocus={setTabFocus}/>
+
     <Box sx={{
       // width: 300,
       width: '100%',
