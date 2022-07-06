@@ -22,7 +22,7 @@ export default function AddTxnForm ({ txnId }) {
   const [amount, setAmount] = useState("0.00");
   const [txnDate, setTxnDate] = useState(curr);
   const [title, setTitle] = useState("");
-  const [categoryId, setCategoryId] = useState();
+  const [categoryId, setCategoryId] = useState("");
   const [shouldPost, setShouldPost] = useState(false); 
   const [shouldFetch, setShouldFetch] = useState(true); 
   const [isSuccess, setIsSuccess] = useState(false);
@@ -36,14 +36,13 @@ export default function AddTxnForm ({ txnId }) {
     
     if (data) {
       setShouldFetch(false);
-      console.log(data);
       setAmount(data.amount);
       setTxnDate(new Date(data.txnDate));
       setTitle(data.title);
       setCategoryId(data.categories[0].id);
     }
   }
-
+  
 
   const onSuccess = (data) => {
     setShouldPost(false);
@@ -72,7 +71,7 @@ export default function AddTxnForm ({ txnId }) {
     setTitle(e.target.value);
   }
 
-  const handleCategoryIdChange = (e, val) => {
+  const handleCategoryIdChange = (_, val) => {
     setCategoryId(val.id);
   }
 
@@ -93,7 +92,7 @@ export default function AddTxnForm ({ txnId }) {
         <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
-        <CategoryDropdown handleChange={handleCategoryIdChange}/>
+        <CategoryDropdown selectValue={categoryId} handleChange={handleCategoryIdChange}/>
         <PrimaryBtn buttonLabel={'Save'} onClickCallback={handleFormSubmit}/>
       </Box>
       

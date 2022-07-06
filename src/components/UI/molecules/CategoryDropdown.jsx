@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 
-export default function CategoryDropdown ({handleChange}) {
+export default function CategoryDropdown ({selectValue, handleChange}) {
   const [categories, setCategories] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true); 
 
@@ -27,6 +27,7 @@ export default function CategoryDropdown ({handleChange}) {
 
   return (
     <Autocomplete
+      value={categories.filter((category) => category.id === selectValue)[0] || null}
       options={categoriesList.sort(sortFunc)}
       groupBy={(category) => category.type}
       getOptionLabel={(category) => category.name}
