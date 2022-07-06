@@ -22,7 +22,7 @@ export default function Dashboard () {
 
   const { firstDay, lastDay } = getMonthFirstLastDate();
 
-  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
 
   if (expenseData) {
     console.log(expenseData);
@@ -32,7 +32,7 @@ export default function Dashboard () {
     setExpenseTxns(expenseData.transactions);
   }
 
-  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcherGet);
 
   if (incomeData) {
     console.log(incomeData);

@@ -31,12 +31,12 @@ export default function AddTxnForm ({ txnId }) {
   const [shouldFetch, setShouldFetch] = useState(true); 
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const postUrl = txnId === "add" ? `http://localhost:3004/transactions` : `http://localhost:3004/transactions/${txnId}`
+  const postUrl = txnId === "add" ? `${process.env.REACT_APP_BACKEND_URL}/transactions` : `${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`
 
   const fetcher = txnId === "add" ? fetcherPost : fetcherPut;
 
   if (txnId !== "add") {
-    const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions/${txnId}`] : null, fetcherGet);
+    const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`] : null, fetcherGet);
     
     if (data) {
       setShouldFetch(false);

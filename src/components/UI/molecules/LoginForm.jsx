@@ -32,7 +32,7 @@ export default function LoginForm () {
     if (error.response.status === 401) setIsError(true);
   }
 
-  useSWR(shouldFetch ? [`http://localhost:3004/users/login`, { email, password }] : null, fetcherPost, {onSuccess, onError});
+  useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/login`, { email, password }] : null, fetcherPost, {onSuccess, onError});
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);

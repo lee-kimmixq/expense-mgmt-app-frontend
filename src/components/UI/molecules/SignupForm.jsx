@@ -27,7 +27,7 @@ export default function SignupForm () {
     setShouldFetch(false);
   }
 
-  useSWR(isPasswordMatch && shouldFetch ? [`http://localhost:3004/users/signup`, { username, contact, email, password }] : null, fetcherPost, {onSuccess, onError});
+  useSWR(isPasswordMatch && shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/signup`, { username, contact, email, password }] : null, fetcherPost, {onSuccess, onError});
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);

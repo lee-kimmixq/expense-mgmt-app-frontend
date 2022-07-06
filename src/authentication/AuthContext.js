@@ -23,7 +23,9 @@ export function AuthProvider({ children }) {
   };
 
   useSWR(
-    shouldFetch ? [`http://localhost:3004/users/checkAuth`] : null,
+    shouldFetch
+      ? [`${process.env.REACT_APP_BACKEND_URL}/users/checkAuth`]
+      : null,
     fetcherGet,
     {
       onSuccess,
