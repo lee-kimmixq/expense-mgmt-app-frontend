@@ -4,7 +4,7 @@ import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
-import fetcherPost from "../../../utils/fetcherPost.mjs";
+import fetcher from "../../../utils/fetcher.mjs";
 import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
 import { useAuth } from "../../../authentication/AuthContext.js"
 
@@ -32,7 +32,7 @@ export default function LoginForm () {
     if (error.response.status === 401) setIsError(true);
   }
 
-  useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/login`, { email, password }] : null, fetcherPost, {onSuccess, onError});
+  useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/login`, { email, password }] : null, fetcher.post, {onSuccess, onError});
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);

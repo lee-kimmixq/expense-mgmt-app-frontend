@@ -8,9 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListSubheader from '@mui/material/ListSubheader';
 import TextField from '@mui/material/TextField';
 import useSWR from "swr";
-import fetcherGet from "../../../utils/fetcherGet.mjs";
-import fetcherPut from "../../../utils/fetcherPut.mjs";
-import fetcherPost from "../../../utils/fetcherPost.mjs";
+import fetcher from "../../../utils/fetcher.mjs";
 import AlertSnackbar from "../atoms//AlertSnackbar.jsx";
 
 
@@ -33,10 +31,10 @@ export default function AddTxnForm ({ txnId }) {
 
   const postUrl = txnId === "add" ? `${process.env.REACT_APP_BACKEND_URL}/transactions` : `${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`
 
-  const fetcher = txnId === "add" ? fetcherPost : fetcherPut;
+  const fetcherToUse = txnId === "add" ? fetcher.post : fetcher.put;
 
   if (txnId !== "add") {
-    const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`] : null, fetcherGet);
+    const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`] : null, fetcher.get);
     
     if (data) {
       setShouldFetch(false);
@@ -62,7 +60,7 @@ export default function AddTxnForm ({ txnId }) {
     setShouldPost(false);
   }
 
-  useSWR(shouldPost ? [postUrl, { amount, txnDate, title, categoryId }] : null, fetcher, {onSuccess, onError});
+  useSWR(shouldPost ? [postUrl, { amount, txnDate, title, categoryId }] : null, fetcherToUse, {onSuccess, onError});
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);

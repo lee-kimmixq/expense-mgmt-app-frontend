@@ -4,7 +4,7 @@ import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box"
 import useSWR from "swr";
-import fetcherPost from "../../../utils/fetcherPost.mjs";
+import fetcher from "../../../utils/fetcher.mjs";
 import FormAlert from "../atoms/FormAlert";
 
 export default function SignupForm () {
@@ -27,7 +27,7 @@ export default function SignupForm () {
     setShouldFetch(false);
   }
 
-  useSWR(isPasswordMatch && shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/signup`, { username, contact, email, password }] : null, fetcherPost, {onSuccess, onError});
+  useSWR(isPasswordMatch && shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/signup`, { username, contact, email, password }] : null, fetcher.post, {onSuccess, onError});
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);

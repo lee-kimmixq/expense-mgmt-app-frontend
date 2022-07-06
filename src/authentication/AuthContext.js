@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import useSWR from "swr";
-import fetcherGet from "../utils/fetcherGet.mjs";
+import fetcher from "../utils/fetcher.mjs";
 
 const AuthContext = createContext();
 
@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
     shouldFetch
       ? [`${process.env.REACT_APP_BACKEND_URL}/users/checkAuth`]
       : null,
-    fetcherGet,
+    fetcher.get,
     {
       onSuccess,
       onError,
