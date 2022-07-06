@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box"
-import AddTxnForm from "../UI/molecules/AddTxnForm.jsx";
+import AddTxnForm from "../UI/organisms/AddTxnForm.jsx";
 import UploadReceiptBtn from "../UI/molecules/UploadReceiptBtn.jsx";
 import GenerateIconLarge from "../UI/atoms/GenerateIconLarge.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"

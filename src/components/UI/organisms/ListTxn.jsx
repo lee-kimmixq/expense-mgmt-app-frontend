@@ -20,7 +20,7 @@ export default function ListTxn ({txns}) {
       >
           <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
             <ListItemAvatar>
-              <CategoryAvatar categoryName={txn.categories[0].name}/>
+              <CategoryAvatar categoryId={txn.categories[0].id}/>
             </ListItemAvatar>
             <ListTxnText textValue={txn.title}/>
           </Box>
