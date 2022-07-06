@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
 // import axios from "axios";
 
-export default function ExpIncNav ({tabName, tabValue, setTabFocus}) {
-  const [value, setValue] = useState('one');
+export default function ExpIncNav ({setTabFocus}) {
+  const [value, setValue] = useState('expenses');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -21,8 +21,8 @@ export default function ExpIncNav ({tabName, tabValue, setTabFocus}) {
         indicatorColor="secondary"
         aria-label="secondary tabs example"
       >
-        <Tab value={"one"} label={"Expenses"} />
-        <Tab value={"two"} label={"Income"} />
+        <Tab value={"expenses"} label={"Expenses"} />
+        <Tab value={"income"} label={"Income"} />
       </Tabs>
     </Box>
   );
