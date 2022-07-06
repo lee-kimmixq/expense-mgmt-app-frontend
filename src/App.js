@@ -11,6 +11,7 @@ import Account from "./components/pages/Account";
 import { AuthProvider } from "./authentication/AuthContext.js";
 import PrivateRoute from "./authentication/PrivateRoute.js";
 import Reports from "./components/pages/Reports";
+import Breakdown from "./components/pages/Breakdown";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -69,6 +70,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Reports />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="breakdown"
+              element={
+                <PrivateRoute>
+                  <Breakdown />
                 </PrivateRoute>
               }
             />
