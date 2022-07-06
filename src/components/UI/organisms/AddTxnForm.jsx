@@ -4,12 +4,10 @@ import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box";
 import TxnAmtField from "../atoms/TxnAmtField.jsx";
-import MenuItem from '@mui/material/MenuItem';
-import ListSubheader from '@mui/material/ListSubheader';
-import TextField from '@mui/material/TextField';
+import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
-import AlertSnackbar from "../atoms//AlertSnackbar.jsx";
+import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
 
 
 export default function AddTxnForm ({ txnId }) {
@@ -24,7 +22,7 @@ export default function AddTxnForm ({ txnId }) {
   const [amount, setAmount] = useState("0.00");
   const [txnDate, setTxnDate] = useState(curr);
   const [title, setTitle] = useState("");
-  const [categoryId, setCategoryId] = useState("1"); // set as default 1 for now
+  const [categoryId, setCategoryId] = useState("0"); // set as default 1 for now
   const [shouldPost, setShouldPost] = useState(false); 
   const [shouldFetch, setShouldFetch] = useState(true); 
   const [isSuccess, setIsSuccess] = useState(false);
@@ -95,23 +93,7 @@ export default function AddTxnForm ({ txnId }) {
         <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
-        <TextField
-          defaultValue=""
-          label="Category"
-          variant="outlined"
-          size="small"
-          select
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <ListSubheader>Income</ListSubheader>
-            <MenuItem value={1}>Option 1</MenuItem>
-            <MenuItem value={2}>Option 2</MenuItem>
-          <ListSubheader>Expense</ListSubheader>
-            <MenuItem value={3}>Option 3</MenuItem>
-            <MenuItem value={4}>Option 4</MenuItem>
-        </TextField>
+        <CategoryDropdown selectValue={categoryId} handleChange={handleCategoryIdChange}/>
     
         <PrimaryBtn buttonLabel={'Save'} onClickCallback={handleFormSubmit}/>
       </Box>
