@@ -4,7 +4,7 @@ import Box from "@mui/material/Box"
 import NavBar from "../UI/organisms/NavBar.jsx";
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
-import fetcherGet from "../../utils/fetcherGet.mjs"
+import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
 import { Grid } from "@mui/material";
@@ -23,7 +23,7 @@ export default function Reports () {
     setShouldFetch(true)
   }, [month]);
 
-  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}`] : null, fetcherGet);
+  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}`] : null, fetcher.get);
 
   if (data) {
     setShouldFetch(false);
