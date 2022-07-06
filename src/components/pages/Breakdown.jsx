@@ -12,23 +12,34 @@ import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx";
 import ListCategory from "../UI/organisms/ListCategory.jsx"
 
 export default function Breakdown () {
-  const [categories, setCategories] = useState([]);
+  const [expenseCategories, setExpenseCategories] = useState([]);
+  const [incomeCategories, setIncomeCategories] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true);
   const [month, setMonth] = useState(new Date());
   const [tabFocus, setTabFocus] = useState("expenses")
-  const [totalExpense, setTotalExpense] = useState("$2,290.17");
-  const [totalIncome, setTotalIncome] = useState("3,500.00");
+  const [totalExpense, setTotalExpense] = useState("");
+  const [totalIncome, setTotalIncome] = useState("");
 
   useEffect(() => {
     setShouldFetch(true)
   }, [month]);
 
-  const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}&isIncome=false&includeBreakdown=true`] : null, fetcher.get);
+  const {data:expenseData, error:expenseErr} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}&isIncome=false&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
-  if (data) {
+  if (expenseData) {
     setShouldFetch(false);
-    setCategories(data.breakdown);
-    console.log(data);
+    setExpenseCategories(expenseData.breakdown);
+    console.log(expenseData);
+    setTotalExpense(`$${expenseData.totalAmount}`)
+  }
+
+  const {data:incomeData, error:incomeErr} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}&isIncome=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
+
+  if (incomeData) {
+    setShouldFetch(false);
+    setIncomeCategories(incomeData.breakdown);
+    console.log(incomeData);
+    setTotalIncome(`$${incomeData.totalAmount}`)
   }
 
   return (
@@ -62,7 +73,7 @@ export default function Breakdown () {
         }}>
       </Box>
       <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
-      <ListCategory categories={categories} />
+      <ListCategory categories={tabFocus === "expenses" ? expenseCategories : incomeCategories} />
       <NavBar />
     </Box>
   );
