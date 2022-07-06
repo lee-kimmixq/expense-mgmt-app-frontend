@@ -10,6 +10,7 @@ import Transactions from "./components/pages/Transactions";
 import Account from "./components/pages/Account";
 import { AuthProvider } from "./authentication/AuthContext.js";
 import PrivateRoute from "./authentication/PrivateRoute.js";
+import Reports from "./components/pages/Reports";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -63,6 +64,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Account />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="reports"
+              element={
+                <PrivateRoute>
+                  <Reports />
                 </PrivateRoute>
               }
             />
