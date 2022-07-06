@@ -1,51 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import dotenv from "dotenv";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+
+dotenv.config();
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
     primary: {
-      main: '#5948D3',
-      contrastText: '#EFEFEF',
+      main: "#5948D3",
+      contrastText: "#EFEFEF",
     },
     secondary: {
-      main: '#CF65F2',
+      main: "#CF65F2",
     },
     background: {
-      default: '#262431',
+      default: "#262431",
     },
     text: {
-      primary: '#EFEFEF',
-      disabled: '#B4B4B4',
-      secondary: '#B4B4B4',
-      hint: '#EFEFEF',
+      primary: "#EFEFEF",
+      disabled: "#B4B4B4",
+      secondary: "#B4B4B4",
+      hint: "#EFEFEF",
     },
     info: {
-      main: '#CF65F2',
+      main: "#CF65F2",
     },
   },
   typography: {
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins",
     fontSize: 15,
     button: {
-      textTransform: 'none',
+      textTransform: "none",
       fontSize: 15,
     },
   },
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-          <App />
-    </ ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 

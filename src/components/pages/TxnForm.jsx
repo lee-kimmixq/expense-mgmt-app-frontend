@@ -15,7 +15,7 @@ export default function TxnForm () {
   let navigate = useNavigate();
 
   const handleTxnDelete = () => {
-    axios.delete(`http://localhost:3004/transactions/${txnId}`)
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`)
       .then(({ data }) => {
         if(data.success) navigate("/txns", { replace: true, state: {txnDeleteSuccess: true}});
       })

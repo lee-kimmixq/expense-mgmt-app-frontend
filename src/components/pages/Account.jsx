@@ -5,7 +5,7 @@ import Box from "@mui/material/Box"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx";
 import useSWR from "swr";
-import fetcherDelete from "../../utils/fetcherDelete.mjs";
+import fetcher from "../../utils/fetcher.mjs";
 import { useAuth } from "../../authentication/AuthContext.js"
 
 export default function Account () {
@@ -23,7 +23,7 @@ export default function Account () {
     setShouldFetch(false);
   }
 
-  useSWR(shouldFetch ? [`http://localhost:3004/logout`] : null, fetcherDelete, {onSuccess, onError});
+  useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/logout`] : null, fetcher.delete, {onSuccess, onError});
 
   const handleLogOutSubmit = () => {
     setShouldFetch(true);
