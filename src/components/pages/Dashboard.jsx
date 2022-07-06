@@ -18,7 +18,7 @@ export default function Dashboard () {
   const [incomeTxns, setIncomeTxns] = useState([]);
   const [shouldFetchExp, setShouldFetchExp] = useState(true);
   const [shouldFetchInc, setShouldFetchInc] = useState(true);
-  const [tabFocus, setTabFocus] = useState("one");
+  const [tabFocus, setTabFocus] = useState("expenses");
 
   const { firstDay, lastDay } = getMonthFirstLastDate();
 
@@ -59,9 +59,9 @@ export default function Dashboard () {
         height: 200,
         backgroundColor: 'primary.dark'}}>
       </Box>
-      <TotalValuePrimary value={tabFocus === "one" ? totalExpense : totalIncome} />
+      <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
       <ExpIncNav setTabFocus={setTabFocus}/>
-      <ListTxn txns={tabFocus === "one" ? expenseTxns : incomeTxns}/>
+      <ListTxn txns={tabFocus === "expenses" ? expenseTxns : incomeTxns}/>
       <LinkTxt linkText={'View all'} linkURL={'/txns'} />
       <NavBar />
     </Box>
