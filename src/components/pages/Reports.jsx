@@ -7,6 +7,7 @@ import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
 import fetcherGet from "../../utils/fetcherGet.mjs"
 import useSWR from "swr";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
+import { Grid } from "@mui/material";
 
 
 export default function Reports () {
@@ -14,6 +15,9 @@ export default function Reports () {
   const [shouldFetch, setShouldFetch] = useState(true);
   const [month, setMonth] = useState(new Date());
   const [tabFocus, setTabFocus] = useState("date");
+  const expenseAmt = '2,290.17';
+  const incomeAmt = '3,200';
+
 
   useEffect(() => {
     setShouldFetch(true)
@@ -45,28 +49,33 @@ export default function Reports () {
       // width: 300,
       width: '100%',
       height: 300,
-      backgroundColor: 'primary.dark'}}>
+      backgroundColor: 'primary.dark',
+      marginBottom: '15px'
+      }}>
     </Box>
-        
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    }}>
-      <Box sx={{
-      // width: 300,
-      width: '48.5%',
-      height: 150,
-      backgroundColor: '#27A37A'}}>
-      </Box>
-      <Box sx={{
-        // width: 300,
-        width: '48.5%',
-        height: 150,
-        backgroundColor: '#CF65F2'}}>
-      </Box>
-    </Box>
-   
+
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <Box sx={{
+          // width: 300,
+          // width: '100',
+          height: 150,
+          backgroundColor: '#27A37A'}}>
+        </Box>
+        <p style={{marginBottom: 0}}>Income</p>
+        <p style={{marginTop: 0}}>$ {incomeAmt}</p>
+      </Grid>
+      <Grid item xs={6}>
+        <Box sx={{
+          // width: 300,
+          // width: '48.5%',
+          height: 150,
+          backgroundColor: '#CF65F2'}}>
+        </Box>
+        <p style={{marginBottom: 0}}>Expense</p>
+        <p style={{marginTop: 0}}>$ {expenseAmt}</p>
+      </Grid>
+    </Grid>   
     <NavBar />
   </Box>
   );
