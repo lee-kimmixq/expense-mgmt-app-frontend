@@ -8,7 +8,7 @@ import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
 import { Grid } from "@mui/material";
-
+import { Link } from 'react-router-dom';
 
 export default function Reports () {
   const [txns, setTxns] = useState([]);
@@ -46,7 +46,6 @@ export default function Reports () {
     <ReportsNav setTabFocus={setTabFocus}/>
 
     <Box sx={{
-      // width: 300,
       width: '100%',
       height: 300,
       backgroundColor: 'primary.dark',
@@ -55,25 +54,26 @@ export default function Reports () {
     </Box>
 
     <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
+            <Box sx={{
+              height: 150,
+              backgroundColor: '#27A37A'}}>
+            </Box>
+            <p style={{marginBottom: 0, fontWeight: 'bold'}}>Income</p>
+            <p style={{marginTop: 0}}>$ {incomeAmt}</p>
+          </Link>
+        </Grid>
+      
       <Grid item xs={6}>
-        <Box sx={{
-          // width: 300,
-          // width: '100',
-          height: 150,
-          backgroundColor: '#27A37A'}}>
-        </Box>
-        <p style={{marginBottom: 0}}>Income</p>
-        <p style={{marginTop: 0}}>$ {incomeAmt}</p>
-      </Grid>
-      <Grid item xs={6}>
-        <Box sx={{
-          // width: 300,
-          // width: '48.5%',
-          height: 150,
-          backgroundColor: '#CF65F2'}}>
-        </Box>
-        <p style={{marginBottom: 0}}>Expense</p>
-        <p style={{marginTop: 0}}>$ {expenseAmt}</p>
+        <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
+          <Box sx={{
+            height: 150,
+            backgroundColor: '#CF65F2'}}>
+          </Box>
+          <p style={{marginBottom: 0, fontWeight: 'bold'}}>Expense</p>
+          <p style={{marginTop: 0}}>$ {expenseAmt}</p>
+        </Link>
       </Grid>
     </Grid>   
     <NavBar />
