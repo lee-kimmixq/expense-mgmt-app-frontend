@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 
-export default function CategoryDropdown ({selectValue, handleChange}) {
+export default function CategoryDropdown ({handleChange}) {
   const [categories, setCategories] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true); 
 
@@ -33,6 +33,7 @@ export default function CategoryDropdown ({selectValue, handleChange}) {
       renderInput={(params) => <TextField {...params} label="Select category" />}
       onChange={handleChange}
       size="small"
+      isOptionEqualToValue={(option, value) => option.id === value.id}
     />
   );
 }
