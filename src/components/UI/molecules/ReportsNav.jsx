@@ -27,13 +27,12 @@ export default function ReportsNav ({tabName, tabValue, setTabFocus}) {
       variant="fullWidth"
       value={value}
       onChange={handleChange}
-      textColor="#fff"
-      indicatorColor="#fff"
+
       aria-label="secondary tabs example"
     >
-      <Tab sx={{height: '20px', minHeight: '0'}} value={"date"} label={"D"} />
-      <Tab sx={{height: '20px', minHeight: '0'}} value={"week"} label={"W"} />
-      <Tab sx={{height: '20px', minHeight: '0'}} value={"month"} label={"M"} />
+      <Tab sx={{height: '22px', minHeight: '0'}} value={"date"} label={"D"} />
+      <Tab sx={{height: '22px', minHeight: '0'}} value={"week"} label={"W"} />
+      <Tab sx={{height: '22px', minHeight: '0'}} value={"month"} label={"M"} />
     </Tabs>
     </Box>
   );
