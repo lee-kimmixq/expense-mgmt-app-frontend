@@ -26,7 +26,7 @@ export default function NavBar () {
         <BottomNavigationAction label="" component={Link} to="/home" value={"/home"} icon={<HomeIcon sx={{fontSize:'2rem'}}/>} />
         <BottomNavigationAction label="" component={Link} to="/txns" value={"/txns"} icon={<ReceiptIcon sx={{fontSize:'2rem'}}/>} />
         <BottomNavigationAction label="" component={Link} to="/txns/add" value={"/txns/add"} icon={<AddCircleIcon sx={{fontSize:'2rem'}}/>} />
-        <BottomNavigationAction label="" component={Link} to="" value={"reports"} icon={<AssessmentIcon sx={{fontSize:'2rem'}}/>} />
+        <BottomNavigationAction label="" component={Link} to="/reports" value={"reports"} icon={<AssessmentIcon sx={{fontSize:'2rem'}}/>} />
         <BottomNavigationAction label="" component={Link} to="/account" value={"/account"} icon={<AccountCircleIcon sx={{fontSize:'2rem'}}/>} />
       </BottomNavigation>
     </Paper>
