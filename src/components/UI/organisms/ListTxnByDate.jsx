@@ -25,7 +25,7 @@ export default function ListTxnsByDate ({txns}) {
         >
             <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
               <ListItemAvatar>
-                <CategoryAvatar categoryId={txn.categories[0].id}/>
+                <CategoryAvatar categoryName={txn.categories[0].name}/>
               </ListItemAvatar>
               <ListTxnText textValue={txn.title}/>
             </Box>

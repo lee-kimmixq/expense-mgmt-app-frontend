@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import GenerateIcon from "../atoms/GenerateIcon";
 import { green, deepPurple, pink, amber, lightBlue, blueGrey } from '@mui/material/colors';
 
-export default function CategoryAvatar ({categoryId}) {
+export default function CategoryAvatar ({categoryName}) {
 
   const categories = [
         {
@@ -206,7 +206,7 @@ export default function CategoryAvatar ({categoryId}) {
         }
     ];
 
-  const category = categories.filter(category => category.id == categoryId); // not strict equals
+  const category = categories.filter(category => category.name == categoryName); // not strict equals
 
   return (
       <Avatar sx={{ bgcolor: category[0].color }}>
