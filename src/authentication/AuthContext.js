@@ -22,10 +22,14 @@ export function AuthProvider({ children }) {
     setAuth(false);
   };
 
-  useSWR(shouldFetch ? [`http://localhost:3004/checkAuth`] : null, fetcherGet, {
-    onSuccess,
-    onError,
-  });
+  useSWR(
+    shouldFetch ? [`http://localhost:3004/users/checkAuth`] : null,
+    fetcherGet,
+    {
+      onSuccess,
+      onError,
+    }
+  );
 
   const login = () => {
     return new Promise((res) => {

@@ -23,7 +23,7 @@ export default function Account () {
     setShouldFetch(false);
   }
 
-  useSWR(shouldFetch ? [`http://localhost:3004/logout`] : null, fetcherDelete, {onSuccess, onError});
+  useSWR(shouldFetch ? [`http://localhost:3004/users/logout`] : null, fetcherDelete, {onSuccess, onError});
 
   const handleLogOutSubmit = () => {
     setShouldFetch(true);
