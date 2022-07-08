@@ -9,6 +9,7 @@ import NavBar from "../UI/organisms/NavBar.jsx"
 import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
+import DashboardChart from "../UI/molecules/DashboardChart.jsx";
 
 export default function Dashboard () {
   const [username, setUsername] = useState("");
@@ -19,6 +20,8 @@ export default function Dashboard () {
   const [shouldFetchExp, setShouldFetchExp] = useState(true);
   const [shouldFetchInc, setShouldFetchInc] = useState(true);
   const [tabFocus, setTabFocus] = useState("expenses");
+  const [expenseBreakdown, setExpenseBreakdown] = useState([]);
+  const [incomeBreakdown, setIncomeBreakdown] = useState([]);
 
   const { firstDay, lastDay } = getMonthFirstLastDate();
 
@@ -30,6 +33,7 @@ export default function Dashboard () {
     setUsername(expenseData.user);
     setTotalExpense(`$${expenseData.totalAmount}`);
     setExpenseTxns(expenseData.transactions);
+    setExpenseBreakdown(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
   const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true`] : null, fetcher.get);
@@ -39,6 +43,7 @@ export default function Dashboard () {
     setShouldFetchInc(false);
     setTotalIncome(`$${incomeData.totalAmount}`);
     setIncomeTxns(incomeData.transactions);
+    setIncomeBreakdown(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
   return (
@@ -53,12 +58,7 @@ export default function Dashboard () {
     >
       
       <PageHeader pageTitle={`Hello ${username}`} />
-      <Box sx={{
-        // width: 300,
-        width: '100%',
-        height: 200,
-        backgroundColor: 'primary.dark'}}>
-      </Box>
+      <DashboardChart data={tabFocus === "expenses" ? expenseBreakdown : incomeBreakdown}/>
       <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
       <ExpIncNav setTabFocus={setTabFocus}/>
       <ListTxn txns={tabFocus === "expenses" ? expenseTxns : incomeTxns}/>
