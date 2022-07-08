@@ -12,7 +12,7 @@ export default function DashboardChart ({ data }) {
           <Cell key={`cell-${index}`} fill={categories.filter(category => category.name == entry.name)[0].color} />
         ))}
       </Pie>
-      <Tooltip formatter={(value, name) => [`$${value}`, name]} allowEscapeViewBox={{x: true, y: true}} />
+      <Tooltip formatter={(value, name) => [`$${value}`, name]} allowEscapeViewBox={{y: true}} />
     </PieChart>
   </ResponsiveContainer>
   )
