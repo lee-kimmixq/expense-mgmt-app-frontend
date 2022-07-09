@@ -6,25 +6,27 @@ const {
   amber,
   lightBlue,
   blueGrey,
+  purple,
+  indigo
 } = require("@mui/material/colors");
 
 const categories = [
   {
     id: 1,
     name: "Food & Drinks",
-    color: deepPurple[100],
+    color: '#5948D3',
     icon: "restaurant",
   },
   {
     id: 2,
     name: "Taxi",
-    color: deepPurple[200],
+    color: '#CF65F2',
     icon: "hail",
   },
   {
     id: 3,
     name: "Public Transport",
-    color: deepPurple[300],
+    color: deepPurple[500],
     icon: "directions_subway",
   },
   {
@@ -36,55 +38,55 @@ const categories = [
   {
     id: 5,
     name: "Groceries",
-    color: deepPurple[50],
+    color: deepPurple[600],
     icon: "shopping_basket",
   },
   {
     id: 6,
     name: "Gifts & Charity",
-    color: pink[100],
+    color: purple['A200'],
     icon: "redeem",
   },
   {
     id: 7,
     name: "Entertainment",
-    color: pink[200],
+    color: purple['A400'],
     icon: "sports_esports",
   },
   {
     id: 8,
     name: "Others",
-    color: pink[300],
+    color: purple['A700'],
     icon: "attach_money",
   },
   {
     id: 9,
     name: "Auto & Parking",
-    color: pink[400],
+    color: purple[600],
     icon: "directions_car_icon",
   },
   {
     id: 10,
     name: "Bills",
-    color: pink[500],
+    color: purple[500],
     icon: "receipt_long",
   },
   {
     id: 11,
     name: "Business",
-    color: amber[100],
+    color: amber['A700'],
     icon: "business_center",
   },
   {
     id: 12,
     name: "Cash & Cheque",
-    color: amber[200],
+    color: amber['A400'],
     icon: "payments",
   },
   {
     id: 13,
     name: "Education",
-    color: amber[300],
+    color: amber[600],
     icon: "school",
   },
   {
@@ -102,19 +104,19 @@ const categories = [
   {
     id: 16,
     name: "Investments",
-    color: lightBlue[100],
+    color: lightBlue['A400'],
     icon: "show_chart",
   },
   {
     id: 17,
     name: "Fuel",
-    color: lightBlue[200],
+    color: lightBlue['A700'],
     icon: "local_gas_station",
   },
   {
     id: 18,
     name: "Health",
-    color: lightBlue[300],
+    color: lightBlue[600],
     icon: "medication_liquid",
   },
   {
@@ -132,19 +134,19 @@ const categories = [
   {
     id: 21,
     name: "Loans",
-    color: blueGrey[100],
+    color: blueGrey['A400'],
     icon: "credit_score",
   },
   {
     id: 22,
     name: "Personal Care",
-    color: blueGrey[200],
+    color: blueGrey['A700'],
     icon: "self_improvement",
   },
   {
     id: 23,
     name: "Pets",
-    color: blueGrey[300],
+    color: blueGrey[600],
     icon: "pets",
   },
   {
@@ -162,31 +164,31 @@ const categories = [
   {
     id: 26,
     name: "Taxes",
-    color: lightBlue[600],
+    color: lightBlue[800],
     icon: "request_quote",
   },
   {
     id: 27,
     name: "Travel",
-    color: amber[600],
+    color: amber[700],
     icon: "flight",
   },
   {
     id: 28,
     name: "Bonuses",
-    color: green[100],
+    color: green['A700'],
     icon: "military_tech",
   },
   {
     id: 29,
     name: "Deposits",
-    color: green[200],
+    color: green[800],
     icon: "savings",
   },
   {
     id: 30,
     name: "Investments",
-    color: green[300],
+    color: green[700],
     icon: "trending_up",
   },
   {
