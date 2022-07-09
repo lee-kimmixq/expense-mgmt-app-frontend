@@ -11,8 +11,11 @@ import { Grid } from "@mui/material";
 import { Link } from 'react-router-dom';
 
 export default function Reports () {
-  const [txns, setTxns] = useState([]);
-  const [shouldFetch, setShouldFetch] = useState(true);
+  const [expenseTxns, setExpenseTxns] = useState([]);
+  const [expenseBreakdown, setExpenseBreakdown] = useState([]);
+  const [incomeBreakdown, setIncomeBreakdown] = useState([]);
+  const [shouldFetchExp, setShouldFetchExp] = useState(true);
+  const [shouldFetchInc, setShouldFetchInc] = useState(true);
   const [month, setMonth] = useState(new Date());
   const [tabFocus, setTabFocus] = useState("date");
   const expenseAmt = '2,290.17';
@@ -20,16 +23,29 @@ export default function Reports () {
 
 
   useEffect(() => {
-    setShouldFetch(true)
+    setShouldFetchExp(true)
+    setShouldFetchInc(true)
   }, [month]);
 
-  const {data, error} = useSWR(shouldFetch ? [`http://localhost:3004/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}`] : null, fetcher.get);
+  const { firstDay, lastDay } = getMonthFirstLastDate();
 
-  if (data) {
-    setShouldFetch(false);
-    setTxns(data.transactions);
-    console.log(data);
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeBreakdown=true`] : null, fetcher.get);
+
+  if (expenseData) {
+    console.log(expenseData);
+    setShouldFetchExp(false);
+    setExpenseTxns(expenseData.transactions);
+    setExpenseBreakdown(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
+
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeBreakdown=true`] : null, fetcher.get);
+
+  if (incomeData) {
+    console.log(incomeData);
+    setShouldFetchInc(false);
+    setIncomeBreakdown(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
+  }
+
   
   return (
     <Box
