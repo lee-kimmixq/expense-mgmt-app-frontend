@@ -9,6 +9,7 @@ import useSWR from "swr";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
 import { Grid } from "@mui/material";
 import { Link } from 'react-router-dom';
+import ReportsDonutChart from "../UI/molecules/ReportsDonutChart.jsx";
 
 export default function Reports () {
   const [expenseTxns, setExpenseTxns] = useState([]);
@@ -75,6 +76,7 @@ export default function Reports () {
             <Box sx={{
               height: 150,
               backgroundColor: '#27A37A'}}>
+              <ReportsDonutChart data={incomeBreakdown} />
             </Box>
             <p style={{marginBottom: 0, fontWeight: 'bold'}}>Income</p>
             <p style={{marginTop: 0}}>$ {incomeAmt}</p>
@@ -86,6 +88,7 @@ export default function Reports () {
           <Box sx={{
             height: 150,
             backgroundColor: '#CF65F2'}}>
+              <ReportsDonutChart data={expenseBreakdown} />
           </Box>
           <p style={{marginBottom: 0, fontWeight: 'bold'}}>Expense</p>
           <p style={{marginTop: 0}}>$ {expenseAmt}</p>
