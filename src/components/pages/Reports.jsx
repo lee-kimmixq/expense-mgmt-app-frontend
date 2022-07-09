@@ -13,37 +13,51 @@ import ReportsDonutChart from "../UI/molecules/ReportsDonutChart.jsx";
 
 export default function Reports () {
   const [expenseTxns, setExpenseTxns] = useState([]);
+  const [totalExpense, setTotalExpense] = useState("");
+  const [totalIncome, setTotalIncome] = useState("");
   const [expenseBreakdown, setExpenseBreakdown] = useState([]);
   const [incomeBreakdown, setIncomeBreakdown] = useState([]);
   const [shouldFetchExp, setShouldFetchExp] = useState(true);
   const [shouldFetchInc, setShouldFetchInc] = useState(true);
   const [month, setMonth] = useState(new Date());
   const [tabFocus, setTabFocus] = useState("date");
-  const expenseAmt = '2,290.17';
-  const incomeAmt = '3,200';
-
 
   useEffect(() => {
     setShouldFetchExp(true)
     setShouldFetchInc(true)
-  }, [month]);
+  }, [month, tabFocus]);
 
-  const { firstDay, lastDay } = getMonthFirstLastDate();
+  let firstDay, lastDay;
+  if (tabFocus === "date") {
+    firstDay = new Date();
+    lastDay = new Date();
+  } else if (tabFocus === "week") {
 
-  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeBreakdown=true`] : null, fetcher.get);
+  }
+  else if (tabFocus === "month") {
+    firstDay = getMonthFirstLastDate(month).firstDay;
+    lastDay = getMonthFirstLastDate(month).lastDay;
+  }
+
+  console.log(tabFocus);
+  console.log(firstDay, lastDay);
+
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (expenseData) {
     console.log(expenseData);
     setShouldFetchExp(false);
     setExpenseTxns(expenseData.transactions);
+    setTotalExpense(expenseData.totalAmount);
     setExpenseBreakdown(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
-  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeBreakdown=true`] : null, fetcher.get);
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (incomeData) {
     console.log(incomeData);
     setShouldFetchInc(false);
+    setTotalIncome(incomeData.totalAmount);
     setIncomeBreakdown(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
@@ -79,7 +93,7 @@ export default function Reports () {
               <ReportsDonutChart data={incomeBreakdown} />
             </Box>
             <p style={{marginBottom: 0, fontWeight: 'bold'}}>Income</p>
-            <p style={{marginTop: 0}}>$ {incomeAmt}</p>
+            <p style={{marginTop: 0}}>$ {totalIncome}</p>
           </Link>
         </Grid>
       
@@ -91,7 +105,7 @@ export default function Reports () {
               <ReportsDonutChart data={expenseBreakdown} />
           </Box>
           <p style={{marginBottom: 0, fontWeight: 'bold'}}>Expense</p>
-          <p style={{marginTop: 0}}>$ {expenseAmt}</p>
+          <p style={{marginTop: 0}}>$ {totalExpense}</p>
         </Link>
       </Grid>
     </Grid>   
