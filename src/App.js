@@ -12,6 +12,7 @@ import { AuthProvider } from "./authentication/AuthContext.js";
 import PrivateRoute from "./authentication/PrivateRoute.js";
 import Reports from "./components/pages/Reports";
 import Breakdown from "./components/pages/Breakdown";
+import PublicOnlyRoute from "./authentication/PublicOnlyRoute";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -26,8 +27,14 @@ function App() {
               path="home"
               element={<PrivateRoute children={<Dashboard />} />}
             />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
+            <Route
+              path="login"
+              element={<PublicOnlyRoute children={<Login />} />}
+            />
+            <Route
+              path="signup"
+              element={<PublicOnlyRoute children={<Signup />} />}
+            />
             <Route
               path="txns/add"
               element={<PrivateRoute children={<TxnForm />} />}
