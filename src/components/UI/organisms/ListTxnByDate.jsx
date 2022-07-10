@@ -13,7 +13,7 @@ export default function ListTxnsByDate ({txns}) {
   const txnList = txns.length === 0 ? <p>No Transactions Available</p> : txns.map((txn) => { 
     const currentDate = new Date(txn.txnDate).toLocaleDateString('en-gb', { year:"numeric", month:"short", day:"numeric"});
     const listItemJsx = (
-    <Box>
+    <Box key={`txn${txn.id}`}>
       {previousDate !== currentDate && <TxnDate dateValue={new Date(txn.txnDate).toLocaleDateString('en-gb', { year:"numeric", month:"short", day:"numeric"})} />}
       <Link to={`/txns/${txn.id}`} style={{ textDecoration: 'none' }} className={'link'}>
         <ListItem

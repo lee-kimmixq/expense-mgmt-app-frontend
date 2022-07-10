@@ -10,13 +10,12 @@ import ListTxnText from "../atoms/ListTxnText.jsx";
 export default function ListTxn ({txns}) {
 
   const txnList = txns.length === 0 ? <p>No Transactions Available</p> : txns.map((txn) => (
-    <Link to={`/txns/${txn.id}`} style={{ textDecoration: 'none' }} className={'link'}>
+    <Link to={`/txns/${txn.id}`} style={{ textDecoration: 'none' }} className={'link'} key={`txn${txn.id}`}>
       <ListItem
         disableGutters
         secondaryAction={
           <ListTxnText ege="end" textValue={`$${txn.amount}`}/>
         }
-        key={`txn${txn.id}`}
       >
           <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
             <ListItemAvatar>
