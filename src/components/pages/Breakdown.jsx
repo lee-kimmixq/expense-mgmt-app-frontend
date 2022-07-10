@@ -66,7 +66,7 @@ export default function Breakdown () {
       </Box>
       <CatReportsNav setTabFocus={setTabFocus} />
       <TxnsNav month={month} setMonth={setMonth}/>
-      <ChartPie data={tabFocus === "expenses" ? expenseCategories : incomeCategories} hasTooltip={false}/>
+      <ChartPie data={tabFocus === "expenses" ? expenseCategories : incomeCategories} hasTooltip={false} height={"25%"}/>
       <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
       <ListCategory categories={tabFocus === "expenses" ? expenseCategories : incomeCategories} />
       <NavBar />

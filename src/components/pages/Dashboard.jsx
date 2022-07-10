@@ -58,7 +58,7 @@ export default function Dashboard () {
     >
       
       <PageHeader pageTitle={`Hello ${username}`} />
-      <ChartPie data={tabFocus === "expenses" ? expenseBreakdown : incomeBreakdown} hasTooltip={true}/>
+      <ChartPie data={tabFocus === "expenses" ? expenseBreakdown : incomeBreakdown} hasTooltip={true} height={"25%"}/>
       <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
       <ExpIncNav setTabFocus={setTabFocus}/>
       <ListTxn txns={tabFocus === "expenses" ? expenseTxns : incomeTxns}/>
