@@ -4,6 +4,8 @@ import categories from "../../../utils/categories.js";
 
 export default function ReportsDonutChart ({ data }) {
 
+  if (data.length === 0) return <>No Transactions Available</>
+
   return (
   <ResponsiveContainer width='100%' height="100%">
     <PieChart width="100%" height="100%">
