@@ -4,6 +4,7 @@ import Box from "@mui/material/Box"
 import NavBar from "../UI/organisms/NavBar.jsx";
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
+import getWeekFirstLastDate from "../../utils/getWeekFirstLastDate.mjs"
 import getDayFirstLastDate from "../../utils/getDayFirstLastDate.mjs"
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
@@ -33,15 +34,13 @@ export default function Reports () {
     firstDay = getDayFirstLastDate().firstDay;
     lastDay = getDayFirstLastDate().lastDay;
   } else if (tabFocus === "week") {
-
+    firstDay = getWeekFirstLastDate().firstDay;
+    lastDay = getWeekFirstLastDate().lastDay;
   }
   else if (tabFocus === "month") {
     firstDay = getMonthFirstLastDate(month).firstDay;
     lastDay = getMonthFirstLastDate(month).lastDay;
   }
-
-  console.log(tabFocus);
-  console.log(firstDay, lastDay);
 
   const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
