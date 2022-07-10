@@ -45,7 +45,6 @@ export default function Reports () {
   const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (expenseData) {
-    console.log(expenseData);
     setShouldFetchExp(false);
     setExpenseTxns(expenseData.transactions);
     setTotalExpense(expenseData.totalAmount);
@@ -55,7 +54,6 @@ export default function Reports () {
   const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (incomeData) {
-    console.log(incomeData);
     setShouldFetchInc(false);
     setTotalIncome(incomeData.totalAmount);
     setIncomeBreakdown(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));

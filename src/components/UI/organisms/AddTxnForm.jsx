@@ -48,7 +48,6 @@ export default function AddTxnForm ({ txnId }) {
     setShouldPost(false);
     if (txnId === "add" && data) navigate(`/txns`, { replace: true, state: {txnAddSuccess: true} });; // on success
     if (txnId !== "add" && data) {
-      console.log(data)
       if (data.success) setIsSuccess(true);
     }; // on success
   }

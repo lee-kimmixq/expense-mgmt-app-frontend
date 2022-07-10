@@ -30,7 +30,6 @@ export default function Breakdown () {
   if (expenseData) {
     setShouldFetch(false);
     setExpenseCategories(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
-    console.log(expenseData);
     setTotalExpense(`$${expenseData.totalAmount}`)
   }
 
@@ -39,7 +38,6 @@ export default function Breakdown () {
   if (incomeData) {
     setShouldFetch(false);
     setIncomeCategories(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
-    console.log(incomeData);
     setTotalIncome(`$${incomeData.totalAmount}`)
   }
 

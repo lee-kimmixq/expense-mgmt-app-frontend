@@ -25,7 +25,6 @@ export default function Transactions () {
   if (data) {
     setShouldFetch(false);
     setTxns(data.transactions);
-    console.log(data);
   }
 
   let location = useLocation(); 
