@@ -1,26 +1,23 @@
-const { modalUnstyledClasses } = require("@mui/material");
 const {
   green,
   deepPurple,
-  pink,
   amber,
   lightBlue,
   blueGrey,
   purple,
-  indigo
 } = require("@mui/material/colors");
 
 const categories = [
   {
     id: 1,
     name: "Food & Drinks",
-    color: '#5948D3',
+    color: "#5948D3",
     icon: "restaurant",
   },
   {
     id: 2,
     name: "Taxi",
-    color: '#CF65F2',
+    color: "#CF65F2",
     icon: "hail",
   },
   {
@@ -44,19 +41,19 @@ const categories = [
   {
     id: 6,
     name: "Gifts & Charity",
-    color: purple['A200'],
+    color: purple["A200"],
     icon: "redeem",
   },
   {
     id: 7,
     name: "Entertainment",
-    color: purple['A400'],
+    color: purple["A400"],
     icon: "sports_esports",
   },
   {
     id: 8,
     name: "Others",
-    color: purple['A700'],
+    color: purple["A700"],
     icon: "attach_money",
   },
   {
@@ -74,13 +71,13 @@ const categories = [
   {
     id: 11,
     name: "Business",
-    color: amber['A700'],
+    color: amber["A700"],
     icon: "business_center",
   },
   {
     id: 12,
     name: "Cash & Cheque",
-    color: amber['A400'],
+    color: amber["A400"],
     icon: "payments",
   },
   {
@@ -104,13 +101,13 @@ const categories = [
   {
     id: 16,
     name: "Investments",
-    color: lightBlue['A400'],
+    color: lightBlue["A400"],
     icon: "show_chart",
   },
   {
     id: 17,
     name: "Fuel",
-    color: lightBlue['A700'],
+    color: lightBlue["A700"],
     icon: "local_gas_station",
   },
   {
@@ -134,13 +131,13 @@ const categories = [
   {
     id: 21,
     name: "Loans",
-    color: blueGrey['A400'],
+    color: blueGrey["A400"],
     icon: "credit_score",
   },
   {
     id: 22,
     name: "Personal Care",
-    color: blueGrey['A700'],
+    color: blueGrey["A700"],
     icon: "self_improvement",
   },
   {
@@ -176,7 +173,7 @@ const categories = [
   {
     id: 28,
     name: "Bonuses",
-    color: green['A700'],
+    color: green["A700"],
     icon: "military_tech",
   },
   {
