@@ -5,7 +5,7 @@ import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
 import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
-import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
+import getFirstLastDates from "../../utils/getFirstLastDates.mjs";
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
 import { useLocation } from "react-router-dom";
@@ -20,7 +20,9 @@ export default function Transactions () {
     setShouldFetch(true)
   }, [month]);
 
-  const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}&includeTransactions=true`] : null, fetcher.get);
+  const { firstDate, lastDate } = getFirstLastDates("month", month);
+
+  const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&includeTransactions=true`] : null, fetcher.get);
 
   if (data) {
     setShouldFetch(false);
