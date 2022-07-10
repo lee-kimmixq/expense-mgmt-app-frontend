@@ -23,7 +23,7 @@ export default function Dashboard () {
   const [expenseBreakdown, setExpenseBreakdown] = useState([]);
   const [incomeBreakdown, setIncomeBreakdown] = useState([]);
 
-  const { firstDate, lastDate } = getFirstLastDates();
+  const { firstDate, lastDate } = getFirstLastDates("month");
 
   const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
 
