@@ -85,20 +85,6 @@ export default function Reports () {
     </Box>
 
     <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
-            <Box sx={{
-              height: 150,
-              backgroundColor: '#27A37A',
-              display: "flex",
-              alignItems: "center"}}>
-              <ReportsDonutChart data={incomeBreakdown} />
-            </Box>
-            <p style={{marginBottom: 0, fontWeight: 'bold'}}>Income</p>
-            <p style={{marginTop: 0}}>$ {totalIncome}</p>
-          </Link>
-        </Grid>
-      
       <Grid item xs={6}>
         <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
           <Box sx={{
@@ -112,6 +98,20 @@ export default function Reports () {
           <p style={{marginTop: 0}}>$ {totalExpense}</p>
         </Link>
       </Grid>
+
+      <Grid item xs={6}>
+          <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
+            <Box sx={{
+              height: 150,
+              backgroundColor: '#27A37A',
+              display: "flex",
+              alignItems: "center"}}>
+              <ReportsDonutChart data={incomeBreakdown} />
+            </Box>
+            <p style={{marginBottom: 0, fontWeight: 'bold'}}>Income</p>
+            <p style={{marginTop: 0}}>$ {totalIncome}</p>
+          </Link>
+        </Grid>
     </Grid>   
     <NavBar />
   </Box>
