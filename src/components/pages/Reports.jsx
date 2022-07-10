@@ -11,7 +11,7 @@ import useSWR from "swr";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
 import { Grid } from "@mui/material";
 import { Link } from 'react-router-dom';
-import ReportsDonutChart from "../UI/molecules/ReportsDonutChart.jsx";
+import ChartPie from "../UI/atoms/ChartPie.jsx"
 
 export default function Reports () {
   const [expenseTxns, setExpenseTxns] = useState([]);
@@ -92,7 +92,7 @@ export default function Reports () {
             backgroundColor: '#CF65F2',
             display: "flex",
             alignItems: "center"}}>
-              <ReportsDonutChart data={expenseBreakdown} />
+              <ChartPie data={expenseBreakdown} hasTooltip={false}/>
           </Box>
           <p style={{marginBottom: 0, fontWeight: 'bold'}}>Expense</p>
           <p style={{marginTop: 0}}>$ {totalExpense}</p>
@@ -106,7 +106,7 @@ export default function Reports () {
               backgroundColor: '#27A37A',
               display: "flex",
               alignItems: "center"}}>
-              <ReportsDonutChart data={incomeBreakdown} />
+              <ChartPie data={incomeBreakdown} hasTooltip={false}/>
             </Box>
             <p style={{marginBottom: 0, fontWeight: 'bold'}}>Income</p>
             <p style={{marginTop: 0}}>$ {totalIncome}</p>

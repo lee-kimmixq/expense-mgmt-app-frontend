@@ -10,7 +10,7 @@ import useSWR from "swr";
 import CatReportsNav from "../UI/molecules/CatReportsNav.jsx";
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx";
 import ListCategory from "../UI/organisms/ListCategory.jsx"
-import BreakdownChart from "../UI/molecules/BreakdownChart.jsx"
+import ChartPie from "../UI/atoms/ChartPie.jsx"
 
 export default function Breakdown () {
   const [expenseCategories, setExpenseCategories] = useState([]);
@@ -66,14 +66,7 @@ export default function Breakdown () {
       </Box>
       <CatReportsNav setTabFocus={setTabFocus} />
       <TxnsNav month={month} setMonth={setMonth}/>
-      {/* <Box sx={{
-        // width: 300,
-        width: '100%',
-        height: 200,
-        backgroundColor: 'primary.dark'
-        }}>
-      </Box> */}
-      <BreakdownChart data={tabFocus === "expenses" ? expenseCategories : incomeCategories}/>
+      <ChartPie data={tabFocus === "expenses" ? expenseCategories : incomeCategories} hasTooltip={false}/>
       <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
       <ListCategory categories={tabFocus === "expenses" ? expenseCategories : incomeCategories} />
       <NavBar />

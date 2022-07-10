@@ -9,7 +9,7 @@ import NavBar from "../UI/organisms/NavBar.jsx"
 import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
-import DashboardChart from "../UI/molecules/DashboardChart.jsx";
+import ChartPie from "../UI/atoms/ChartPie.jsx"
 
 export default function Dashboard () {
   const [username, setUsername] = useState("");
@@ -58,7 +58,7 @@ export default function Dashboard () {
     >
       
       <PageHeader pageTitle={`Hello ${username}`} />
-      <DashboardChart data={tabFocus === "expenses" ? expenseBreakdown : incomeBreakdown}/>
+      <ChartPie data={tabFocus === "expenses" ? expenseBreakdown : incomeBreakdown} hasTooltip={true}/>
       <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
       <ExpIncNav setTabFocus={setTabFocus}/>
       <ListTxn txns={tabFocus === "expenses" ? expenseTxns : incomeTxns}/>
