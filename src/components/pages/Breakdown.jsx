@@ -10,6 +10,7 @@ import useSWR from "swr";
 import CatReportsNav from "../UI/molecules/CatReportsNav.jsx";
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx";
 import ListCategory from "../UI/organisms/ListCategory.jsx"
+import BreakdownChart from "../UI/molecules/BreakdownChart.jsx"
 
 export default function Breakdown () {
   const [expenseCategories, setExpenseCategories] = useState([]);
@@ -28,7 +29,7 @@ export default function Breakdown () {
 
   if (expenseData) {
     setShouldFetch(false);
-    setExpenseCategories(expenseData.breakdown);
+    setExpenseCategories(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
     console.log(expenseData);
     setTotalExpense(`$${expenseData.totalAmount}`)
   }
@@ -37,7 +38,7 @@ export default function Breakdown () {
 
   if (incomeData) {
     setShouldFetch(false);
-    setIncomeCategories(incomeData.breakdown);
+    setIncomeCategories(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
     console.log(incomeData);
     setTotalIncome(`$${incomeData.totalAmount}`)
   }
@@ -65,13 +66,14 @@ export default function Breakdown () {
       </Box>
       <CatReportsNav setTabFocus={setTabFocus} />
       <TxnsNav month={month} setMonth={setMonth}/>
-       <Box sx={{
+      {/* <Box sx={{
         // width: 300,
         width: '100%',
         height: 200,
         backgroundColor: 'primary.dark'
         }}>
-      </Box>
+      </Box> */}
+      <BreakdownChart data={tabFocus === "expenses" ? expenseCategories : incomeCategories}/>
       <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
       <ListCategory categories={tabFocus === "expenses" ? expenseCategories : incomeCategories} />
       <NavBar />
