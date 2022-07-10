@@ -22,66 +22,36 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            {/* <Route path="/" element={<App />}> */}
             <Route
               path="home"
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute children={<Dashboard />} />}
             />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route
               path="txns/add"
-              element={
-                <PrivateRoute>
-                  <TxnForm />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute children={<TxnForm />} />}
             />
             <Route
               path="txns/:id"
-              element={
-                <PrivateRoute>
-                  <TxnForm />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute children={<TxnForm />} />}
             />
             <Route
               path="txns"
-              element={
-                <PrivateRoute>
-                  <Transactions />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute children={<Transactions />} />}
             />
             <Route
               path="account"
-              element={
-                <PrivateRoute>
-                  <Account />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute children={<Account />} />}
             />
             <Route
               path="reports"
-              element={
-                <PrivateRoute>
-                  <Reports />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute children={<Reports />} />}
             />
             <Route
               path="breakdown"
-              element={
-                <PrivateRoute>
-                  <Breakdown />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute children={<Breakdown />} />}
             />
-            {/* </Route> */}
           </Routes>
         </BrowserRouter>
       </AuthProvider>
