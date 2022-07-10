@@ -13,6 +13,7 @@ import PrivateRoute from "./authentication/PrivateRoute.js";
 import Reports from "./components/pages/Reports";
 import Breakdown from "./components/pages/Breakdown";
 import PublicOnlyRoute from "./authentication/PublicOnlyRoute";
+import { Navigate } from "react-router-dom";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -59,6 +60,7 @@ function App() {
               path="breakdown"
               element={<PrivateRoute children={<Breakdown />} />}
             />
+            <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
