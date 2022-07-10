@@ -25,22 +25,22 @@ export default function Dashboard () {
 
   const { firstDate, lastDate } = getFirstLastDates("month");
 
-  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
 
   if (expenseData) {
     setShouldFetchExp(false);
     setUsername(expenseData.user);
     setTotalExpense(`$${expenseData.totalAmount}`);
-    setExpenseTxns(expenseData.transactions);
+    setExpenseTxns(expenseData.transactions.slice(0, 5));
     setExpenseBreakdown(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
-  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
 
   if (incomeData) {
     setShouldFetchInc(false);
     setTotalIncome(`$${incomeData.totalAmount}`);
-    setIncomeTxns(incomeData.transactions);
+    setIncomeTxns(incomeData.transactions.slice(0, 5));
     setIncomeBreakdown(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
