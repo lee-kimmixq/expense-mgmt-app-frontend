@@ -3,9 +3,7 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import Box from "@mui/material/Box"
 import NavBar from "../UI/organisms/NavBar.jsx";
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
-import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
-import getWeekFirstLastDate from "../../utils/getWeekFirstLastDate.mjs"
-import getDayFirstLastDate from "../../utils/getDayFirstLastDate.mjs"
+import getFirstLastDates from "../../utils/getFirstLastDates.mjs";
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
@@ -29,20 +27,10 @@ export default function Reports () {
     setShouldFetchInc(true)
   }, [month, tabFocus]);
 
-  let firstDay, lastDay;
-  if (tabFocus === "date") {
-    firstDay = getDayFirstLastDate().firstDay;
-    lastDay = getDayFirstLastDate().lastDay;
-  } else if (tabFocus === "week") {
-    firstDay = getWeekFirstLastDate().firstDay;
-    lastDay = getWeekFirstLastDate().lastDay;
-  }
-  else if (tabFocus === "month") {
-    firstDay = getMonthFirstLastDate(month).firstDay;
-    lastDay = getMonthFirstLastDate(month).lastDay;
-  }
+  const {firstDate, lastDate} = getFirstLastDates(tabFocus, month);
+  console.log(firstDate, lastDate);
 
-  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (expenseData) {
     setShouldFetchExp(false);
@@ -51,7 +39,7 @@ export default function Reports () {
     setExpenseBreakdown(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
-  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=true&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (incomeData) {
     setShouldFetchInc(false);

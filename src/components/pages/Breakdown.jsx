@@ -4,7 +4,7 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
-import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
+import getFirstLastDates from "../../utils/getFirstLastDates.mjs";
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
 import CatReportsNav from "../UI/molecules/CatReportsNav.jsx";
@@ -25,7 +25,9 @@ export default function Breakdown () {
     setShouldFetch(true)
   }, [month]);
 
-  const {data:expenseData, error:expenseErr} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}&isIncome=false&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
+  const { firstDate, lastDate } = getFirstLastDates("month", month);
+
+  const {data:expenseData, error:expenseErr} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (expenseData) {
     setShouldFetch(false);
@@ -33,7 +35,7 @@ export default function Breakdown () {
     setTotalExpense(`$${expenseData.totalAmount}`)
   }
 
-  const {data:incomeData, error:incomeErr} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${getMonthFirstLastDate(month).firstDay}&txnDateMax=${getMonthFirstLastDate(month).lastDay}&isIncome=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
+  const {data:incomeData, error:incomeErr} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
   if (incomeData) {
     setShouldFetch(false);

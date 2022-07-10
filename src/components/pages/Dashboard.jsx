@@ -6,7 +6,7 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx"
 import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
-import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
+import getFirstLastDates from "../../utils/getFirstLastDates.mjs";
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
 import ChartPie from "../UI/atoms/ChartPie.jsx"
@@ -23,9 +23,9 @@ export default function Dashboard () {
   const [expenseBreakdown, setExpenseBreakdown] = useState([]);
   const [incomeBreakdown, setIncomeBreakdown] = useState([]);
 
-  const { firstDay, lastDay } = getMonthFirstLastDate();
+  const { firstDate, lastDate } = getFirstLastDates("month");
 
-  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
+  const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
 
   if (expenseData) {
     setShouldFetchExp(false);
@@ -35,7 +35,7 @@ export default function Dashboard () {
     setExpenseBreakdown(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
   }
 
-  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDay}&txnDateMax=${lastDay}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
+  const {data: incomeData, error: incomeErr} = useSWR(shouldFetchInc ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&limit=5&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`] : null, fetcher.get);
 
   if (incomeData) {
     setShouldFetchInc(false);
