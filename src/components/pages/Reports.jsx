@@ -4,6 +4,7 @@ import Box from "@mui/material/Box"
 import NavBar from "../UI/organisms/NavBar.jsx";
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import getMonthFirstLastDate from "../../utils/getMonthFirstLastDate.mjs"
+import getDayFirstLastDate from "../../utils/getDayFirstLastDate.mjs"
 import fetcher from "../../utils/fetcher.mjs"
 import useSWR from "swr";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
@@ -29,8 +30,8 @@ export default function Reports () {
 
   let firstDay, lastDay;
   if (tabFocus === "date") {
-    firstDay = new Date();
-    lastDay = new Date();
+    firstDay = getDayFirstLastDate().firstDay;
+    lastDay = getDayFirstLastDate().lastDay;
   } else if (tabFocus === "week") {
 
   }
