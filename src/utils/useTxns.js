@@ -11,17 +11,15 @@ const getQueryParams = (type, firstDate, lastDate) => {
   return queryParams[type];
 };
 
-const useTxns = (shouldFetch, queryParamType, dateType) => {
+const useTxns = (queryParamType, dateType) => {
   const { firstDate, lastDate } = getFirstLastDates(dateType);
 
   const { data, error, mutate } = useSWR(
-    shouldFetch
-      ? `${process.env.REACT_APP_BACKEND_URL}/transactions${getQueryParams(
-          queryParamType,
-          firstDate,
-          lastDate
-        )}`
-      : null,
+    `${process.env.REACT_APP_BACKEND_URL}/transactions${getQueryParams(
+      queryParamType,
+      firstDate,
+      lastDate
+    )}`,
     fetcher.get
   );
 

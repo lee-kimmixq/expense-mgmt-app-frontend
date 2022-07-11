@@ -13,7 +13,7 @@ import Loading from "../pages/Loading.jsx"
 export default function Dashboard () {
   const [tabFocus, setTabFocus] = useState("expenses");
 
-  const { data, isLoading } = useTxns(true, tabFocus === "expenses" ? "dashboardExp" : "dashboardInc", "month");
+  const { data, isLoading } = useTxns(tabFocus === "expenses" ? "dashboardExp" : "dashboardInc", "month");
 
   if (isLoading) return <Loading />;
 
@@ -27,7 +27,6 @@ export default function Dashboard () {
         marginTop: '10vmin'
       }}
     >
-      
       <PageHeader pageTitle={`Hello ${data.user}`} />
       <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={true} height={"25%"}/>
       <TotalValuePrimary value={data.totalAmount} />
