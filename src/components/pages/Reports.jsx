@@ -9,15 +9,19 @@ import { Link } from 'react-router-dom';
 import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
 import Loading from "../pages/Loading.jsx"
+import useReports from "../../utils/useReports.js";
 
 export default function Reports () {
   const [month, setMonth] = useState(new Date());
   const [tabFocus, setTabFocus] = useState("date");
 
+  const { data: reportData, isLoading: isRepLoading } = useReports("month", month);
   const { data: expenseData, isLoading: isExpLoading } = useTxns("reports", "expenses", tabFocus, month);
   const { data: incomeData, isLoading: isIncLoading } = useTxns("reports", "income", tabFocus, month);
 
   if (isExpLoading || isIncLoading) return <Loading />;
+
+  console.log(reportData);
   
   return (
     <Box
