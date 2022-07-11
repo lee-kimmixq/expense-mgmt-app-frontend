@@ -15,9 +15,9 @@ export default function Transactions () {
 
   const { data, isLoading } = useTxns("transactions", null, "month", month);
 
-  if (isLoading) return <Loading />;
-
   let location = useLocation(); 
+  
+  if (isLoading) return <Loading />;
   let txnAddSuccess = false;
   let txnDeleteSuccess = false;
   if (location.state && location.state.txnAddSuccess) txnAddSuccess = true;
