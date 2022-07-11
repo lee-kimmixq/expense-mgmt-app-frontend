@@ -28,7 +28,6 @@ export default function Reports () {
   }, [month, tabFocus]);
 
   const {firstDate, lastDate} = getFirstLastDates(tabFocus, month);
-  console.log(firstDate, lastDate);
 
   const {data: expenseData, error: expenseErr} = useSWR(shouldFetchExp ? [`${process.env.REACT_APP_BACKEND_URL}/transactions?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeUser=true&includeBreakdown=true&includeTotal=true`] : null, fetcher.get);
 
