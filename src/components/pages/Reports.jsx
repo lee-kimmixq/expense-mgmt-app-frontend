@@ -10,6 +10,7 @@ import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
 import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
+import { ResponsiveContainer, BarChart, XAxis, Bar} from 'recharts';
 
 export default function Reports () {
   const [month, setMonth] = useState(new Date());
@@ -21,7 +22,9 @@ export default function Reports () {
 
   if (isExpLoading || isIncLoading) return <Loading />;
 
-  console.log(reportData);
+  // format reportData
+  const newData = reportData.map((day) => {return {...day, date: new Date(day.date).getDate()}})
+  console.log(newData);
   
   return (
     <Box
@@ -40,9 +43,14 @@ export default function Reports () {
     <Box sx={{
       width: '100%',
       height: 300,
-      backgroundColor: 'primary.dark',
       marginBottom: '15px'
       }}>
+      <ResponsiveContainer width='100%' height='100%' >
+        <BarChart width="100%" height="100%" data={newData}>
+          <XAxis dataKey="date" />
+          <Bar dataKey="sum" fill="#8884d8"/>
+        </BarChart>
+      </ResponsiveContainer>
     </Box>
 
     <Grid container spacing={2}>
