@@ -2,21 +2,23 @@ import useSWR from "swr";
 import fetcher from "./fetcher.mjs";
 import getFirstLastDates from "./getFirstLastDates.mjs";
 
-const getQueryParams = (type, firstDate, lastDate) => {
+const getQueryParams = (page, type, firstDate, lastDate) => {
+  const isIncomeVal = type === "income";
+
   const queryParams = {
-    dashboardExp: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=false&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`,
-    dashboardInc: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=true&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`,
+    dashboard: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=${isIncomeVal}&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`,
   };
 
-  return queryParams[type];
+  return queryParams[page];
 };
 
-const useTxns = (queryParamType, dateType) => {
+const useTxns = (queryParamType, dataType, dateType) => {
   const { firstDate, lastDate } = getFirstLastDates(dateType);
 
   const { data, error, mutate } = useSWR(
     `${process.env.REACT_APP_BACKEND_URL}/transactions${getQueryParams(
       queryParamType,
+      dataType,
       firstDate,
       lastDate
     )}`,

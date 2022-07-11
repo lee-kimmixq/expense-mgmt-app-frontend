@@ -13,7 +13,7 @@ import Loading from "../pages/Loading.jsx"
 export default function Dashboard () {
   const [tabFocus, setTabFocus] = useState("expenses");
 
-  const { data, isLoading } = useTxns(tabFocus === "expenses" ? "dashboardExp" : "dashboardInc", "month");
+  const { data, isLoading } = useTxns("dashboard", tabFocus, "month");
 
   if (isLoading) return <Loading />;
 
