@@ -8,6 +8,7 @@ import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
+import UploadReceiptBtn from "../molecules/UploadReceiptBtn.jsx";
 
 
 export default function AddTxnForm ({ txnId }) {
@@ -88,6 +89,7 @@ export default function AddTxnForm ({ txnId }) {
       }}
       >
         {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true}/>}
+        <UploadReceiptBtn />
         <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>

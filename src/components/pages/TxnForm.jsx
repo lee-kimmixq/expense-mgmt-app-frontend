@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box"
 import AddTxnForm from "../UI/organisms/AddTxnForm.jsx";
-import UploadReceiptBtn from "../UI/molecules/UploadReceiptBtn.jsx";
 import GenerateIconLarge from "../UI/atoms/GenerateIconLarge.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
@@ -34,7 +33,6 @@ export default function TxnForm () {
         }}
       >
       <GenerateIconLarge name={'paid'}/>
-      <UploadReceiptBtn />
       <AddTxnForm txnId={txnId}/>
       <NavBar />
       {txnId !== "add" && <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} onClickCallback={()=>{setShowDialog(true)}} />}
