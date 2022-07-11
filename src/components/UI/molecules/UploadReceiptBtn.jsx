@@ -1,14 +1,25 @@
 import React from "react";
-import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box"
-
-// import axios from "axios";
+import { Button } from "@mui/material";
+import GenerateIcon from "../atoms/GenerateIcon.jsx";
 
 export default function UploadReceiptBtn () {
 
   return (
     <Box>
-      <PrimaryBtn buttonLabel={'Upload Receipt'} buttonColorPalette={'secondary'} icon={'camera_alt'}/>      
+      <label htmlFor="contained-button-file">
+        <input style={{display: 'none'}} accept="image/*" id="contained-button-file" multiple type="file" />
+        <Button variant="contained" component="span"
+        sx={{
+          display: 'flex', 
+          width: '100%', 
+        }}  
+        color={'secondary'} 
+        startIcon={<GenerateIcon name={'camera_alt'} />}>
+          Upload Receipt
+        </Button>
+      </label>
+        
     </Box>
   );
 }
