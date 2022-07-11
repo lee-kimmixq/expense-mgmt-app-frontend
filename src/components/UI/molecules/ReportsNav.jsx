@@ -30,7 +30,7 @@ export default function ReportsNav ({tabName, tabValue, setTabFocus}) {
 
       aria-label="secondary tabs example"
     >
-      <Tab sx={{height: '22px', minHeight: '0'}} value={"date"} label={"D"} />
+      <Tab sx={{height: '22px', minHeight: '0'}} value={"day"} label={"D"} />
       <Tab sx={{height: '22px', minHeight: '0'}} value={"week"} label={"W"} />
       <Tab sx={{height: '22px', minHeight: '0'}} value={"month"} label={"M"} />
     </Tabs>

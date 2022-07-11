@@ -5,6 +5,11 @@ const getFirstLastDates = (duration, date) => {
   let lastDate;
 
   switch (duration) {
+    case "year":
+      firstDate = new Date(date.getFullYear() - 1, 1, 1);
+      lastDate = new Date(date.getFullYear(), 12, 0);
+      break;
+
     case "month":
       firstDate = new Date(date.getFullYear(), date.getMonth(), 1);
       lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
