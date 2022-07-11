@@ -4,7 +4,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 // import axios from "axios";
 
 export default function CatReportsNav ({tabName, tabValue, setTabFocus}) {
-  const [value, setValue] = useState('expenses');
+  const [value, setValue] = useState(tabValue);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
