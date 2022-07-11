@@ -5,8 +5,6 @@ import { Box, Tab, Tabs } from "@mui/material";
 export default function ExpIncNav ({setTabFocus, currentValue}) {
   const [value, setValue] = useState(currentValue);
 
-  console.log(value);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setTabFocus(newValue);
