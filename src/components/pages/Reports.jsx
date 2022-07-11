@@ -35,9 +35,7 @@ export default function Reports () {
   }
 
   const maxSum = Math.max(...reportData.map((day) => day.sum));
-  console.log(reportData);
-  console.log(newData);
-  
+
   return (
     <Box
     sx={{
