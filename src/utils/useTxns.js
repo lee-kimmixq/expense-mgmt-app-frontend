@@ -7,13 +7,14 @@ const getQueryParams = (page, type, firstDate, lastDate) => {
 
   const queryParams = {
     dashboard: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=${isIncomeVal}&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`,
+    transactions: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&includeTransactions=true`,
   };
 
   return queryParams[page];
 };
 
-const useTxns = (queryParamType, dataType, dateType) => {
-  const { firstDate, lastDate } = getFirstLastDates(dateType);
+const useTxns = (queryParamType, dataType, dateType, currDate) => {
+  const { firstDate, lastDate } = getFirstLastDates(dateType, currDate);
 
   const { data, error, mutate } = useSWR(
     `${process.env.REACT_APP_BACKEND_URL}/transactions${getQueryParams(
