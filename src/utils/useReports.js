@@ -4,7 +4,6 @@ import getFirstLastDates from "./getFirstLastDates.mjs";
 
 const useReports = (dateType, currDate) => {
   const { firstDate, lastDate } = getFirstLastDates(dateType, currDate);
-  console.log(firstDate, lastDate);
 
   const { data, error, mutate } = useSWR(
     `${process.env.REACT_APP_BACKEND_URL}/transactions/reports?txnDateMin=${firstDate}&txnDateMax=${lastDate}`,
