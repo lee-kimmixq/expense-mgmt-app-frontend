@@ -8,37 +8,14 @@ import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
+import Loading from "../pages/Loading.jsx"
 
 export default function Dashboard () {
-  const [username, setUsername] = useState("");
-  const [totalExpense, setTotalExpense] = useState("");
-  const [totalIncome, setTotalIncome] = useState("");
-  const [expenseTxns, setExpenseTxns] = useState([]);
-  const [incomeTxns, setIncomeTxns] = useState([]);
-  const [shouldFetchExp, setShouldFetchExp] = useState(true);
-  const [shouldFetchInc, setShouldFetchInc] = useState(true);
   const [tabFocus, setTabFocus] = useState("expenses");
-  const [expenseBreakdown, setExpenseBreakdown] = useState([]);
-  const [incomeBreakdown, setIncomeBreakdown] = useState([]);
 
-  const {data: expenseData, error: expenseErr} = useTxns(shouldFetchExp, "dashboardExp", "month");
+  const { data, isLoading } = useTxns(true, tabFocus === "expenses" ? "dashboardExp" : "dashboardInc", "month");
 
-  if (expenseData) {
-    setShouldFetchExp(false);
-    setUsername(expenseData.user);
-    setTotalExpense(`$${expenseData.totalAmount}`);
-    setExpenseTxns(expenseData.transactions.slice(0, 5));
-    setExpenseBreakdown(expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
-  }
-
-  const {data: incomeData, error: incomeErr} = useTxns(shouldFetchInc, "dashboardInc", "month");
-
-  if (incomeData) {
-    setShouldFetchInc(false);
-    setTotalIncome(`$${incomeData.totalAmount}`);
-    setIncomeTxns(incomeData.transactions.slice(0, 5));
-    setIncomeBreakdown(incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}}));
-  }
+  if (isLoading) return <Loading />;
 
   return (
     <Box
@@ -51,11 +28,11 @@ export default function Dashboard () {
       }}
     >
       
-      <PageHeader pageTitle={`Hello ${username}`} />
-      <ChartPie data={tabFocus === "expenses" ? expenseBreakdown : incomeBreakdown} hasTooltip={true} height={"25%"}/>
-      <TotalValuePrimary value={tabFocus === "expenses" ? totalExpense : totalIncome} />
+      <PageHeader pageTitle={`Hello ${data.user}`} />
+      <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={true} height={"25%"}/>
+      <TotalValuePrimary value={data.totalAmount} />
       <ExpIncNav setTabFocus={setTabFocus}/>
-      <ListTxn txns={tabFocus === "expenses" ? expenseTxns : incomeTxns}/>
+      <ListTxn txns={data.transactions.slice(0, 5)}/>
       <LinkTxt linkText={'View all'} linkURL={'/txns'} />
       <NavBar />
     </Box>
