@@ -10,7 +10,7 @@ import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
 import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
-import { ResponsiveContainer, BarChart, XAxis, Bar} from 'recharts';
+import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
 
 export default function Reports () {
   const [month, setMonth] = useState(new Date());
@@ -23,7 +23,8 @@ export default function Reports () {
   if (isExpLoading || isIncLoading) return <Loading />;
 
   // format reportData
-  const newData = reportData.map((day) => {return {...day, date: new Date(day.date).getDate()}})
+  const newData = reportData.map((day) => {return {...day, date: new Date(day.date).getDate()}});
+  const maxSum = Math.max(...reportData.map((day) => day.sum));
   console.log(newData);
   
   return (
@@ -48,6 +49,7 @@ export default function Reports () {
       <ResponsiveContainer width='100%' height='100%' >
         <BarChart width="100%" height="100%" data={newData}>
           <XAxis dataKey="date" />
+          <YAxis type="number" domain={[0, maxSum]} hide/>
           <Bar dataKey="sum" fill="#8884d8"/>
         </BarChart>
       </ResponsiveContainer>
