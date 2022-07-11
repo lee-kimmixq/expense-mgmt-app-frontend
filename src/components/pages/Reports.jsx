@@ -61,7 +61,7 @@ export default function Reports () {
         <BarChart width="100%" height="100%" data={newData}>
           <XAxis dataKey="date" tickSize={'0'} tickMargin={'5'} tick={{fontSize: '0.7em'}}/>
           <YAxis type="number" domain={[0, maxSum]} hide/>
-          <Bar dataKey="sum" fill="#8884d8"/>
+          <Bar dataKey="sum" fill="#8f49f8"/>
         </BarChart>
       </ResponsiveContainer>
     </Box>
@@ -71,7 +71,7 @@ export default function Reports () {
         <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
           <Box sx={{
             height: 150,
-            backgroundColor: '#CF65F2',
+            // backgroundColor: '#CF65F2',
             display: "flex",
             alignItems: "center"}}>
               <ChartPie data={expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false}/>
@@ -85,7 +85,7 @@ export default function Reports () {
           <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
             <Box sx={{
               height: 150,
-              backgroundColor: '#27A37A',
+              // backgroundColor: '#27A37A',
               display: "flex",
               alignItems: "center"}}>
               <ChartPie data={incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false}/>
