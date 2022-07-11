@@ -20,6 +20,7 @@ export default function AddTxnForm ({ txnId }) {
   // const date = curr.toISOString().substring(0,10);
   var tzOffset = (new Date()).getTimezoneOffset() * 60000;
 
+  const [photo, setPhoto] = useState(null);
   const [amount, setAmount] = useState("0.00");
   const [txnDate, setTxnDate] = useState(curr);
   const [title, setTitle] = useState("");
@@ -30,7 +31,7 @@ export default function AddTxnForm ({ txnId }) {
 
   const postUrl = txnId === "add" ? `${process.env.REACT_APP_BACKEND_URL}/transactions` : `${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`
 
-  const fetcherToUse = txnId === "add" ? fetcher.post : fetcher.put;
+  const fetcherToUse = txnId === "add" ? fetcher.postMultipart : fetcher.put;
 
   if (txnId !== "add") {
     const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`] : null, fetcher.get);
@@ -57,7 +58,7 @@ export default function AddTxnForm ({ txnId }) {
     setShouldPost(false);
   }
 
-  useSWR(shouldPost ? [postUrl, { amount, txnDate, title, categoryId }] : null, fetcherToUse, {onSuccess, onError});
+  useSWR(shouldPost ? [postUrl, { photo, amount, txnDate, title, categoryId }] : null, fetcherToUse, {onSuccess, onError});
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -89,7 +90,7 @@ export default function AddTxnForm ({ txnId }) {
       }}
       >
         {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true}/>}
-        <UploadReceiptBtn />
+        <UploadReceiptBtn setPhoto={setPhoto}/>
         <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
