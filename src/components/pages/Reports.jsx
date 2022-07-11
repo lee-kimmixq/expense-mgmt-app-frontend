@@ -14,13 +14,13 @@ import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
 
 export default function Reports () {
   const [month, setMonth] = useState(new Date());
-  const [tabFocus, setTabFocus] = useState("date");
+  const [tabFocus, setTabFocus] = useState("day");
 
-  const { data: reportData, isLoading: isRepLoading } = useReports("month", month);
+  const { data: reportData, isLoading: isRepLoading } = useReports("month", month, tabFocus);
   const { data: expenseData, isLoading: isExpLoading } = useTxns("reports", "expenses", tabFocus, month);
   const { data: incomeData, isLoading: isIncLoading } = useTxns("reports", "income", tabFocus, month);
 
-  if (isExpLoading || isIncLoading) return <Loading />;
+  if (isRepLoading || isExpLoading || isIncLoading) return <Loading />;
 
   // format reportData
   const newData = reportData.map((day) => {return {...day, date: new Date(day.date).getDate()}});
