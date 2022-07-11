@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-// import axios from "axios";
 
-export default function ExpIncNav ({setTabFocus}) {
-  const [value, setValue] = useState('expenses');
+export default function ExpIncNav ({setTabFocus, currentValue}) {
+  const [value, setValue] = useState(currentValue);
+
+  console.log(value);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

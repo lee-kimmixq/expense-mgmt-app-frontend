@@ -31,7 +31,7 @@ export default function Dashboard () {
       <PageHeader pageTitle={`Hello ${data.user}`} />
       <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={true} height={"25%"}/>
       <TotalValuePrimary value={data.totalAmount} />
-      <ExpIncNav setTabFocus={setTabFocus}/>
+      <ExpIncNav setTabFocus={setTabFocus} currentValue={tabFocus}/>
       <ListTxn txns={data.transactions.slice(0, 5)}/>
       <LinkTxt linkText={'View all'} linkURL={'/txns'} />
       <NavBar />
