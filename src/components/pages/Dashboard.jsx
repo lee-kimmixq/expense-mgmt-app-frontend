@@ -28,11 +28,25 @@ export default function Dashboard () {
       }}
     >
       <PageHeader pageTitle={`Hello ${data.user}`} />
-      <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={true} height={"25%"}/>
-      <TotalValuePrimary value={data.totalAmount} />
+      <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={true} height={220}/>
+      <TotalValuePrimary value={`$ ${data.totalAmount}`} />
       <ExpIncNav setTabFocus={setTabFocus} currentValue={tabFocus}/>
       <ListTxn txns={data.transactions.slice(0, 5)}/>
       <LinkTxt linkText={'View all'} linkURL={'/txns'} />
+      <Box
+        sx={{
+          display: 'inline-flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+        <PageHeader pageTitle={`Budgeting`} />
+        <LinkTxt linkText={'More'} linkURL={'...'} />
+      </Box>
+      <br />
+      <br />
+      <br />
+
       <NavBar />
     </Box>
   );
