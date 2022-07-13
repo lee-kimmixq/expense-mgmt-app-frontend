@@ -41,7 +41,7 @@ export default function FormDialog({handleClickOpen, setOpen, dialogTitle, handl
         {/* <DialogTitle>{dialogTitle}</DialogTitle> */}
         <DialogContent>
          
-          <CategoryDropdown selectValue={categoryId} handleChange={handleCategoryIdChange}/>
+          <CategoryDropdown filterValues={'isIncome=false'} selectValue={categoryId} handleChange={handleCategoryIdChange}/>
           <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
 
         </DialogContent>
