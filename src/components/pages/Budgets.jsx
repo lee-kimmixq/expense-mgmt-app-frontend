@@ -10,6 +10,13 @@ import ListBudgets from "../UI/molecules/ListBudgets.jsx";
 export default function Breakdown () {
 
   const [showDialog, setShowDialog] = useState(false);
+  const [pinMode, setPinMode] = useState(false);
+  console.log(pinMode)
+
+  const handleClickPin = () => {
+    setPinMode(!pinMode);
+  };
+
   const dummyBudgets = 
     [
         {
@@ -73,8 +80,19 @@ export default function Breakdown () {
         justifyContent: 'space-between'
       }}>
         <PageHeader pageTitle={`Budgets`} />
-        <Box>
-          <PrimaryBtn buttonLabel={'Add'} icon={'add'}
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row'
+        }}>
+          
+          {pinMode ? (<PrimaryBtn buttonLabel={'Done'} icon={''} buttonColorPalette={'light'} iconColor={'#5948D3'}
+            onClickCallback={handleClickPin} 
+            />) : (<PrimaryBtn buttonLabel={'Pin'} icon={'push_pin'} buttonColorPalette={'light'} iconColor={'#5948D3'}
+            onClickCallback={handleClickPin} 
+            />)}
+          </Box>
+      </Box>
+      <PrimaryBtn buttonLabel={'Add Budget'} icon={'add'}
           onClickCallback={()=>{setShowDialog(true)}} 
           />
           {showDialog && <FormDialog 
@@ -82,9 +100,7 @@ export default function Breakdown () {
             // dialogTitle={'Add budget'}
             handleClickOpen={showDialog} 
             setOpen={setShowDialog} />} 
-        </Box>
-      </Box>
-      <ListBudgets budgets={dummyBudgets} />
+      <ListBudgets budgets={dummyBudgets} pinMode={pinMode}/>
       <NavBar />
     </Box>
   );
