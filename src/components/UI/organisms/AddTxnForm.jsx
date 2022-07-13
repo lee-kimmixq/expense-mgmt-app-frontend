@@ -9,6 +9,7 @@ import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
 import UploadReceiptBtn from "../molecules/UploadReceiptBtn.jsx";
+import ViewReceiptBtn from "../molecules/ViewReceiptBtn.jsx";
 
 
 export default function AddTxnForm ({ txnId }) {
@@ -21,6 +22,7 @@ export default function AddTxnForm ({ txnId }) {
   var tzOffset = (new Date()).getTimezoneOffset() * 60000;
 
   const [photo, setPhoto] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const [amount, setAmount] = useState("0.00");
   const [txnDate, setTxnDate] = useState(curr);
   const [title, setTitle] = useState("");
@@ -31,7 +33,7 @@ export default function AddTxnForm ({ txnId }) {
 
   const postUrl = txnId === "add" ? `${process.env.REACT_APP_BACKEND_URL}/transactions` : `${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`
 
-  const fetcherToUse = txnId === "add" ? fetcher.postMultipart : fetcher.put;
+  const fetcherToUse = txnId === "add" ? fetcher.postMultipart : fetcher.putMultipart;
 
   if (txnId !== "add") {
     const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`] : null, fetcher.get);
@@ -42,6 +44,7 @@ export default function AddTxnForm ({ txnId }) {
       setTxnDate(new Date(data.txnDate));
       setTitle(data.title);
       setCategoryId(data.categories[0].id);
+      setImageUrl(data.imageUrl)
     }
   }
   
@@ -90,7 +93,7 @@ export default function AddTxnForm ({ txnId }) {
       }}
       >
         {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true}/>}
-        <UploadReceiptBtn photo={photo} setPhoto={setPhoto}/>
+        {txnId === "add" ? <UploadReceiptBtn photo={photo} setPhoto={setPhoto}/> : <ViewReceiptBtn photo={photo} setPhoto={setPhoto} imageUrl={imageUrl} />}
         <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
