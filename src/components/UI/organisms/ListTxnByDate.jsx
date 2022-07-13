@@ -21,7 +21,7 @@ export default function ListTxnsByDate ({txns}) {
           secondaryAction={
             <ListTxnText ege="end" textValue={`$${txn.amount}`}/>
           }
-          key={`txn${txn.id}`}
+          key={`txnList${txn.id}`}
         >
             <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
               <ListItemAvatar>
