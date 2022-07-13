@@ -2,13 +2,60 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box"
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import NavBar from "../UI/organisms/NavBar.jsx"
-import GenerateIcon from "../UI/atoms/GenerateIcon.jsx"
+// import GenerateIcon from "../UI/atoms/GenerateIcon.jsx"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import FormDialog from "../UI/organisms/FormDialog.jsx";
+import ListBudgets from "../UI/molecules/ListBudgets.jsx";
 
 export default function Breakdown () {
 
   const [showDialog, setShowDialog] = useState(false);
+  const dummyBudgets = 
+    [
+        {
+            "id": 1,
+            "userId": 1,
+            "categoryId": 1,
+            "categories": [{
+              "name": "Food & Drinks",
+              "color": "#5948D3",
+              "icon": "restaurant"
+           }],
+            "amount": "500.00",
+            "showInDashboard": true,
+            "createdAt": "2022-07-13T11:52:45.818Z",
+            "updatedAt": "2022-07-13T11:52:45.818Z"
+        },
+        {
+            "id": 2,
+            "userId": 1,
+            "categoryId": 4,
+            "categories": [{
+              "name": "Shopping",
+              "color": "#7e57c2",
+              "icon": "shopping_bag",
+            }],
+            "amount": "750.00",
+            "showInDashboard": true,
+            "createdAt": "2022-07-13T11:52:45.818Z",
+            "updatedAt": "2022-07-13T11:52:45.818Z"
+        },
+        {
+            "id": 3,
+            "userId": 1,
+            "categoryId": 2,
+             "categories": [{
+              "name": "Taxi",
+              "color": "#CF65F2",
+              "icon": "hail",
+            }],
+            "amount": "300.00",
+            "showInDashboard": false,
+            "createdAt": "2022-07-13T11:52:45.818Z",
+            "updatedAt": "2022-07-13T11:52:45.818Z"
+        }
+    ]
+  
 
   return (
     <Box
@@ -37,7 +84,7 @@ export default function Breakdown () {
             setOpen={setShowDialog} />} 
         </Box>
       </Box>
-      
+      <ListBudgets budgets={dummyBudgets} />
       <NavBar />
     </Box>
   );
