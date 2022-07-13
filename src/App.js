@@ -6,6 +6,7 @@ import Dashboard from "./components/pages/Dashboard.jsx";
 import Login from "./components/pages/Login.jsx";
 import Signup from "./components/pages/Signup";
 import TxnForm from "./components/pages/TxnForm";
+import Budgets from "./components/pages/Budgets";
 import Transactions from "./components/pages/Transactions";
 import Account from "./components/pages/Account";
 import { AuthProvider } from "./authentication/AuthContext.js";
@@ -59,6 +60,10 @@ function App() {
             <Route
               path="breakdown"
               element={<PrivateRoute children={<Breakdown />} />}
+            />
+            <Route
+              path="budgets"
+              element={<PrivateRoute children={<Budgets />} />}
             />
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
