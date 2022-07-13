@@ -14,8 +14,8 @@ export default function LinearProgressBar ({totalExp, budgetAmt, categoryColor }
       <Box sx={{ width: '100%', mr: 1, color: categoryColor }}>
         <LinearProgress color='inherit' variant="determinate" value={progressRate} />
       </Box>
-      <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" color="text.secondary">{`$${totalExp}`}</Typography>
+      <Box sx={{ minWidth: 35, color: categoryColor }}>
+        <Typography variant="body2" color="inherit">{`$${budgetAmt}`}</Typography>
       </Box>
     </Box>
   );
