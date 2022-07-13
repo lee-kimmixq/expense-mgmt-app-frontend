@@ -4,7 +4,7 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import GenerateIcon from "../UI/atoms/GenerateIcon.jsx"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
-import FormDialog from "../UI/molecules/FormDialog.jsx";
+import FormDialog from "../UI/organisms/FormDialog.jsx";
 
 export default function Breakdown () {
 
