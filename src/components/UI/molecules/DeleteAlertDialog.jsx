@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AlertDialog from '../atoms/AlertDialog';
 
-export default function DeleteAlertDialog ({handleDeleteConfirmation, handleCancellationDelete, showDialog, setShowDialog}) {
+export default function DeleteAlertDialog ({handleDeleteConfirmation, showDialog, setShowDialog}) {
 
   return (
     <AlertDialog 
