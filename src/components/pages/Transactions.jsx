@@ -49,6 +49,9 @@ export default function Transactions () {
       </Box>
       <TxnsNav month={month} setMonth={setMonth}/>
       <ListTxnsByDate txns={data.transactions} />
+      <br />
+      <br />
+      <br />
       <NavBar />
     </Box>
   );

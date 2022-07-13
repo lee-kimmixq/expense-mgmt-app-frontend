@@ -31,6 +31,10 @@ const theme = createTheme({
     info: {
       main: "#CF65F2",
     },
+    light: {
+      main: "#efefef",
+      contrastText: "#5948D3"
+    }
   },
   typography: {
     fontFamily: "Poppins",
