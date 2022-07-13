@@ -41,7 +41,7 @@ export default function Dashboard () {
           justifyContent: 'space-between'
         }}>
         <PageHeader pageTitle={`Budgeting`} />
-        <LinkTxt linkText={'More'} linkURL={'...'} />
+        <LinkTxt linkText={'More'} linkURL={'/budgets'} />
       </Box>
       <br />
       <br />
