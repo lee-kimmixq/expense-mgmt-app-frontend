@@ -19,6 +19,15 @@ const fetcher = {
   put: function(url, payload) {
     return axios.put(url, payload).then((res) => res.data);
   },
+  putMultipart: function(url, payload) {
+    return axios
+      .put(url, payload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => res.data);
+  },
   delete: function(url) {
     return axios.delete(url).then((res) => res.data);
   },
