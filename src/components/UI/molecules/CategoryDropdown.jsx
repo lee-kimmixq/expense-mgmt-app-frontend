@@ -4,11 +4,11 @@ import TextField from '@mui/material/TextField';
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 
-export default function CategoryDropdown ({selectValue, handleChange}) {
+export default function CategoryDropdown ({selectValue, handleChange, filterValues}) {
   const [categories, setCategories] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true); 
 
-  const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/categories`] : null, fetcher.get);
+  const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/categories?${filterValues ? filterValues : ''}`] : null, fetcher.get);
 
   if (data) {
       setShouldFetch(false);
