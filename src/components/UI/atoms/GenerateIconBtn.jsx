@@ -8,7 +8,7 @@ export default function GenerateIconBtn ({ name, color, onClickCallback }) {
 
   return (
     <Box onClick={onClickCallback}>
-      <IconButton sx={{ color: color ? color : '#fff', transform: 'scale(1.3)', padding: 0}}>
+      <IconButton sx={{ color: color ? color : '#fff', transform: 'scale(1.3)', padding: 0.5}}>
         <GenerateIcon name={name} />
       </IconButton>
     </Box>
