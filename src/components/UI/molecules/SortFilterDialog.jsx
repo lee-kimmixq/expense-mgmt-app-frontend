@@ -10,8 +10,10 @@ import { DialogTitle } from '@mui/material';
 import Expand from '../atoms/Expand';
 import MinMaxInputs from '../atoms/MinMaxInputs';
 import MultipleCategorySelectDropdown from './MultipleCategorySelectDropdown';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
-export default function FilterDialog ({handleOpen, setHandleOpen, name, handleConfirm, alertDescription, yesBtnLabel, noBtnLabel} ) {
+export default function SortFilterDialog ({handleOpen, setHandleOpen, name, handleConfirm, alertDescription, yesBtnLabel, noBtnLabel} ) {
   const [categoryId, setCategoryId] = useState([]);
   const [selectedOption, setSelectedOption] = useState();
   console.log(categoryId)
@@ -20,6 +22,10 @@ export default function FilterDialog ({handleOpen, setHandleOpen, name, handleCo
   const handleClose = () => {
     setHandleOpen(false);
   }; 
+
+  const handleSortChange = () => {
+
+  }
 
   const handleCategoryIdChange = (_, val) => {
     console.log(val)
@@ -45,7 +51,24 @@ export default function FilterDialog ({handleOpen, setHandleOpen, name, handleCo
         }}
       >
         <DialogTitle>
-          Filter
+          Sort by
+        </DialogTitle>
+        <DialogContent>
+          <Select
+            fullWidth={true}
+            id="sort-select"
+            onChange={handleSortChange}
+            defaultValue={'latestTxn'}
+          >
+            <MenuItem value={'latestTxn'}>Latest Transactions</MenuItem>
+            <MenuItem value={'oldestTxn'}>Oldest Transactions</MenuItem>
+            <MenuItem value={'highestAmt'}>Highest Transaction Amount</MenuItem>
+            <MenuItem value={'lowestAmt'}>Lowest Transaction Amount</MenuItem>
+          </Select>
+        </DialogContent>
+
+        <DialogTitle>
+          Filters
         </DialogTitle>
         <DialogContent>
           <DialogContentText id={`alert-description-${name}`} sx={{color: "#262431"}}>

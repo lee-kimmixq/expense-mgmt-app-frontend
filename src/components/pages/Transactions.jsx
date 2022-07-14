@@ -10,7 +10,7 @@ import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
 import useTxns from "../../utils/useTxns.js";
 import Loading from "../pages/Loading.jsx"
 import GenerateIconBtn from "../UI/atoms/GenerateIconBtn.jsx";
-import FilterDialog from "../UI/molecules/FilterDialog.jsx";
+import SortFilterDialog from "../UI/molecules/SortFilterDialog.jsx";
 
 export default function Transactions () {
   const [month, setMonth] = useState(new Date());
@@ -58,7 +58,7 @@ export default function Transactions () {
       <br />
       <br />
       <NavBar />
-      {showFilterDialog && <FilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} />}
+      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} />}
     </Box>
   );
 }
