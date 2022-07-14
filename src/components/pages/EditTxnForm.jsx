@@ -47,6 +47,11 @@ export default function NewTxnForm () {
       })
   }
 
+  const getReqBody = () => {
+    if (imageUrl) return { amount, txnDate, title, categoryId };
+    return { photo, amount, txnDate, title, categoryId };
+  }
+
   const onSuccess = (data) => {
     setShouldPost(false);
     if (data.success) {
@@ -59,7 +64,7 @@ export default function NewTxnForm () {
     setShouldPost(false);
   }
 
-  useSWR(shouldPost ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`, { photo, amount, txnDate, title, categoryId }] : null, fetcher.putMultipart, {onSuccess, onError});
+  useSWR(shouldPost ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`, getReqBody()] : null, fetcher.putMultipart, {onSuccess, onError});
 
   return (
     <Box
