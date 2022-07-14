@@ -35,7 +35,6 @@ export default function NewTxnForm () {
 
   const onFetchSuccess = (data) => {
     if (data) {
-      console.log('fetch', data.imageUrl)
       setShouldFetch(false);
       setAmount(data.amount);
       setTxnDate(new Date(data.txnDate));
