@@ -49,7 +49,7 @@ export default function Transactions () {
           display: 'flex',
         }}>
           <GenerateIconBtn name={'tune'} onClickCallback={() => {setShowFilterDialog(true)}}/>
-          <GenerateIconBtn name={'sort'} />
+          {/* <GenerateIconBtn name={'sort'} /> */}
         </Box>
       </Box>
       <TxnsNav month={month} setMonth={setMonth}/>
