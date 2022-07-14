@@ -4,7 +4,6 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
-import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
 import { useLocation } from "react-router-dom";
 import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
 import useTxns from "../../utils/useTxns.js";

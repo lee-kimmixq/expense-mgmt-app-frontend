@@ -1,5 +1,5 @@
 import { List, ListItem } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import ListTxnText from "../atoms/ListTxnText";
 import { Box } from "@mui/system";
 import ListItemAvatar from '@mui/material/ListItemAvatar';
