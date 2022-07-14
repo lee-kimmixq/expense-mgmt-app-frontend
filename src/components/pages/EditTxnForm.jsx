@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box"
 import TxnForm from "../UI/organisms/TxnForm.jsx";
@@ -14,7 +14,7 @@ import AlertSnackbar from "../UI/atoms/AlertSnackbar.jsx";
 export default function NewTxnForm () {
   const [showDialog, setShowDialog] = useState(false);
 
-  const [shouldFetch, setShouldFetch] = useState(true); 
+  const [shouldFetch, setShouldFetch] = useState(false); 
 
   const [photo, setPhoto] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -25,20 +25,26 @@ export default function NewTxnForm () {
   const [shouldPost, setShouldPost] = useState(false); 
   const [isSuccess, setIsSuccess] = useState(false);
 
+  useEffect(() => {
+    setShouldFetch(true);
+  }, [isSuccess])
+
   const txnId = window.location.pathname.split('/')[2];
   
   let navigate = useNavigate();
 
-  const { data } = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`] : null, fetcher.get);
-
-  if (data) {
-    setShouldFetch(false);
-    setAmount(data.amount);
-    setTxnDate(new Date(data.txnDate));
-    setTitle(data.title);
-    setCategoryId(data.categories[0].id);
-    setImageUrl(data.imageUrl)
+  const onFetchSuccess = (data) => {
+    if(data) {
+      setShouldFetch(false);
+      setAmount(data.amount);
+      setTxnDate(new Date(data.txnDate));
+      setTitle(data.title);
+      setCategoryId(data.categories[0].id);
+      setImageUrl(data.imageUrl)
+    }
   }
+
+  useSWR(shouldFetch ? `${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}` : null, fetcher.get, { onSuccess: onFetchSuccess });
 
   const handleTxnDelete = () => {
     axios.delete(`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`)
@@ -56,7 +62,6 @@ export default function NewTxnForm () {
     setShouldPost(false);
     if (data.success) {
       setIsSuccess(true);
-      // mutate(`${process.env.REACT_APP_BACKEND_URL}/transactions/${txnId}`);
     }
   }
 

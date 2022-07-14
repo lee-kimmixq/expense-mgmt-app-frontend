@@ -10,6 +10,8 @@ import ViewReceiptBtn from "../molecules/ViewReceiptBtn.jsx";
 
 export default function TxnForm ({ isEditForm, photo, setPhoto, amount, setAmount, txnDate, setTxnDate, title, setTitle, categoryId, setCategoryId, imageUrl, setShouldPost }) {
 
+  console.log(imageUrl);
+
   var tzOffset = (new Date()).getTimezoneOffset() * 60000;
 
   const handleAmountChange = (e) => {
