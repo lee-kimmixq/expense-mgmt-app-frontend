@@ -4,12 +4,12 @@ import GenerateIcon from "./GenerateIcon";
 import Box from "@mui/material/Box";
 
 
-export default function GenerateIconBtn ({ name, color, onClickCallback }) {
+export default function GenerateIconBtn ({ name, color, onClickCallback, scale }) {
 
   return (
     <Box onClick={onClickCallback}>
-      <IconButton sx={{ color: color ? color : '#fff', transform: 'scale(1.3)', padding: 0.5}}>
-        <GenerateIcon name={name} />
+      <IconButton sx={{ transform: scale ? scale : 'scale(1.3)', padding: 0.5}}>
+        <GenerateIcon name={name} color={color ? color : '#fff'} />
       </IconButton>
     </Box>
     
