@@ -7,6 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import CategoryAvatar from "../molecules/CategoryAvatar.jsx";
 import ListTxnText from "../atoms/ListTxnText.jsx";
 import TxnDate from "../atoms/TxnDate.jsx";
+import { Icon } from "@mui/material";
 
 export default function ListTxnsByDate ({txns}) {
   let previousDate = "";
@@ -28,6 +29,7 @@ export default function ListTxnsByDate ({txns}) {
                 <CategoryAvatar categoryName={txn.categories[0].name}/>
               </ListItemAvatar>
               <ListTxnText textValue={txn.title}/>
+              {txn.imageUrl && <Icon sx={{ color: '#aaa', transform: 'scale(0.55)' }}>{"attach_file"}</Icon>}
             </Box>
         </ListItem>
       </Link>

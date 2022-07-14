@@ -7,7 +7,7 @@ const getQueryParams = (page, type, firstDate, lastDate) => {
 
   const queryParams = {
     dashboard: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=${isIncomeVal}&includeUser=true&includeTotal=true&includeBreakdown=true&includeTransactions=true`,
-    transactions: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&includeTransactions=true`,
+    transactions: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&fields=imageUrl&sort=txnDate:DESC&txnDateMin=${firstDate}&txnDateMax=${lastDate}&includeTransactions=true`,
     reports: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=${isIncomeVal}&includeUser=true&includeBreakdown=true&includeTotal=true`,
     breakdown: `?fields=id&fields=title&fields=amount&fields=category&fields=txnDate&txnDateMin=${firstDate}&txnDateMax=${lastDate}&isIncome=${isIncomeVal}&includeBreakdown=true&includeTotal=true`,
   };
