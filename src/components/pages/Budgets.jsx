@@ -11,7 +11,6 @@ export default function Breakdown () {
 
   const [showDialog, setShowDialog] = useState(false);
   const [pinMode, setPinMode] = useState(false);
-  console.log(pinMode)
 
   const handleClickPin = () => {
     setPinMode(!pinMode);

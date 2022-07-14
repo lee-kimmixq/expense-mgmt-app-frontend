@@ -10,10 +10,19 @@ import useTxns from "../../utils/useTxns.js";
 import Loading from "../pages/Loading.jsx"
 import GenerateIconBtn from "../UI/atoms/GenerateIconBtn.jsx";
 import SortFilterDialog from "../UI/molecules/SortFilterDialog.jsx";
+import { TextField } from "@mui/material";
+import { Search } from "@mui/icons-material";
+import InputAdornment from '@mui/material/InputAdornment';
+
 
 export default function Transactions () {
   const [month, setMonth] = useState(new Date());
   const [showFilterDialog, setShowFilterDialog] = useState(false);
+  const [searchMode, setSearchMode] = useState(false);
+
+  const handleClickSearch = () => {
+    setSearchMode(!searchMode);
+  };
 
   const { data, isLoading } = useTxns("transactions", null, "month", month);
 
@@ -48,10 +57,25 @@ export default function Transactions () {
           display: 'flex',
         }}>
           <GenerateIconBtn name={'tune'} onClickCallback={() => {setShowFilterDialog(true)}}/>
+          {searchMode ? (<GenerateIconBtn name={'cancel'} onClickCallback={handleClickSearch}/>) : <GenerateIconBtn name={'search'} onClickCallback={handleClickSearch} />}
           {/* <GenerateIconBtn name={'sort'} /> */}
+
+
         </Box>
       </Box>
+      
       <TxnsNav month={month} setMonth={setMonth}/>
+      {searchMode && 
+        <TextField
+          size="small"
+          InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Search />
+            </InputAdornment>
+          ),
+        }}
+        />}
       <ListTxnsByDate txns={data.transactions} />
       <br />
       <br />
