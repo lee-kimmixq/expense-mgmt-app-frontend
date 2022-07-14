@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard.jsx";
 import Login from "./components/pages/Login.jsx";
 import Signup from "./components/pages/Signup";
-import TxnForm from "./components/pages/TxnForm";
+import NewTxnForm from "./components/pages/NewTxnForm";
+import EditTxnForm from "./components/pages/EditTxnForm";
 import Transactions from "./components/pages/Transactions";
 import Account from "./components/pages/Account";
 import { AuthProvider } from "./authentication/AuthContext.js";
@@ -38,11 +39,11 @@ function App() {
             />
             <Route
               path="txns/add"
-              element={<PrivateRoute children={<TxnForm />} />}
+              element={<PrivateRoute children={<NewTxnForm />} />}
             />
             <Route
               path="txns/:id"
-              element={<PrivateRoute children={<TxnForm />} />}
+              element={<PrivateRoute children={<EditTxnForm />} />}
             />
             <Route
               path="txns"
