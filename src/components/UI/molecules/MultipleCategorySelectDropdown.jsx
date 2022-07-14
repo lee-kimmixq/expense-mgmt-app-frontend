@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 
-export default function CategoryDropdown ({selectValue, handleChange, filterValues}) {
+export default function MultipleCategorySelectDropdown ({selectValue, handleChange, filterValues}) {
   const [categories, setCategories] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true); 
 
@@ -27,7 +27,10 @@ export default function CategoryDropdown ({selectValue, handleChange, filterValu
 
   return (
     <Autocomplete
-      value={categories.filter((category) => category.id === selectValue)[0] || null}
+      multiple
+      filterSelectedOptions
+      // value={categories.filter((category) => category.id === selectValue)[0] || null}
+      // value={selectValue}
       options={categoriesList.sort(sortFunc)}
       groupBy={(category) => category.type}
       getOptionLabel={(category) => category.name}
@@ -35,6 +38,7 @@ export default function CategoryDropdown ({selectValue, handleChange, filterValu
       onChange={handleChange}
       size="small"
       isOptionEqualToValue={(option, value) => option.id === value.id}
+      fullWidth={true}
     />
   );
 }
