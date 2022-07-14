@@ -34,13 +34,15 @@ export default function NewTxnForm () {
   let navigate = useNavigate();
 
   const onFetchSuccess = (data) => {
-    if(data) {
+    if (data) {
+      console.log('fetch', data.imageUrl)
       setShouldFetch(false);
       setAmount(data.amount);
       setTxnDate(new Date(data.txnDate));
       setTitle(data.title);
       setCategoryId(data.categories[0].id);
-      setImageUrl(data.imageUrl)
+      setImageUrl(data.imageUrl);
+      setPhoto(null);
     }
   }
 
@@ -54,7 +56,7 @@ export default function NewTxnForm () {
   }
 
   const getReqBody = () => {
-    if (imageUrl) return { amount, txnDate, title, categoryId };
+    if (imageUrl && !photo) return { amount, txnDate, title, categoryId };
     return { photo, amount, txnDate, title, categoryId };
   }
 

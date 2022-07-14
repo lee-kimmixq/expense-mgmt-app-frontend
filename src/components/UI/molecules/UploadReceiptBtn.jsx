@@ -3,11 +3,7 @@ import Box from "@mui/material/Box"
 import { Button } from "@mui/material";
 import GenerateIcon from "../atoms/GenerateIcon.jsx";
 
-export default function UploadReceiptBtn ({ photo, setPhoto }) {
-
-  const handleFileUpload = (e) => {
-    setPhoto(e.target.files[0]);
-  }
+export default function UploadReceiptBtn ({ photo, handleFileUpload, buttonText }) {
 
   return (
     <Box>
@@ -20,7 +16,7 @@ export default function UploadReceiptBtn ({ photo, setPhoto }) {
         }}  
         color={'secondary'} 
         startIcon={photo ? <GenerateIcon name={'download_done'} /> : <GenerateIcon name={'upload'} />}>
-          {photo ? `${photo.name}`: "Upload Receipt"}
+          {photo ? `${photo.name}`: buttonText}
         </Button>
       </label>
         

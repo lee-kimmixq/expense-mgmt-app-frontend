@@ -4,42 +4,43 @@ import { Button } from "@mui/material";
 import GenerateIcon from "../atoms/GenerateIcon.jsx";
 import PrimaryBtn from "../atoms/PrimaryBtn.jsx";
 import Modal from '@mui/material/Modal';
+import UploadReceiptBtn from "./UploadReceiptBtn.jsx";
 
 
-export default function ViewReceiptBtn ({ photo, setPhoto, imageUrl }) {
+export default function ViewReceiptBtn ({ photo, imageUrl, handleFileUpload }) {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
   const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
-  if (imageUrl) {
+  if (imageUrl && !photo) {
     return (<Box>
       <PrimaryBtn buttonLabel={'View Receipt'} buttonColorPalette={'secondary'} icon={'image'} onClickCallback={handleOpenModal} />
       <Modal
         open={showModal}
         onClose={handleCloseModal}
       >
-        <Box sx={style}>
-          <img src={imageUrl} style={{maxWidth: '80vw', maxHeight: '90vh'}}/>
-        </Box>
+        <>
+          <Box sx={style}>
+            <img src={imageUrl} style={{maxWidth: '80vw', maxHeight: '90vh'}}/>
+            <UploadReceiptBtn photo={photo} handleFileUpload={handleFileUpload} buttonText={'Upload New Receipt'}/>
+          </Box>
+        </>
       </Modal>
     </Box>)
   }
 
-  const handleFileUpload = (e) => {
-    setPhoto(e.target.files[0]);
-  }
 
   return (
     <Box>

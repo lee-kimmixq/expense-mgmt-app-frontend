@@ -20,7 +20,6 @@ export default function NewTxnForm () {
 
   const onSuccess = (data) => {
     setShouldPost(false);
-    console.log(data);
     if (data) navigate(`/txns`, { replace: true, state: {txnAddSuccess: true} });; // on success - should be direct to txns/:id instead
   }
 
