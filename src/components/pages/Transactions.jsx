@@ -9,9 +9,12 @@ import { useLocation } from "react-router-dom";
 import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
 import useTxns from "../../utils/useTxns.js";
 import Loading from "../pages/Loading.jsx"
+import GenerateIconBtn from "../UI/atoms/GenerateIconBtn.jsx";
+import FilterDialog from "../UI/molecules/FilterDialog.jsx";
 
 export default function Transactions () {
   const [month, setMonth] = useState(new Date());
+  const [showFilterDialog, setShowFilterDialog] = useState(false);
 
   const { data, isLoading } = useTxns("transactions", null, "month", month);
 
@@ -42,9 +45,11 @@ export default function Transactions () {
         justifyContent: 'space-between'
       }}>
         <PageHeader pageTitle={`Transactions`} />
-        <Box>
-          <GenerateIcon name={'tune'} />
-          <GenerateIcon name={'sort'} />
+        <Box sx={{
+          display: 'flex',
+        }}>
+          <GenerateIconBtn name={'tune'} onClickCallback={() => {setShowFilterDialog(true)}}/>
+          <GenerateIconBtn name={'sort'} />
         </Box>
       </Box>
       <TxnsNav month={month} setMonth={setMonth}/>
@@ -53,6 +58,7 @@ export default function Transactions () {
       <br />
       <br />
       <NavBar />
+      {showFilterDialog && <FilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} />}
     </Box>
   );
 }
