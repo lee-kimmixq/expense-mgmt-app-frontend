@@ -33,7 +33,7 @@ export default function ViewReceiptBtn ({ photo, imageUrl, handleFileUpload }) {
       >
         <>
           <Box sx={style}>
-            <img src={imageUrl} style={{maxWidth: '80vw', maxHeight: '90vh'}}/>
+            <img src={imageUrl} alt={''} style={{maxWidth: '80vw', maxHeight: '90vh'}}/>
             <UploadReceiptBtn photo={photo} handleFileUpload={handleFileUpload} buttonText={'Upload New Receipt'}/>
           </Box>
         </>

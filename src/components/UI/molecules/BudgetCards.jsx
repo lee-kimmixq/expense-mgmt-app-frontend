@@ -11,7 +11,7 @@ export default function BudgetCards ({pinnedBudgets}) {
   
   const listBudgetCards = pinnedBudgets.length === 0 ? <p>No budgets pinned</p> : pinnedBudgets.map((budget) => {
     const listBudgetCardsJsx = (
-      <Grid item xs={4}>
+      <Grid item xs={4} key={`budget${budget.id}`}>
       <Box
         sx={{
           width: 100,
