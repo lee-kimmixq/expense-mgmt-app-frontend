@@ -16,6 +16,8 @@ import Reports from "./components/pages/Reports";
 import Breakdown from "./components/pages/Breakdown";
 import PublicOnlyRoute from "./authentication/PublicOnlyRoute";
 import { Navigate } from "react-router-dom";
+import Confirmation from "./components/pages/Confirmation";
+
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -37,6 +39,10 @@ function App() {
             <Route
               path="signup"
               element={<PublicOnlyRoute children={<Signup />} />}
+            />
+            <Route
+              path="confirm/:confirmationCode"
+              element={<PublicOnlyRoute children={<Confirmation />} />}
             />
             <Route
               path="txns/add"
