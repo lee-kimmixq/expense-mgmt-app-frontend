@@ -58,9 +58,6 @@ export default function Transactions () {
         }}>
           <GenerateIconBtn name={'tune'} onClickCallback={() => {setShowFilterDialog(true)}}/>
           {searchMode ? (<GenerateIconBtn name={'cancel'} onClickCallback={handleClickSearch}/>) : <GenerateIconBtn name={'search'} onClickCallback={handleClickSearch} />}
-          {/* <GenerateIconBtn name={'sort'} /> */}
-
-
         </Box>
       </Box>
       
