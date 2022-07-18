@@ -13,11 +13,9 @@ const Welcome = (props) => {
   const confirmationCode = window.location.pathname.split('/')[2];
 
   const onFetchSuccess = (data) => {
-    console.log(data);
     if (data.verified) {
       setShouldFetch(false);
       setMessage('Verified successfully');
-      console.log('verified');
     }
   }
 
