@@ -6,5 +6,5 @@ import Loading from "../components/pages/Loading.jsx";
 export default function PrivateRoute({ children }) {
   const { auth } = useAuth();
   if (auth === null) return <Loading />;
-  return auth ? children : <Navigate to="/login" />;
+  return auth ? children : <Navigate to="/" />;
 }
