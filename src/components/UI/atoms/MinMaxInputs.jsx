@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import InputField from './InputField';
 
-export default function MinMaxInputs ({fieldName, fieldType, isRequired}) {
+export default function MinMaxInputs ({fieldName, fieldType, isRequired, handleMinChange, handleMaxChange, minValue, maxValue}) {
   return (
     <Box sx={{
       display: 'flex',
@@ -10,8 +10,8 @@ export default function MinMaxInputs ({fieldName, fieldType, isRequired}) {
       flexWrap: 'wrap',
       justifyContent: 'flex-start'
     }}>
-      <InputField fieldName={`inputMin${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Min'} />
-      <InputField fieldName={`inputMax${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Max'} />
+      <InputField fieldName={`inputMin${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Min'} handleChange={handleMinChange} value={minValue}/>
+      <InputField fieldName={`inputMax${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Max'} handleChange={handleMaxChange} value={maxValue}/>
     </Box>
   )
 }
