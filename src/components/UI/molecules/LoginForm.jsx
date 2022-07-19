@@ -63,9 +63,10 @@ export default function LoginForm () {
         <p
           style={{fontSize: '0.75em'}}
         >
-          Don't have an account?
-          <a> </a>
-          <a onClick={()=>{navigate('/signup', {replace: true})}} href="#" >Sign up here</a>
+          <button style={{
+            background: 'none',
+            border: 'none'
+          }} onClick={()=>{navigate('/signup', {replace: true})}} >Don't have an account? Sign up here!</button>
         </p>
       </Box>
       
