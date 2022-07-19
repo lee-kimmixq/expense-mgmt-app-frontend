@@ -49,8 +49,6 @@ const getTxnQueryParams = (page, type, dateType, currDate, filters) => {
 
   if (!filters) return combinedParams.toString();
 
-  console.log(filters);
-
   if (filters.sort) {
     combinedParams.delete("sort");
     combinedParams.set("sort", filters.sort);
@@ -70,7 +68,10 @@ const getTxnQueryParams = (page, type, dateType, currDate, filters) => {
   if (filters.amountMax) combinedParams.set("amountMax", filters.amountMax);
 
   if (filters.categories.length > 0)
-    combinedParams.set("category", filters.categories);
+    combinedParams.set(
+      "category",
+      JSON.stringify(filters.categories.map((cty) => cty.id))
+    );
 
   return combinedParams.toString();
 };
