@@ -14,6 +14,7 @@ export default function Breakdown () {
   const [pinMode, setPinMode] = useState(false);
   const [shouldFetch, setShouldFetch] = useState(true); 
   const [budgets, setBudgets] = useState([]);
+  const [putBudget, setPutBudget] = useState(false);
 
   const handleClickPin = () => {
     setPinMode(!pinMode);
@@ -28,6 +29,13 @@ export default function Breakdown () {
   }
 
   useSWR(shouldFetch ? `${process.env.REACT_APP_BACKEND_URL}/budgets` : null, fetcher.get, {onSuccess});
+
+  const onPostSuccess = (data) => {
+    setPutBudget(false);
+    shouldFetch(true);
+  }
+
+  useSWR(putBudget !== false ? [`${process.env.REACT_APP_BACKEND_URL}/budgets/${putBudget.id}`, { showInDashboard: putBudget.state }] : null, fetcher.put, {onPostSuccess})
 
   return (
     <Box
@@ -65,7 +73,7 @@ export default function Breakdown () {
             // dialogTitle={'Add budget'}
             handleClickOpen={showDialog} 
             setOpen={setShowDialog} />} 
-      <ListBudgets budgets={budgets} pinMode={pinMode}/>
+      <ListBudgets budgets={budgets} pinMode={pinMode} setPutBudget={setPutBudget}/>
       <NavBar />
     </Box>
   );
