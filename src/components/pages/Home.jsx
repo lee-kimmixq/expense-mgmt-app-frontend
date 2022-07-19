@@ -3,8 +3,9 @@ import Box from "@mui/material/Box"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import Image from "../../utils/giphy.webp";
 import { useNavigate } from "react-router-dom";
+import FormAlert from "../UI/atoms/FormAlert.jsx";
 
-export default function Login () {
+export default function Home ({successAlert, failAlert}) {
 
   let navigate = useNavigate();
 
@@ -43,6 +44,11 @@ export default function Login () {
               marginBottom: '0.3em'
             }}
           >make cents.</h1>
+
+          { successAlert  ?
+            (<FormAlert alertSeverity={'success'} alertLabel={'Account confirmed'} />) : (<FormAlert alertSeverity={'warning'} alertLabel={'No user found'} />)
+          }
+          
           <PrimaryBtn buttonLabel={'Login'} onClickCallback={()=>{navigate('/login', {replace: true})}} />
           <PrimaryBtn buttonLabel={'Register'} buttonColorPalette="light" onClickCallback={()=>{navigate('/signup', {replace: true})}}/>
            
