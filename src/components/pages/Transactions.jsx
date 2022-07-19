@@ -7,6 +7,7 @@ import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
 import { useLocation } from "react-router-dom";
 import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
 import useTxns from "../../utils/useTxns.js";
+import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import GenerateIconBtn from "../UI/atoms/GenerateIconBtn.jsx";
 import SortFilterDialog from "../UI/molecules/SortFilterDialog.jsx";
@@ -25,11 +26,12 @@ export default function Transactions () {
     setSearchMode(!searchMode);
   };
 
-  const { data, isLoading } = useTxns("transactions", null, "month", month);
+  const { data, isLoading } = useTxns(getTxnQueryParams("transactions", null, "month", month));
 
   let location = useLocation(); 
   
   if (isLoading) return <Loading />;
+  
   let txnAddSuccess = false;
   let txnDeleteSuccess = false;
   if (location.state && location.state.txnAddSuccess) txnAddSuccess = true;
