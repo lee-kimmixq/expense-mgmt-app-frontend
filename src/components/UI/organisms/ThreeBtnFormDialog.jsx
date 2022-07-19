@@ -5,12 +5,31 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import TxnAmtField from "../atoms/TxnAmtField.jsx";
 import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
+import useSWR, {useSWRConfig} from "swr";
+import fetcher from "../../../utils/fetcher.mjs";
 
 
 export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTitle, handleSubmit, handleDelete, budgetAmt, category }) {
 
+    const { mutate } = useSWRConfig();
+
   const [amount, setAmount] = useState(budgetAmt);
   const [categoryId, setCategoryId] = useState(category);
+  const [shouldPost, setShouldPost] = useState(false);
+
+  const onSuccess = (data) => {
+    if (data) {
+      mutate(`${process.env.REACT_APP_BACKEND_URL}/budgets`);
+      setOpen(false);
+      setShouldPost(false);
+    }
+  }
+
+  useSWR(shouldPost ? [`${process.env.REACT_APP_BACKEND_URL}/budgets`, { amount, categoryId }] : null, fetcher.post, { onSuccess })
+
+  const handleSave = () => {
+    setShouldPost(true);
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -47,7 +66,7 @@ export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTit
         <DialogActions>
           <Button variant="outlined" sx={{color: '#efefef', borderColor: '#999999'}} onClick={handleClose}>Cancel</Button>
           <Button variant="outlined" color="warning" onClick={handleDelete}>Delete</Button>
-          <Button variant="contained" sx={{color: ''}} onClick={handleClose}>Save</Button>
+          <Button variant="contained" sx={{color: ''}} onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
 

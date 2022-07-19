@@ -16,10 +16,12 @@ export default function FormDialog({handleClickOpen, setOpen, dialogTitle, handl
   const [categoryId, setCategoryId] = useState("");
   const [shouldPost, setShouldPost] = useState(false);
 
-  const onSuccess = () => {
-    mutate(`${process.env.REACT_APP_BACKEND_URL}/budgets`);
-    setOpen(false);
-    setShouldPost(false);
+  const onSuccess = (data) => {
+    if (data) {
+      mutate(`${process.env.REACT_APP_BACKEND_URL}/budgets`);
+      setOpen(false);
+      setShouldPost(false);
+    }
   }
 
   useSWR(shouldPost ? [`${process.env.REACT_APP_BACKEND_URL}/budgets`, { amount, categoryId }] : null, fetcher.post, { onSuccess })
