@@ -21,12 +21,13 @@ export default function Transactions () {
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [filters, setFilters] = useState(null);
 
   const handleClickSearch = () => {
     setSearchMode(!searchMode);
   };
 
-  const { data, isLoading } = useTxns(getTxnQueryParams("transactions", null, "month", month));
+  const { data, isLoading } = useTxns(getTxnQueryParams("transactions", null, "month", month, filters));
 
   let location = useLocation(); 
   
@@ -87,7 +88,7 @@ export default function Transactions () {
       <br />
       <br />
       <NavBar />
-      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} />}
+      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} setFilters={setFilters}/>}
     </Box>
   );
 }
