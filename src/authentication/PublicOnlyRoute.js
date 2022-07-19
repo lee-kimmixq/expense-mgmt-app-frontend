@@ -6,5 +6,5 @@ import Loading from "../components/pages/Loading.jsx";
 export default function PublicOnlyRoute({ children }) {
   const { auth } = useAuth();
   if (auth === null) return <Loading />;
-  return auth ? <Navigate to="/home" /> : children;
+  return auth ? <Navigate to="/dashboard" /> : children;
 }
