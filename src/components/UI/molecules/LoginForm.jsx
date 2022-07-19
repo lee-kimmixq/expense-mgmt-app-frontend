@@ -60,6 +60,13 @@ export default function LoginForm () {
         <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange}/>
         <InputField fieldName={'loginPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange}/>
         <PrimaryBtn buttonLabel={'Login'} onClickCallback={handleLoginFormSubmit}/>
+        <p
+          style={{fontSize: '0.75em'}}
+        >
+          Don't have an account?
+          <a> </a>
+          <a onClick={()=>{navigate('/signup', {replace: true})}} href="#" >Sign up here</a>
+        </p>
       </Box>
       
   );
