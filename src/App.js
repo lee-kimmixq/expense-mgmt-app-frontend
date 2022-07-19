@@ -17,7 +17,7 @@ import Breakdown from "./components/pages/Breakdown";
 import PublicOnlyRoute from "./authentication/PublicOnlyRoute";
 import { Navigate } from "react-router-dom";
 import Confirmation from "./components/pages/Confirmation";
-
+import Home from "./components/pages/Home";
 
 // make sure that axios always sends the cookies to the backend server
 axios.defaults.withCredentials = true;
@@ -29,7 +29,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route
-              path="home"
+              path="dashboard"
               element={<PrivateRoute children={<Dashboard />} />}
             />
             <Route
@@ -72,7 +72,11 @@ function App() {
               path="budgets"
               element={<PrivateRoute children={<Budgets />} />}
             />
-            <Route path="*" element={<Navigate to="/home" />} />
+            <Route 
+              path="/" 
+              element={<PublicOnlyRoute children={<Home />} />}
+            />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
