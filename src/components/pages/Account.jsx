@@ -15,11 +15,11 @@ export default function Account () {
   const [shouldFetch, setShouldFetch] = useState(false);
 
   let navigate = useNavigate();
-  const { login } = useAuth();
+  const { logout } = useAuth();
 
   const onSuccess = (data) => {
     setShouldFetch(false);
-    if (data.logout) login().then(() => {navigate("/login", { replace: true }) });
+    if (data.logout) logout().then(() => {navigate("/", { replace: true }) });
   }
 
   const onError = (error) => {

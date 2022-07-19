@@ -38,6 +38,7 @@ export default function NewTxnForm () {
           rowGap: '10px',
           width: '80%',
           justifyContent: 'center',
+          marginTop: '-10%'
         }}
       >
       <GenerateIconLarge name={'paid'}/>

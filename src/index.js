@@ -33,7 +33,7 @@ const theme = createTheme({
     },
     light: {
       main: "#efefef",
-      contrastText: "#5948D3"
+      contrastText: "rgba(1, 0, 6, 0.8)"
     }
   },
   typography: {
@@ -47,6 +47,7 @@ const theme = createTheme({
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+document.getElementById("root").style.height = "100%";
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
