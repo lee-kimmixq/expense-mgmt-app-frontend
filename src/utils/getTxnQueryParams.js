@@ -1,6 +1,6 @@
 import getFirstLastDates from "./getFirstLastDates.mjs";
 
-const getTxnQueryParams = (page, type, dateType, currDate) => {
+const getTxnQueryParams = (page, type, dateType, currDate, filters) => {
   const isIncomeVal = type === "income";
 
   const { firstDate, lastDate } = getFirstLastDates(dateType, currDate);
@@ -42,10 +42,37 @@ const getTxnQueryParams = (page, type, dateType, currDate) => {
     ],
   };
 
-  return new URLSearchParams([
+  const combinedParams = new URLSearchParams([
     ...defaultQueryParams,
     ...additionalQueries[page],
-  ]).toString();
+  ]);
+
+  if (!filters) return combinedParams.toString();
+
+  console.log(filters);
+
+  if (filters.sort) {
+    combinedParams.delete("sort");
+    combinedParams.set("sort", filters.sort);
+  }
+
+  if (filters.txnDateMin) {
+    combinedParams.delete("txnDateMin");
+    combinedParams.set("txnDateMin", filters.txnDateMin);
+  }
+
+  if (filters.txnDateMax) {
+    combinedParams.delete("txnDateMax");
+    combinedParams.set("txnDateMax", filters.txnDateMax);
+  }
+
+  if (filters.amountMin) combinedParams.set("amountMin", filters.amountMin);
+  if (filters.amountMax) combinedParams.set("amountMax", filters.amountMax);
+
+  if (filters.categories.length > 0)
+    combinedParams.set("category", filters.categories);
+
+  return combinedParams.toString();
 };
 
 export default getTxnQueryParams;
