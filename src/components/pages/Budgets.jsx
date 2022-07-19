@@ -4,6 +4,7 @@ import PageHeader from "../UI/atoms/PageHeader.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import FormDialog from "../UI/organisms/FormDialog.jsx";
+import ThreeBtnFormDialog from "../UI/organisms/ThreeBtnFormDialog.jsx";
 import ListBudgets from "../UI/molecules/ListBudgets.jsx";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher.mjs";
@@ -11,6 +12,7 @@ import fetcher from "../../utils/fetcher.mjs";
 export default function Breakdown () {
 
   const [showDialog, setShowDialog] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
   const [pinMode, setPinMode] = useState(false);
   const [shouldFetch, setShouldFetch] = useState(true); 
   const [budgets, setBudgets] = useState([]);
@@ -24,7 +26,6 @@ export default function Breakdown () {
     if (data) {
       setShouldFetch(false);
       setBudgets(data.budgets);
-      console.log(data.budgets);
     }
   }
 
@@ -68,12 +69,17 @@ export default function Breakdown () {
       <PrimaryBtn buttonLabel={'Add Budget'} icon={'add'}
           onClickCallback={()=>{setShowDialog(true)}} 
           />
-          {showDialog && <FormDialog 
-            // handleDeleteConfirmation={handleTxnDelete} 
-            // dialogTitle={'Add budget'}
-            handleClickOpen={showDialog} 
-            setOpen={setShowDialog} />} 
-      <ListBudgets budgets={budgets} pinMode={pinMode} setPutBudget={setPutBudget}/>
+      {showDialog && <FormDialog 
+        // handleDeleteConfirmation={handleTxnDelete} 
+        handleClickOpen={showDialog} 
+        setOpen={setShowDialog} />} 
+      
+      <ListBudgets budgets={budgets} pinMode={pinMode} setPutBudget={setPutBudget} setShowEditDialog={setShowEditDialog} />
+      {showEditDialog && <ThreeBtnFormDialog 
+        // handleDeleteConfirmation={handleTxnDelete} 
+        handleClickOpen={showEditDialog} 
+        setOpen={setShowEditDialog} setShowEditDialog={setShowEditDialog} budgetAmt={showEditDialog.amount} category={showEditDialog.id} />
+      } 
       <NavBar />
     </Box>
   );
