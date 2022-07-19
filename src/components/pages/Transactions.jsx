@@ -19,6 +19,7 @@ export default function Transactions () {
   const [month, setMonth] = useState(new Date());
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   const handleClickSearch = () => {
     setSearchMode(!searchMode);
@@ -34,6 +35,10 @@ export default function Transactions () {
   if (location.state && location.state.txnAddSuccess) txnAddSuccess = true;
   if (location.state && location.state.txnDeleteSuccess) txnDeleteSuccess = true;
 
+  const filteredTransactions = data.transactions.filter((txn) => {
+    const pattern = new RegExp(searchText, "i")
+    return pattern.test(txn.title)}
+  )
 
   return (
     <Box
@@ -71,9 +76,11 @@ export default function Transactions () {
               <Search />
             </InputAdornment>
           ),
-        }}
+        }
+      }
+      onChange={(e)=>{ setSearchText(e.target.value) }}
         />}
-      <ListTxnsByDate txns={data.transactions} />
+      <ListTxnsByDate txns={filteredTransactions} />
       <br />
       <br />
       <br />
