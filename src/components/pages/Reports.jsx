@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import { Link } from 'react-router-dom';
 import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
+import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
@@ -17,8 +18,8 @@ export default function Reports () {
   const [tabFocus, setTabFocus] = useState("day");
 
   const { data: reportData, isLoading: isRepLoading } = useReports(tabFocus, month);
-  const { data: expenseData, isLoading: isExpLoading } = useTxns("reports", "expenses", tabFocus, month);
-  const { data: incomeData, isLoading: isIncLoading } = useTxns("reports", "income", tabFocus, month);
+  const { data: expenseData, isLoading: isExpLoading } = useTxns(getTxnQueryParams("reports", "expenses", tabFocus, month));
+  const { data: incomeData, isLoading: isIncLoading } = useTxns(getTxnQueryParams("reports", "income", tabFocus, month));
 
   if (isRepLoading || isExpLoading || isIncLoading) return <Loading />;
 

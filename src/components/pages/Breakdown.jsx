@@ -9,13 +9,14 @@ import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx";
 import ListCategory from "../UI/organisms/ListCategory.jsx"
 import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
+import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 
 export default function Breakdown () {
   const [month, setMonth] = useState(new Date());
   const [tabFocus, setTabFocus] = useState("expenses")
 
-  const { data, isLoading } = useTxns("breakdown", tabFocus, "month", month);
+  const { data, isLoading } = useTxns(getTxnQueryParams("breakdown", tabFocus, "month", month));
 
   if (isLoading) return <Loading />;
 

@@ -7,6 +7,7 @@ import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
 import { useLocation } from "react-router-dom";
 import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
 import useTxns from "../../utils/useTxns.js";
+import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import GenerateIconBtn from "../UI/atoms/GenerateIconBtn.jsx";
 import SortFilterDialog from "../UI/molecules/SortFilterDialog.jsx";
@@ -20,16 +21,18 @@ export default function Transactions () {
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [filters, setFilters] = useState(null);
 
   const handleClickSearch = () => {
     setSearchMode(!searchMode);
   };
 
-  const { data, isLoading } = useTxns("transactions", null, "month", month);
+  const { data, isLoading } = useTxns(getTxnQueryParams("transactions", null, "month", month, filters));
 
   let location = useLocation(); 
   
   if (isLoading) return <Loading />;
+  
   let txnAddSuccess = false;
   let txnDeleteSuccess = false;
   if (location.state && location.state.txnAddSuccess) txnAddSuccess = true;
@@ -85,7 +88,7 @@ export default function Transactions () {
       <br />
       <br />
       <NavBar />
-      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} />}
+      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} filters={filters} setFilters={setFilters}/>}
     </Box>
   );
 }

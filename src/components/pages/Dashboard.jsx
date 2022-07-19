@@ -7,6 +7,7 @@ import LinkTxt from "../UI/atoms/LinkTxt.jsx";
 import NavBar from "../UI/organisms/NavBar.jsx"
 import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
+import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import BudgetCards from "../UI/molecules/BudgetCards.jsx";
 import Box from "@mui/material/Box"
@@ -14,8 +15,8 @@ import Box from "@mui/material/Box"
 
 export default function Dashboard () {
   const [tabFocus, setTabFocus] = useState("expenses");
-
-  const { data, isLoading } = useTxns("dashboard", tabFocus, "month");
+  
+  const { data, isLoading } = useTxns(getTxnQueryParams("dashboard", tabFocus, "month"));
 
   if (isLoading) return <Loading />;
 
