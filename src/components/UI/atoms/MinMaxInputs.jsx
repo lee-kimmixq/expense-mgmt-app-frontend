@@ -10,8 +10,8 @@ export default function MinMaxInputs ({fieldName, fieldType, isRequired, handleM
       flexWrap: 'wrap',
       justifyContent: 'flex-start'
     }}>
-      <InputField fieldName={`inputMin${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Min'} handleChange={handleMinChange} value={minValue}/>
-      <InputField fieldName={`inputMax${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Max'} handleChange={handleMaxChange} value={maxValue}/>
+      <InputField fieldName={`inputMin${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Min'} handleChange={handleMinChange} fieldValue={minValue}/>
+      <InputField fieldName={`inputMax${fieldName}`} fieldType={fieldType} isRequired={isRequired ? isRequired : false} fieldHelperText={'Max'} handleChange={handleMaxChange} fieldValue={maxValue}/>
     </Box>
   )
 }

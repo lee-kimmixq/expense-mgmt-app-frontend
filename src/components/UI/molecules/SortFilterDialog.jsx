@@ -14,13 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import getFirstLastDates from '../../../utils/getFirstLastDates.mjs'
 import getDateObj from '../../../utils/getDateObj.mjs'
 
-export default function SortFilterDialog ({handleOpen, setHandleOpen, name, alertDescription, yesBtnLabel, noBtnLabel, setFilters} ) {
+export default function SortFilterDialog ({handleOpen, setHandleOpen, name, alertDescription, yesBtnLabel, noBtnLabel, filters, setFilters} ) {
   const {firstDate, lastDate} = getFirstLastDates();
 
-  const [sortValue, setSortValue] = useState('txnDate:DESC')
-  const [txnDateFilter, setTxnDateFilter] = useState({txnDateMin: firstDate, txnDateMax: lastDate})
-  const [amountFilter, setAmountFilter] = useState({amountMin: null, amountMax: null});
-  const [categoryId, setCategoryId] = useState([]);
+  const [sortValue, setSortValue] = useState(filters ? filters.sort : 'txnDate:DESC')
+  const [txnDateFilter, setTxnDateFilter] = useState({txnDateMin: filters ? filters.txnDateMin : firstDate, txnDateMax: filters ? filters.txnDateMax :lastDate})
+  const [amountFilter, setAmountFilter] = useState({amountMin: filters ? filters.amountMin : '', amountMax: filters ? filters.amountMax : ''});
+  const [categoryId, setCategoryId] = useState(filters ? filters.categories : []);
 
   const handleSave = () => {
     setHandleOpen(false);
@@ -57,7 +57,7 @@ export default function SortFilterDialog ({handleOpen, setHandleOpen, name, aler
   }
 
   const handleCategoryIdChange = (_, val) => {
-    setCategoryId([...categoryId, val[val.length - 1].id]);
+    setCategoryId([...categoryId, val[val.length - 1]]);
   }
 
   return (
@@ -105,19 +105,19 @@ export default function SortFilterDialog ({handleOpen, setHandleOpen, name, aler
           <Expand 
             expandTitle={'Transaction Date'} 
             expandContents={
-              <MinMaxInputs fieldName={'txnDate'} fieldType={'date'} handleMinChange={handleTxnDateMinChange} handleMaxChange={handleTxnDateMaxChange} minValue={txnDateFilter.txnDateMin} maxValue={txnDateFilter.txnDateMax} />
+              <MinMaxInputs fieldName={'txnDate'} fieldType={'date'} handleMinChange={handleTxnDateMinChange} handleMaxChange={handleTxnDateMaxChange} minValue={new Date(txnDateFilter.txnDateMin).toLocaleDateString('en-CA')} maxValue={new Date(txnDateFilter.txnDateMax).toLocaleDateString('en-CA')} />
             } 
           />
           <Expand 
             expandTitle={'Transaction Amount'} 
             expandContents={
-              <MinMaxInputs fieldName={'txnAmt'} fieldType={'number'} handleMinChange={handleAmountMinChange} handleMaxChange={handleAmountMaxChange}/>
+              <MinMaxInputs fieldName={'txnAmt'} fieldType={'number'} handleMinChange={handleAmountMinChange} handleMaxChange={handleAmountMaxChange} minValue={amountFilter.amountMin} maxValue={amountFilter.amountMax}/>
             } 
           />
           <Expand 
             expandTitle={'Category'} 
             expandContents={
-              <MultipleCategorySelectDropdown handleChange={handleCategoryIdChange} />
+              <MultipleCategorySelectDropdown handleChange={handleCategoryIdChange} selectedValues={categoryId}/>
             } 
           />
 

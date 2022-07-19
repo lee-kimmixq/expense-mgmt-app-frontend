@@ -88,7 +88,7 @@ export default function Transactions () {
       <br />
       <br />
       <NavBar />
-      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} setFilters={setFilters}/>}
+      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} filters={filters} setFilters={setFilters}/>}
     </Box>
   );
 }

@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 
-export default function MultipleCategorySelectDropdown ({selectValue, handleChange, filterValues}) {
+export default function MultipleCategorySelectDropdown ({selectedValues, handleChange, filterValues}) {
   const [categories, setCategories] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true); 
 
@@ -30,7 +30,7 @@ export default function MultipleCategorySelectDropdown ({selectValue, handleChan
       multiple
       filterSelectedOptions
       // value={categories.filter((category) => category.id === selectValue)[0] || null}
-      // value={selectValue}
+      value={selectedValues}
       options={categoriesList.sort(sortFunc)}
       groupBy={(category) => category.type}
       getOptionLabel={(category) => category.name}
