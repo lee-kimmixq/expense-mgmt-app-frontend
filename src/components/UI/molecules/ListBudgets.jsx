@@ -6,9 +6,10 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import CategoryAvatar from "../molecules/CategoryAvatar.jsx";
 import LinearProgressBar from "../atoms/LinearProgressBar";
 import Switch from '@mui/material/Switch';
+import categories from "../../../utils/categories.js";
 
 
-export default function ListBudgets ({budgets , pinMode}) {
+export default function ListBudgets ({budgets , pinMode, setPutBudget}) {
 
   const dummyTotalExpense = 200;
 
@@ -23,15 +24,18 @@ export default function ListBudgets ({budgets , pinMode}) {
           key={`budgetList${budget.id}`}
           >
             <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-              { pinMode && <Switch /> }
+              { pinMode && <Switch checked={budget.showInDashboard} onChange={() => {
+                setPutBudget({id: budget.id, state: !budget.showInDashboard});
+                budget.showInDashboard = !budget.showInDashboard;
+                }}/> }
 
               <ListItemAvatar>
-                <CategoryAvatar categoryName={budget.categories[0].name}/>
+                <CategoryAvatar categoryName={budget["category.name"]}/>
               </ListItemAvatar>
-              <ListTxnText textValue={budget.categories[0].name}/>
+              <ListTxnText textValue={budget["category.name"]}/>
             </Box>
           </ListItem>
-          <LinearProgressBar categoryColor={budget.categories[0].color} totalExp={200} budgetAmt={budget.amount} />
+          <LinearProgressBar categoryColor={categories.filter(category => category.name === budget["category.name"])[0].color} totalExp={200} budgetAmt={budget.amount} />
       </Box>
     )
     return listBudgetJsx;
