@@ -29,7 +29,7 @@ export default function SortFilterDialog ({handleOpen, setHandleOpen, name, hand
   const handleCategoryIdChange = (_, val) => {
     console.log(val)
     setSelectedOption(val)
-    setCategoryId([...categoryId, val[0].id]);
+    setCategoryId([...categoryId, val[val.length - 1].id]);
   }
 
   return (
