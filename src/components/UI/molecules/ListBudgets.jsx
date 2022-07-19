@@ -9,14 +9,14 @@ import Switch from '@mui/material/Switch';
 import categories from "../../../utils/categories.js";
 
 
-export default function ListBudgets ({budgets , pinMode, setPutBudget}) {
+export default function ListBudgets ({budgets , pinMode, setPutBudget, setShowEditDialog}) {
 
   const dummyTotalExpense = 200;
 
   const budgetsList = budgets.length === 0 ? <p>You have no budgets saved.<br></br>Add a budget to get started!</p> : budgets.map((budget) => {
     const listBudgetJsx = (
-      <Box key={`budget${budget.id}`}>
-        <ListItem
+      <Box key={`budget${budget.id}`} onClick={()=>{setShowEditDialog(budget)}}>
+        <ListItem 
           disableGutters
           secondaryAction={
             <ListTxnText ege="end" textValue={`$${dummyTotalExpense}`} />
