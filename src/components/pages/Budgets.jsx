@@ -78,7 +78,7 @@ export default function Breakdown () {
       {showEditDialog && <ThreeBtnFormDialog 
         // handleDeleteConfirmation={handleTxnDelete} 
         handleClickOpen={showEditDialog} 
-        setOpen={setShowEditDialog} setShowEditDialog={setShowEditDialog} budgetAmt={showEditDialog.amount} category={showEditDialog.id} />
+        setOpen={setShowEditDialog} setShowEditDialog={setShowEditDialog} budgetAmt={showEditDialog.amount} category={showEditDialog.categoryId} />
       } 
       <NavBar />
     </Box>
