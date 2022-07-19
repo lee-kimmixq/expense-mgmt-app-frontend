@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import GenerateIcon from "./GenerateIcon";
 // import axios from "axios";
 
-export default function PrimaryBtn ({buttonLabel,onClickCallback, marginTop, buttonColorPalette, icon, iconColor}) {
+export default function PrimaryBtn ({buttonLabel, onClickCallback, marginTop, buttonColorPalette, icon, iconColor}) {
   return (
       <Button 
         sx={{
