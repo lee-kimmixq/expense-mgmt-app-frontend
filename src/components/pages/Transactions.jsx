@@ -35,8 +35,10 @@ export default function Transactions () {
   
   let txnAddSuccess = false;
   let txnDeleteSuccess = false;
+  let txnEditSuccess = false;
   if (location.state && location.state.txnAddSuccess) txnAddSuccess = true;
   if (location.state && location.state.txnDeleteSuccess) txnDeleteSuccess = true;
+  if (location.state && location.state.txnEditSuccess) txnEditSuccess = true;
 
   const filteredTransactions = data.transactions.filter((txn) => {
     const pattern = new RegExp(searchText, "i")
@@ -45,50 +47,68 @@ export default function Transactions () {
 
   return (
     <Box
-    sx={{
+      sx={{
         display: 'inline-flex',
         flexDirection: 'column',
         rowGap: '10px',
         width: '80%',
-        marginTop: '10vmin'
+        marginTop: '10vmin',
       }}
     >
-      {txnAddSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction added'} displayAlert={true}/>}
-      {txnDeleteSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction deleted'} displayAlert={true}/>}
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
-        <PageHeader pageTitle={`Transactions`} />
-        <Box sx={{
-          display: 'flex',
-        }}>
-          <GenerateIconBtn name={'tune'} onClickCallback={() => {setShowFilterDialog(true)}}/>
-          {searchMode ? (<GenerateIconBtn name={'cancel'} onClickCallback={handleClickSearch}/>) : <GenerateIconBtn name={'search'} onClickCallback={handleClickSearch} />}
-        </Box>
-      </Box>
       
-      <TxnsNav month={month} setMonth={setMonth}/>
-      {searchMode && 
-        <TextField
-          size="small"
-          InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-        }
-      }
-      onChange={(e)=>{ setSearchText(e.target.value) }}
-        />}
-      <ListTxnsByDate txns={filteredTransactions} />
-      <br />
-      <br />
-      <br />
-      <NavBar />
-      {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} filters={filters} setFilters={setFilters}/>}
+      <Box
+        sx={{
+          height: '90%',
+          position: 'relative'
+          }}
+        >
+          
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <PageHeader pageTitle={`Transactions`} />
+            <Box sx={{
+              display: 'flex',
+            }}>
+              <GenerateIconBtn name={'tune'} onClickCallback={() => {setShowFilterDialog(true)}}/>
+              {searchMode ? (<GenerateIconBtn name={'cancel'} onClickCallback={handleClickSearch}/>) : <GenerateIconBtn name={'search'} onClickCallback={handleClickSearch} />}
+            </Box>
+          </Box>
+          
+          <TxnsNav month={month} setMonth={setMonth}/>
+          {searchMode && 
+            <TextField
+              size="small"
+              InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }
+          }
+          onChange={(e)=>{ setSearchText(e.target.value) }}
+            />}
+          <ListTxnsByDate txns={filteredTransactions} />
+         
+          <br />
+          <br />
+          <br />
+          {showFilterDialog && <SortFilterDialog setHandleOpen={setShowFilterDialog} handleOpen={showFilterDialog} name={'Filter'} yesBtnLabel={'Save'} noBtnLabel={'Cancel'} filters={filters} setFilters={setFilters}/>}
+          
+        </Box>
+        
+        <Box sx={{
+          height: '5%',
+          position: 'relative'
+        }}>
+          {txnAddSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction added'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+          {txnDeleteSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction deleted'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+          {txnEditSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+          <NavBar />
+        </Box>
     </Box>
   );
 }
