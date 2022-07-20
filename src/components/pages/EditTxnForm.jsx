@@ -9,7 +9,6 @@ import axios from "axios";
 import DeleteAlertDialog from "../UI/molecules/DeleteAlertDialog.jsx";
 import fetcher from "../../utils/fetcher.mjs";
 import useSWR from "swr";
-import AlertSnackbar from "../UI/atoms/AlertSnackbar.jsx";
 
 export default function NewTxnForm () {
   const [showDialog, setShowDialog] = useState(false);

@@ -12,7 +12,6 @@ import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
 import { useNavigate } from "react-router-dom";
-import getFirstLastDates from "../../utils/getFirstLastDates.mjs";
 
 export default function Reports () {
   let navigate = useNavigate();
@@ -37,12 +36,6 @@ export default function Reports () {
   } else if (tabFocus === "month") {
     newData = reportData.map((day) => {return {...day, date: `${monthNames[new Date(day.date).getMonth()]}`}});
   }
-
-  const tabFocusToDateType = { day: "date", week: "week", month: "month" };
-  const { firstDate: txnDateMin, lastDate: txnDateMax } = getFirstLastDates(
-    tabFocusToDateType[tabFocus],
-    month
-  );
 
   const handleBarClick = (data) => {
     let txnDateMin, txnDateMax;
