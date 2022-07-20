@@ -83,6 +83,7 @@ export default function Transactions () {
           {searchMode && 
             <TextField
               size="small"
+              sx={{width: '100%', marginTop: '0.6em'}}
               InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
