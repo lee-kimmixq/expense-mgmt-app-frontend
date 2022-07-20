@@ -36,21 +36,17 @@ export default function Breakdown () {
     mutate({ budgets : [...data.budgets, {...budgetChanged, showInDashboard: newState }]});
   }
 
-  const handleAddBudget = async (reqBody) => {
+  const handleEditBudget = async (reqBody, isAdd) => {
     const { data: postData } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/budgets`, reqBody);
     if (postData.newBudget) {
       mutate()
-      setShowAddDialog(false);
-      setShowAddSuccessAlert(true);
-    }
-  }
-
-  const handleEditBudget = async (reqBody) => {
-    const { data: postData } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/budgets`, reqBody);
-    if (postData.newBudget) {
-      mutate()
-      setShowEditDialog(false);
-      setShowEditSuccessAlert(true);
+      if (isAdd) {
+        setShowAddDialog(false);
+        setShowAddSuccessAlert(true);
+      } else {
+        setShowEditDialog(false);
+        setShowEditSuccessAlert(true);
+      }
     }
   }
 
@@ -90,7 +86,7 @@ export default function Breakdown () {
           />
       {showAddDialog && <FormDialog 
         handleClickOpen={showAddDialog} 
-        setOpen={setShowAddDialog} handleAddBudget={handleAddBudget}/>} 
+        setOpen={setShowAddDialog} handleEditBudget={handleEditBudget}/>} 
       
       <ListBudgets budgets={data.budgets} pinMode={pinMode} setShowEditDialog={setShowEditDialog} handlePinChange={handlePinChange}/>
       {showEditDialog && <ThreeBtnFormDialog 

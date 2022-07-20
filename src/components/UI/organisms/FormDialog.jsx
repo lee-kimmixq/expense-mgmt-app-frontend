@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import TxnAmtField from "../atoms/TxnAmtField.jsx";
 import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
 
-export default function FormDialog({handleClickOpen, setOpen, dialogTitle, handleSubmit, handleAddBudget }) {
+export default function FormDialog({handleClickOpen, setOpen, handleEditBudget }) {
 
   const [amount, setAmount] = useState("0.00");
   const [categoryId, setCategoryId] = useState("");
@@ -45,7 +45,7 @@ export default function FormDialog({handleClickOpen, setOpen, dialogTitle, handl
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" sx={{color: '#efefef', borderColor: '#999999'}} onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" sx={{color: ''}} onClick={() => { handleAddBudget({ amount, categoryId })}}>Save</Button>
+          <Button variant="contained" sx={{color: ''}} onClick={() => { handleEditBudget({ amount, categoryId }, true)}}>Save</Button>
         </DialogActions>
       </Dialog>
 
