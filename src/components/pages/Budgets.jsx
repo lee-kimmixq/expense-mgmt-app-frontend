@@ -6,37 +6,39 @@ import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import FormDialog from "../UI/organisms/FormDialog.jsx";
 import ThreeBtnFormDialog from "../UI/organisms/ThreeBtnFormDialog.jsx";
 import ListBudgets from "../UI/molecules/ListBudgets.jsx";
-import useSWR from "swr";
-import fetcher from "../../utils/fetcher.mjs";
+import useBudgets from "../../utils/useBudgets.js";
+import Loading from "./Loading"
+import axios from "axios";
+import AlertSnackbar from "../UI/atoms/AlertSnackbar"
 
 export default function Breakdown () {
 
   const [showDialog, setShowDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [pinMode, setPinMode] = useState(false);
-  const [shouldFetch, setShouldFetch] = useState(true); 
-  const [budgets, setBudgets] = useState([]);
-  const [putBudget, setPutBudget] = useState(false);
+  const [showPinErrorAlert, setShowPinErrorAlert] = useState(false);
 
   const handleClickPin = () => {
     setPinMode(!pinMode);
   };
 
-  const onSuccess = (data) => {
-    if (data) {
-      setShouldFetch(false);
-      setBudgets(data.budgets);
+  const { data, isLoading, mutate } = useBudgets();
+  
+  if (isLoading) return <Loading />;
+  console.log(data);
+
+  const handlePinChange = async (id, newState) => {
+    const [ budgetChanged ] = data.budgets.filter(budget => budget.id === id);
+    const newBudgets = [...data.budgets, {...budgetChanged, showInDashboard: newState }];
+    const { data: putData } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/budgets/${id}`, { showInDashboard: newState })
+    if (putData.update) {
+      mutate({ budgets : newBudgets});
+    } else {
+      console.log('fail');
+      setShowPinErrorAlert(true);
     }
   }
 
-  useSWR(shouldFetch ? `${process.env.REACT_APP_BACKEND_URL}/budgets` : null, fetcher.get, {onSuccess});
-
-  const onPostSuccess = (data) => {
-    setPutBudget(false);
-    shouldFetch(true);
-  }
-
-  useSWR(putBudget !== false ? [`${process.env.REACT_APP_BACKEND_URL}/budgets/${putBudget.id}`, { showInDashboard: putBudget.state }] : null, fetcher.put, {onPostSuccess})
 
   return (
     <Box
@@ -48,6 +50,7 @@ export default function Breakdown () {
         marginTop: '10vmin'
       }}
     >
+      {showPinErrorAlert && <AlertSnackbar alertSeverity={'error'} alertLabel={'Unable to pin category - You already have 3 pinned categories'} displayAlert={true}/>}
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
@@ -74,11 +77,11 @@ export default function Breakdown () {
         handleClickOpen={showDialog} 
         setOpen={setShowDialog} />} 
       
-      <ListBudgets budgets={budgets} pinMode={pinMode} setPutBudget={setPutBudget} setShowEditDialog={setShowEditDialog} />
+      <ListBudgets budgets={data.budgets} pinMode={pinMode} setShowEditDialog={setShowEditDialog} handlePinChange={handlePinChange}/>
       {showEditDialog && <ThreeBtnFormDialog 
         // handleDeleteConfirmation={handleTxnDelete} 
         handleClickOpen={showEditDialog} 
-        setOpen={setShowEditDialog} setShowEditDialog={setShowEditDialog} budgetAmt={showEditDialog.amount} category={showEditDialog.categoryId} />
+        setOpen={setShowEditDialog} setShowEditDialog={setShowEditDialog} budgetAmt={showEditDialog.amount} category={showEditDialog.categoryId} showEditDialog={showEditDialog}/>
       } 
       <NavBar />
     </Box>
