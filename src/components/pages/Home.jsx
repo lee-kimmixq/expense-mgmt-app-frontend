@@ -43,6 +43,7 @@ export default function Home ({successAlert, failAlert}) {
               margin: 0,
               marginBottom: '0.3em'
             }}
+            className="animate__animated animate__bounceInDown"
           >make cents.</h1>
 
           { successAlert && (<FormAlert alertSeverity={'success'} alertLabel={'Account confirmed'} />) }
