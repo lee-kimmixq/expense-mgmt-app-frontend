@@ -1,13 +1,17 @@
 import React from "react";
 import { TextField } from "@mui/material";
-// import axios from "axios";
 
-export default function TxnAmtField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange, fieldValue}) {
+export default function TxnAmtField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange, fieldValue, isShrink}) {
 
   return (
       <TextField 
         InputLabelProps={{ 
           required: false,
+          style: {
+            fontWeight: 'bolder',
+            fontSize: 'xx-large',
+          },
+          shrink: isShrink
          }}
         InputProps={{
           style: {
@@ -15,7 +19,9 @@ export default function TxnAmtField ({fieldName, fieldType, isRequired, fieldLab
             fontSize: 'xx-large',
           }
          }}
-        // sx={{input: {textAlign: 'center'}}}
+        sx={{
+          "& label.Mui-focused": {color: "#efefef"}
+        }}
         id={fieldName}
         label={fieldLabel}
         type={fieldType}

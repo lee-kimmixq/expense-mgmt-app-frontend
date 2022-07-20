@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InputField from "../atoms/InputField";
 import PrimaryBtn from "../atoms/PrimaryBtn";
 import Box from "@mui/material/Box";
@@ -46,7 +46,7 @@ export default function TxnForm ({ isEditForm, photo, setPhoto, amount, setAmoun
       }}
       >
         {isEditForm ? <ViewReceiptBtn photo={photo} imageUrl={imageUrl} handleFileUpload={handleFileUpload}/> : <UploadReceiptBtn photo={photo} handleFileUpload={handleFileUpload} buttonText={'Upload Receipt'}/>}
-        <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
+        <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldLabel={amount ? amount : '0.00'} fieldValue={amount} isShrink={false} isRequired={true} handleChange={handleAmountChange}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
         <CategoryDropdown selectValue={categoryId} handleChange={handleCategoryIdChange}/>

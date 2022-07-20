@@ -11,9 +11,12 @@ import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import BudgetCards from "../UI/molecules/BudgetCards.jsx";
 import Box from "@mui/material/Box"
-
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard () {
+
+  let navigate = useNavigate();
+
   const [tabFocus, setTabFocus] = useState("expenses");
   
   const { data, isLoading } = useTxns(getTxnQueryParams("dashboard", tabFocus, "month"));
@@ -81,7 +84,7 @@ export default function Dashboard () {
       <TotalValuePrimary value={`$ ${data.totalAmount}`} />
       <ExpIncNav setTabFocus={setTabFocus} currentValue={tabFocus}/>
       <ListTxn txns={data.transactions.slice(0, 5)}/>
-      <LinkTxt linkText={'View all'} linkURL={'/txns'} />
+      <LinkTxt linkText={'View all'} onClickCallback={()=>{navigate('/txns', {replace: true})}} />
       <Box
         sx={{
           display: 'inline-flex',
@@ -90,7 +93,7 @@ export default function Dashboard () {
           justifyContent: 'space-between'
         }}>
         <PageHeader pageTitle={`Budgeting`} />
-        <LinkTxt linkText={'More'} linkURL={'/budgets'} />
+        <LinkTxt linkText={'More'} onClickCallback={()=>{navigate('/budgets', {replace: true})}} />
       </Box>
       <Box
         sx={{
