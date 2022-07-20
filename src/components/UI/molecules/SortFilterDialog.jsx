@@ -72,7 +72,6 @@ export default function SortFilterDialog ({handleOpen, setHandleOpen, name, aler
         aria-describedby={`alert-description-${name}`}
         PaperProps={{
           style: {
-            // backgroundColor: "#eeeeee",
             boxShadow: "none",
           },
         }}

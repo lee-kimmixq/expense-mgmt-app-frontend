@@ -5,7 +5,7 @@ import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
 import { useLocation } from "react-router-dom";
-import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
+import AlertSnackbar from "../UI/atoms/AlertSnackbar.jsx";
 import useTxns from "../../utils/useTxns.js";
 import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"

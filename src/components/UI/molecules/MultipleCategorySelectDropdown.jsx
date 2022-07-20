@@ -29,7 +29,6 @@ export default function MultipleCategorySelectDropdown ({selectedValues, handleC
     <Autocomplete
       multiple
       filterSelectedOptions
-      // value={categories.filter((category) => category.id === selectValue)[0] || null}
       value={selectedValues}
       options={categoriesList.sort(sortFunc)}
       groupBy={(category) => category.type}

@@ -3,8 +3,6 @@ import Box from "@mui/material/Box"
 import GenerateIcon from "../atoms/GenerateIcon";
 import MonthPicker from "../atoms/MonthPicker";
 
-// import axios from "axios";
-
 export default function TxnsNav ({ month, setMonth }) {
   const selectPreviousMonth = () => {
     setMonth(new Date(month.setMonth(month.getMonth()-1)));

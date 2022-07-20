@@ -93,7 +93,6 @@ export default function Reports () {
       <Grid item xs={6}>
           <Box sx={{
             height: 150,
-            // backgroundColor: '#CF65F2',
             display: "flex",
             alignItems: "center"}}
             onClick={()=>{navigate(`/breakdown`, { replace: true, state: { month: month, tabFocus: "expenses" }})}}
@@ -107,7 +106,6 @@ export default function Reports () {
       <Grid item xs={6}>
             <Box sx={{
               height: 150,
-              // backgroundColor: '#27A37A',
               display: "flex",
               alignItems: "center"}}
               onClick={()=>{navigate(`/breakdown`, { replace: true, state: { month: month, tabFocus: "income" }})}}

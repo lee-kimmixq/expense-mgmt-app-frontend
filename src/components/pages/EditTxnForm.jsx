@@ -88,7 +88,6 @@ export default function NewTxnForm () {
       <NavBar />
       {txnId !== "add" && <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} onClickCallback={()=>{setShowDialog(true)}} />}
       {showDialog && <DeleteAlertDialog handleDeleteConfirmation={handleTxnDelete} showDialog={showDialog} setShowDialog={setShowDialog} />} 
-      {/* {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true} customPositionFrmBtm={'60px'}/>} */}
     </Box>
       
   );

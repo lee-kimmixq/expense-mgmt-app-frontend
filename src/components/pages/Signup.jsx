@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box"
 import CenteredPageHeader from "../UI/atoms/CenteredPageHeader.jsx";
 import SignupForm from "../UI/molecules/SignupForm.jsx";
-// import axios from "axios";
 
 export default function Signup () {
   return (

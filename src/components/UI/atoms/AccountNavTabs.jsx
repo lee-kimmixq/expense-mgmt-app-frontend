@@ -19,9 +19,7 @@ export default function AccountNavTabs ({navName, navIcon}) {
         >
         <Box sx={{display:'flex', flexDirection:'row', alignItems:'center', marginLeft: '20px'}}>
           <ListItemAvatar>
-            {/* <Avatar sx={{ bgcolor: '#00FFFFFF', width: 65, height: 65  }}> */}
               <GenerateIcon name={navIcon} scale={'scale(1.5)'} />
-            {/* </Avatar> */}
           </ListItemAvatar>
           <Box sx={{
             display: 'flex',
@@ -30,7 +28,6 @@ export default function AccountNavTabs ({navName, navIcon}) {
           }}>
             
             <ListItemText sx={{
-              // fontWeight: 'bold',
               margin: 0,
               
             }}

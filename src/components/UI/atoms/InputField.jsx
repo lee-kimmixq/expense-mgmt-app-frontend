@@ -9,7 +9,6 @@ export default function InputField ({fieldName, fieldType, isRequired, fieldLabe
         InputLabelProps={{ 
           required: false,
         }}
-        // sx={{input: {textAlign: 'center'}}}
         id={fieldName}
         label={fieldLabel}
         type={fieldType}
@@ -17,7 +16,6 @@ export default function InputField ({fieldName, fieldType, isRequired, fieldLabe
         helperText={fieldHelperText}
         onChange={handleChange}
         required={isRequired}
-        // defaultValue={fieldValue}
         size="small"
         />
   );
