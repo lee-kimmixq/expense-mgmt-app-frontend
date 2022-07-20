@@ -29,6 +29,7 @@ const Confirmation = (props) => {
     if (error.response.status === 404) {
       setFailAlert(true);
       setLoading(false);
+      setFailAlert(true);
     };
   };
 
