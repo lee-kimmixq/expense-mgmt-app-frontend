@@ -28,11 +28,10 @@ export default function Breakdown () {
   console.log(data);
 
   const handlePinChange = async (id, newState) => {
-    const [ budgetChanged ] = data.budgets.filter(budget => budget.id === id);
-    const newBudgets = [...data.budgets, {...budgetChanged, showInDashboard: newState }];
     const { data: putData } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/budgets/${id}`, { showInDashboard: newState })
     if (!putData.update) return setShowPinErrorAlert(true);
-    mutate({ budgets : newBudgets});
+    const [ budgetChanged ] = data.budgets.filter(budget => budget.id === id);
+    mutate({ budgets : [...data.budgets, {...budgetChanged, showInDashboard: newState }]});
   }
 
 
