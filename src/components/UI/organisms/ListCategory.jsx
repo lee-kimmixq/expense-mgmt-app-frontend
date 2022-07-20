@@ -10,7 +10,6 @@ import ListTxnText from "../atoms/ListTxnText.jsx";
 export default function ListCategory ({categories}) {
 
   const catList = categories.length === 0 ? <p>No Transactions Available</p> : categories.map((category) => (
-    // <Link to={`/txns/${txn.id}`} style={{ textDecoration: 'none' }} className={'link'}>
       <ListItem
         disableGutters
         secondaryAction={
@@ -25,7 +24,6 @@ export default function ListCategory ({categories}) {
             <ListTxnText textValue={category.name}/>
           </Box>
       </ListItem>
-    // </Link>
   ));
 
   return (

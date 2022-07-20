@@ -84,7 +84,7 @@ export default function Dashboard () {
       <TotalValuePrimary value={`$ ${data.totalAmount}`} />
       <ExpIncNav setTabFocus={setTabFocus} currentValue={tabFocus}/>
       <ListTxn txns={data.transactions.slice(0, 5)}/>
-      <LinkTxt linkText={'View all'} linkURL={'/txns'} />
+      <LinkTxt linkText={'View all'} onClickCallback={()=>{navigate('/txns', {replace: true})}} />
       <Box
         sx={{
           display: 'inline-flex',

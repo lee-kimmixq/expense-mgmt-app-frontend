@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "@mui/material";
 // import axios from "axios";
 
-export default function LinkTxt ({linkText, linkURL}) {
+export default function LinkTxt ({linkText, onClickCallback}) {
 
   return (
-    <Link href={linkURL} underline="always" color="inherit">
+    <Link onClick={onClickCallback} underline="always" color="inherit">
       {linkText}
     </Link>
   );
