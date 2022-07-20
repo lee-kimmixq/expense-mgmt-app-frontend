@@ -12,6 +12,7 @@ export default function GenerateIconLarge ({name}) {
         width: '100%',
         color: '#e0e0e0',
       }}
+      // className="animate__animated animate__flip"
     >
       {name}</Icon>
     </Box>
