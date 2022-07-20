@@ -13,7 +13,7 @@ import AlertSnackbar from "../UI/atoms/AlertSnackbar"
 
 export default function Breakdown () {
 
-  const [showDialog, setShowDialog] = useState(false);
+  const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [pinMode, setPinMode] = useState(false);
   const [showPinErrorAlert, setShowPinErrorAlert] = useState(false);
@@ -34,6 +34,13 @@ export default function Breakdown () {
     mutate({ budgets : [...data.budgets, {...budgetChanged, showInDashboard: newState }]});
   }
 
+  const handleAddBudget = async (reqBody) => {
+    const { data: postData } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/budgets`, reqBody);
+    if (postData.newBudget) {
+      mutate()
+      setShowAddDialog(false);
+    }
+  }
 
   return (
     <Box
@@ -65,12 +72,12 @@ export default function Breakdown () {
           </Box>
       </Box>
       <PrimaryBtn buttonLabel={'Add Budget'} icon={'add'}
-          onClickCallback={()=>{setShowDialog(true)}} 
+          onClickCallback={()=>{setShowAddDialog(true)}} 
           />
-      {showDialog && <FormDialog 
+      {showAddDialog && <FormDialog 
         // handleDeleteConfirmation={handleTxnDelete} 
-        handleClickOpen={showDialog} 
-        setOpen={setShowDialog} />} 
+        handleClickOpen={showAddDialog} 
+        setOpen={setShowAddDialog} handleAddBudget={handleAddBudget}/>} 
       
       <ListBudgets budgets={data.budgets} pinMode={pinMode} setShowEditDialog={setShowEditDialog} handlePinChange={handlePinChange}/>
       {showEditDialog && <ThreeBtnFormDialog 

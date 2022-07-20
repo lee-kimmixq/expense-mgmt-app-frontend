@@ -5,30 +5,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import TxnAmtField from "../atoms/TxnAmtField.jsx";
 import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
-import useSWR, {useSWRConfig} from "swr";
-import fetcher from "../../../utils/fetcher.mjs";
 
-
-export default function FormDialog({handleClickOpen, setOpen, dialogTitle, handleSubmit }) {
-  const { mutate } = useSWRConfig();
+export default function FormDialog({handleClickOpen, setOpen, dialogTitle, handleSubmit, handleAddBudget }) {
 
   const [amount, setAmount] = useState("0.00");
   const [categoryId, setCategoryId] = useState("");
-  const [shouldPost, setShouldPost] = useState(false);
-
-  const onSuccess = (data) => {
-    if (data) {
-      mutate(`${process.env.REACT_APP_BACKEND_URL}/budgets`);
-      setOpen(false);
-      setShouldPost(false);
-    }
-  }
-
-  useSWR(shouldPost ? [`${process.env.REACT_APP_BACKEND_URL}/budgets`, { amount, categoryId }] : null, fetcher.post, { onSuccess })
-
-  const handleSave = () => {
-    setShouldPost(true);
-  }
 
   const handleClose = () => {
     setOpen(false);
@@ -64,7 +45,7 @@ export default function FormDialog({handleClickOpen, setOpen, dialogTitle, handl
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" sx={{color: '#efefef', borderColor: '#999999'}} onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" sx={{color: ''}} onClick={handleSave}>Save</Button>
+          <Button variant="contained" sx={{color: ''}} onClick={() => { handleAddBudget({ amount, categoryId })}}>Save</Button>
         </DialogActions>
       </Dialog>
 
