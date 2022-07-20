@@ -21,8 +21,8 @@ export default function Reports () {
   const [tabFocus, setTabFocus] = useState("day");
 
   const { data: reportData, isLoading: isRepLoading } = useReports(tabFocus, month);
-  const { data: expenseData, isLoading: isExpLoading } = useTxns(getTxnQueryParams("reports", "expenses", tabFocus, month));
-  const { data: incomeData, isLoading: isIncLoading } = useTxns(getTxnQueryParams("reports", "income", tabFocus, month));
+  const { data: expenseData, isLoading: isExpLoading } = useTxns(getTxnQueryParams("reports", "expenses", "month", month));
+  const { data: incomeData, isLoading: isIncLoading } = useTxns(getTxnQueryParams("reports", "income", "month", month));
 
   if (isRepLoading || isExpLoading || isIncLoading) return <Loading />;
 
