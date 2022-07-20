@@ -72,3 +72,25 @@ html,body {
 .link:visited {
    color: #EFEFEF
 }
+
+@keyframes strikethrough{
+  0%   { width : 0; }
+  100% { width: 100%; }
+}
+.strikethrough {
+  position: relative;
+}
+.strikethrough::after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #EFEFEF;
+  animation-name: strikethrough;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; 
+}
