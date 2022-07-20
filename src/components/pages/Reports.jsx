@@ -45,7 +45,6 @@ export default function Reports () {
   );
 
   const handleBarClick = (data) => {
-    console.log(data);
     let txnDateMin, txnDateMax;
     let monthToShow = month;
     if (tabFocus === "day") {

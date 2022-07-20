@@ -18,7 +18,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 export default function Transactions () {
   let location = useLocation(); 
-  console.log(location.state);
 
   const [month, setMonth] = useState(location.state ? location.state.month : new Date());
   const [showFilterDialog, setShowFilterDialog] = useState(false);
