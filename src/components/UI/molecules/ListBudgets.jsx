@@ -9,9 +9,7 @@ import Switch from '@mui/material/Switch';
 import categories from "../../../utils/categories.js";
 
 
-export default function ListBudgets ({budgets , pinMode, setPutBudget, setShowEditDialog}) {
-
-  const dummyTotalExpense = 200;
+export default function ListBudgets ({ budgets, pinMode, setShowEditDialog, handlePinChange}) {
 
   const budgetsList = budgets.length === 0 ? <p>You have no budgets saved.<br></br>Add a budget to get started!</p> : budgets.map((budget) => {
     const listBudgetJsx = (
@@ -19,23 +17,19 @@ export default function ListBudgets ({budgets , pinMode, setPutBudget, setShowEd
         <ListItem 
           disableGutters
           secondaryAction={
-            <ListTxnText ege="end" textValue={`$${dummyTotalExpense}`} />
+            <ListTxnText ege="end" textValue={`$${budget.total}`} />
           }
           key={`budgetList${budget.id}`}
           >
             <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-              { pinMode && <Switch checked={budget.showInDashboard} onChange={() => {
-                setPutBudget({id: budget.id, state: !budget.showInDashboard});
-                budget.showInDashboard = !budget.showInDashboard;
-                }}/> }
-
+              { pinMode && <Switch checked={budget.showInDashboard} onChange={() => { handlePinChange(budget.id, !budget.showInDashboard) }} onClick={(e) => e.stopPropagation()}/> }
               <ListItemAvatar>
                 <CategoryAvatar categoryName={budget["category.name"]}/>
               </ListItemAvatar>
               <ListTxnText textValue={budget["category.name"]}/>
             </Box>
           </ListItem>
-          <LinearProgressBar categoryColor={categories.filter(category => category.name === budget["category.name"])[0].color} totalExp={200} budgetAmt={budget.amount} />
+          <LinearProgressBar categoryColor={categories.filter(category => category.name === budget["category.name"])[0].color} totalExp={budget.total <= budget.amount ? budget.total : budget.amount} budgetAmt={budget.amount} />
       </Box>
     )
     return listBudgetJsx;

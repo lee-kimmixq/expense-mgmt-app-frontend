@@ -7,14 +7,18 @@ import TxnAmtField from "../atoms/TxnAmtField.jsx";
 import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
 
 
-export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTitle, handleSubmit, handleDelete, budgetAmt, category }) {
+export default function ThreeBtnFormDialog ({ budget, setShowEditDialog, handleEditBudget, setShowConfirmDeleteDialog }) {
 
-  const [amount, setAmount] = useState(budgetAmt);
-  const [categoryId, setCategoryId] = useState(category);
+  const [amount, setAmount] = useState(budget.amount);
+  const [categoryId, setCategoryId] = useState(budget.categoryId);
 
   const handleClose = () => {
-    setOpen(false);
+    setShowEditDialog(false);
   };
+
+  const handleDelete = () => {
+    setShowConfirmDeleteDialog(true);
+  }
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -31,15 +35,12 @@ export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTit
         maxWidth={'sm'}
         PaperProps={{
           style: {
-            // backgroundColor: "#eeeeee",
             boxShadow: "none",
           },
         }}
-        open={Boolean(handleClickOpen)} 
+        open={Boolean(budget)} 
         onClose={handleClose}>
-        {/* <DialogTitle>{dialogTitle}</DialogTitle> */}
         <DialogContent>
-         
           <CategoryDropdown filterValues={'isIncome=false'} selectValue={categoryId} handleChange={handleCategoryIdChange}/>
           <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
 
@@ -47,7 +48,7 @@ export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTit
         <DialogActions>
           <Button variant="outlined" sx={{color: '#efefef', borderColor: '#999999'}} onClick={handleClose}>Cancel</Button>
           <Button variant="outlined" color="warning" onClick={handleDelete}>Delete</Button>
-          <Button variant="contained" sx={{color: ''}} onClick={handleClose}>Save</Button>
+          <Button variant="contained" sx={{color: ''}} onClick={() => {handleEditBudget({ amount, categoryId })}}>Save</Button>
         </DialogActions>
       </Dialog>
 
