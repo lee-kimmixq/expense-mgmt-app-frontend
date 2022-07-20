@@ -63,6 +63,7 @@ export default function NewTxnForm () {
     setShouldPost(false);
     if (data.success) {
       setIsSuccess(true);
+      navigate("/txns", { replace: true, state: {txnEditSuccess: true}});
     }
   }
 
@@ -88,7 +89,7 @@ export default function NewTxnForm () {
       <NavBar />
       {txnId !== "add" && <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} onClickCallback={()=>{setShowDialog(true)}} />}
       {showDialog && <DeleteAlertDialog handleDeleteConfirmation={handleTxnDelete} showDialog={showDialog} setShowDialog={setShowDialog} />} 
-      {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true}/>}
+      {/* {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true} customPositionFrmBtm={'60px'}/>} */}
     </Box>
       
   );
