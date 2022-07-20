@@ -1,9 +1,11 @@
 import useSWR from "swr";
 import fetcher from "./fetcher.mjs";
 
-const useBudgets = () => {
+const useBudgets = (showInDashboard) => {
   const { data, error, mutate } = useSWR(
-    `${process.env.REACT_APP_BACKEND_URL}/budgets`,
+    `${process.env.REACT_APP_BACKEND_URL}/budgets${
+      showInDashboard ? "?showInDashboard=true" : ""
+    }`,
     fetcher.get
   );
 
