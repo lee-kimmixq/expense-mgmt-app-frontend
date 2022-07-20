@@ -105,6 +105,16 @@ export default function SignupForm () {
         <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
         <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'re-type password'} isRequired={true} handleChange={handleRetypePasswordChange} inputError={retypePasswordInputError}/>
         <PrimaryBtn marginTop={'20px'} buttonLabel={'Create Account'} onClickCallback={handleSignupFormSubmit}/>
+
+        <p
+          style={{fontSize: '0.75em'}}
+        >
+          <button style={{
+            background: 'none',
+            border: 'none'
+          }} onClick={()=>{navigate('/login', {replace: true})}} >Already have an account? Log in here!</button>
+        </p>
+
       </Box>
       
   );
