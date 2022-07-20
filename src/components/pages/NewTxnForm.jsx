@@ -12,7 +12,7 @@ export default function NewTxnForm () {
   let navigate = useNavigate();
 
   const [photo, setPhoto] = useState(null);
-  const [amount, setAmount] = useState("0.00");
+  const [amount, setAmount] = useState(null);
   const [txnDate, setTxnDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -20,7 +20,7 @@ export default function NewTxnForm () {
 
   const onSuccess = (data) => {
     setShouldPost(false);
-    if (data) navigate(`/txns`, { replace: true, state: {txnAddSuccess: true} });; // on success - should be direct to txns/:id instead
+    if (data) navigate(`/txns`, { replace: true, state: {txnAddSuccess: true} });; 
   }
 
   const onError = (error) => {
