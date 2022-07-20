@@ -19,6 +19,7 @@ export default function Breakdown () {
   const [showPinErrorAlert, setShowPinErrorAlert] = useState(false);
   const [showAddSuccessAlert, setShowAddSuccessAlert] = useState(false);
   const [showEditSuccessAlert, setShowEditSuccessAlert] = useState(false);
+  const [showDeleteSuccessAlert, setShowDeleteSuccessAlert] = useState(false);
 
   const handleClickPin = () => {
     setPinMode(!pinMode);
@@ -50,6 +51,15 @@ export default function Breakdown () {
     }
   }
 
+  const handleDeleteBudget = async (id) => {
+    const { data: deleteData } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/budgets/${id}`);
+    if (deleteData.deactivate) {
+      mutate();
+      setShowEditDialog(false);
+      setShowDeleteSuccessAlert(true);
+    } 
+  }
+
   return (
     <Box
     sx={{
@@ -63,6 +73,7 @@ export default function Breakdown () {
       {showPinErrorAlert && <AlertSnackbar alertSeverity={'error'} alertLabel={'Unable to pin category - You already have 3 pinned categories'} displayAlert={true}/>}
       {showAddSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully added new budget'} displayAlert={true}/>}
       {showEditSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully edited budget'} displayAlert={true}/>}
+      {showDeleteSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully deleted budget'} displayAlert={true}/>}
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
@@ -89,9 +100,8 @@ export default function Breakdown () {
         setOpen={setShowAddDialog} handleEditBudget={handleEditBudget}/>} 
       
       <ListBudgets budgets={data.budgets} pinMode={pinMode} setShowEditDialog={setShowEditDialog} handlePinChange={handlePinChange}/>
-      {showEditDialog && <ThreeBtnFormDialog 
-        // handleDeleteConfirmation={handleTxnDelete} 
-        budget={showEditDialog} setShowEditDialog={setShowEditDialog} handleEditBudget={handleEditBudget}/>
+      {showEditDialog && <ThreeBtnFormDialog
+        budget={showEditDialog} setShowEditDialog={setShowEditDialog} handleEditBudget={handleEditBudget} handleDeleteBudget={handleDeleteBudget}/>
       } 
       <NavBar />
     </Box>
