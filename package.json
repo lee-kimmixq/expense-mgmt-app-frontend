@@ -23,6 +23,7 @@
     "react-scripts": "^2.1.3",
     "recharts": "^2.1.12",
     "swr": "^1.3.0",
+    "typeface-poppins": "^1.1.13",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
