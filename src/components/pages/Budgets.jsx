@@ -30,7 +30,6 @@ export default function Breakdown () {
   const { data, isLoading, mutate } = useBudgets();
   
   if (isLoading) return <Loading />;
-  console.log(data);
 
   const handlePinChange = async (id, newState) => {
     const { data: putData } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/budgets/${id}`, { showInDashboard: newState })

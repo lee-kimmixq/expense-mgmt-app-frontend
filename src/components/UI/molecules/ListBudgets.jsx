@@ -11,15 +11,13 @@ import categories from "../../../utils/categories.js";
 
 export default function ListBudgets ({ budgets, pinMode, setShowEditDialog, handlePinChange}) {
 
-  const dummyTotalExpense = 200;
-
   const budgetsList = budgets.length === 0 ? <p>You have no budgets saved.<br></br>Add a budget to get started!</p> : budgets.map((budget) => {
     const listBudgetJsx = (
       <Box key={`budget${budget.id}`} onClick={()=>{setShowEditDialog(budget)}}>
         <ListItem 
           disableGutters
           secondaryAction={
-            <ListTxnText ege="end" textValue={`$${dummyTotalExpense}`} />
+            <ListTxnText ege="end" textValue={`$${budget.total}`} />
           }
           key={`budgetList${budget.id}`}
           >
@@ -31,7 +29,7 @@ export default function ListBudgets ({ budgets, pinMode, setShowEditDialog, hand
               <ListTxnText textValue={budget["category.name"]}/>
             </Box>
           </ListItem>
-          <LinearProgressBar categoryColor={categories.filter(category => category.name === budget["category.name"])[0].color} totalExp={200} budgetAmt={budget.amount} />
+          <LinearProgressBar categoryColor={categories.filter(category => category.name === budget["category.name"])[0].color} totalExp={budget.total <= budget.amount ? budget.total : budget.amount} budgetAmt={budget.amount} />
       </Box>
     )
     return listBudgetJsx;
