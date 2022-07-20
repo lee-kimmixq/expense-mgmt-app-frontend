@@ -9,7 +9,6 @@ import axios from "axios";
 import DeleteAlertDialog from "../UI/molecules/DeleteAlertDialog.jsx";
 import fetcher from "../../utils/fetcher.mjs";
 import useSWR from "swr";
-import AlertSnackbar from "../UI/atoms/AlertSnackbar.jsx";
 
 export default function NewTxnForm () {
   const [showDialog, setShowDialog] = useState(false);
@@ -89,7 +88,6 @@ export default function NewTxnForm () {
       <NavBar />
       {txnId !== "add" && <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} onClickCallback={()=>{setShowDialog(true)}} />}
       {showDialog && <DeleteAlertDialog handleDeleteConfirmation={handleTxnDelete} showDialog={showDialog} setShowDialog={setShowDialog} />} 
-      {/* {isSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true} customPositionFrmBtm={'60px'}/>} */}
     </Box>
       
   );

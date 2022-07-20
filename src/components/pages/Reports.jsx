@@ -12,7 +12,6 @@ import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
 import { useNavigate } from "react-router-dom";
-import getFirstLastDates from "../../utils/getFirstLastDates.mjs";
 
 export default function Reports () {
   let navigate = useNavigate();
@@ -38,14 +37,7 @@ export default function Reports () {
     newData = reportData.map((day) => {return {...day, date: `${monthNames[new Date(day.date).getMonth()]}`}});
   }
 
-  const tabFocusToDateType = { day: "date", week: "week", month: "month" };
-  const { firstDate: txnDateMin, lastDate: txnDateMax } = getFirstLastDates(
-    tabFocusToDateType[tabFocus],
-    month
-  );
-
   const handleBarClick = (data) => {
-    console.log(data);
     let txnDateMin, txnDateMax;
     let monthToShow = month;
     if (tabFocus === "day") {
@@ -101,7 +93,6 @@ export default function Reports () {
       <Grid item xs={6}>
           <Box sx={{
             height: 150,
-            // backgroundColor: '#CF65F2',
             display: "flex",
             alignItems: "center"}}
             onClick={()=>{navigate(`/breakdown`, { replace: true, state: { month: month, tabFocus: "expenses" }})}}
@@ -115,7 +106,6 @@ export default function Reports () {
       <Grid item xs={6}>
             <Box sx={{
               height: 150,
-              // backgroundColor: '#27A37A',
               display: "flex",
               alignItems: "center"}}
               onClick={()=>{navigate(`/breakdown`, { replace: true, state: { month: month, tabFocus: "income" }})}}

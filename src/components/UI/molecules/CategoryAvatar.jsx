@@ -5,7 +5,7 @@ import categories from "../../../utils/categories.js";
 
 export default function CategoryAvatar ({categoryName}) {
 
-  const category = categories.filter(category => category.name === categoryName); // not strict equals
+  const category = categories.filter(category => category.name === categoryName); 
 
   return (
       <Avatar sx={{ bgcolor: category[0].color }}>

@@ -36,7 +36,6 @@ export default function AccountProfileHeader ({handleLogOutSubmit, username}) {
           }}
           primary={'Welcome'} />
           <ListItemText sx={{
-            // fontWeight: 'bold',
             margin: 0
           }}
           primary={username} />

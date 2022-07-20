@@ -52,7 +52,6 @@ export default function Account () {
       <Divider />
       <AccountProfileHeader handleLogOutSubmit={handleLogOutSubmit} username={'John Tan'} />
       <Divider /> 
-      <br />
       <AccountNavTabs navName={'Profile'} navIcon={'person'} />
       <AccountNavTabs navName={'Settings'} navIcon={'settings'} />
       <AccountNavTabs navName={'Notifications'} navIcon={'notifications'} />
@@ -60,13 +59,13 @@ export default function Account () {
       <AccountNavTabs navName={'Security'} navIcon={'security'} />
       <AccountNavTabs navName={'Help Centre'} navIcon={'support'} />
       <AccountNavTabs navName={'About'} navIcon={'info'} />
-      <br></br>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start'
        }
       }>
+        <br></br>
         <p style={{
         fontSize: '0.8em',
         margin: 0,

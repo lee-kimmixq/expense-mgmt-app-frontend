@@ -30,13 +30,11 @@ export default function FormDialog({handleClickOpen, setOpen, handleEditBudget }
         maxWidth={'sm'}
         PaperProps={{
           style: {
-            // backgroundColor: "#eeeeee",
             boxShadow: "none",
           },
         }}
         open={handleClickOpen} 
         onClose={handleClose}>
-        {/* <DialogTitle>{dialogTitle}</DialogTitle> */}
         <DialogContent>
          
           <CategoryDropdown filterValues={'isIncome=false'} selectValue={categoryId} handleChange={handleCategoryIdChange}/>

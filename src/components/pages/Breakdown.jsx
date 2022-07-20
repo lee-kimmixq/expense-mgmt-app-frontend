@@ -3,7 +3,6 @@ import Box from "@mui/material/Box"
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
-import GenerateIcon from "../UI/atoms/GenerateIcon.jsx";
 import CatReportsNav from "../UI/molecules/CatReportsNav.jsx";
 import TotalValuePrimary from "../UI/atoms/TotalValuePrimary.jsx";
 import ListCategory from "../UI/organisms/ListCategory.jsx"

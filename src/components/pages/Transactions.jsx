@@ -5,7 +5,7 @@ import NavBar from "../UI/organisms/NavBar.jsx"
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ListTxnsByDate from "../UI/organisms/ListTxnByDate.jsx";
 import { useLocation } from "react-router-dom";
-import AlertSnackbar from "../UI/atoms//AlertSnackbar.jsx";
+import AlertSnackbar from "../UI/atoms/AlertSnackbar.jsx";
 import useTxns from "../../utils/useTxns.js";
 import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
@@ -18,9 +18,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 export default function Transactions () {
   let location = useLocation(); 
-  console.log(location.state);
 
-  const [month, setMonth] = useState(location.state ? location.state.month : new Date());
+  const [month, setMonth] = useState((location.state && location.state.month ) ? location.state.month : new Date());
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -84,6 +83,7 @@ export default function Transactions () {
           {searchMode && 
             <TextField
               size="small"
+              sx={{width: '100%', marginTop: '0.6em'}}
               InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -109,7 +109,7 @@ export default function Transactions () {
         }}>
           {txnAddSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction added'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
           {txnDeleteSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction deleted'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
-          {txnEditSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+          {txnEditSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={' Transaction saved'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
           <NavBar />
         </Box>
     </Box>
