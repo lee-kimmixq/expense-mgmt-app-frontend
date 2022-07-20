@@ -12,6 +12,7 @@ import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
 import { useNavigate } from "react-router-dom";
+import getFirstLastDates from "../../utils/getFirstLastDates.mjs";
 
 export default function Reports () {
   let navigate = useNavigate();
@@ -35,6 +36,35 @@ export default function Reports () {
     newData = reportData.map((day) => {return {...day, date: `${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`}});
   } else if (tabFocus === "month") {
     newData = reportData.map((day) => {return {...day, date: `${monthNames[new Date(day.date).getMonth()]}`}});
+  }
+
+  const tabFocusToDateType = { day: "date", week: "week", month: "month" };
+  const { firstDate: txnDateMin, lastDate: txnDateMax } = getFirstLastDates(
+    tabFocusToDateType[tabFocus],
+    month
+  );
+
+  const handleBarClick = (data) => {
+    console.log(data);
+    let txnDateMin, txnDateMax;
+    let monthToShow = month;
+    if (tabFocus === "day") {
+      txnDateMin = new Date(month.getFullYear(), month.getMonth(), data.date);
+      txnDateMax = new Date(month.getFullYear(), month.getMonth(), data.date);
+    } else if (tabFocus === "week") {
+      const [dayFromDate, monthFromDate] = data.date.split('/');
+      txnDateMin = new Date(month.getFullYear(), monthFromDate - 1, dayFromDate);
+      txnDateMax = new Date(month.getFullYear(), monthFromDate - 1, dayFromDate);
+      txnDateMax.setDate(txnDateMax.getDate() + 6);
+    } else if (tabFocus === "month") {
+      const monthNum = monthNames.indexOf(data.date);
+      txnDateMin = new Date(month.getFullYear(), monthNum, 1);
+      txnDateMax = new Date(month.getFullYear(), monthNum + 1, 0);
+      monthToShow = txnDateMin;
+    }
+    txnDateMin.setHours(0, 0, 0, 0);
+    txnDateMax.setHours(23, 59, 59, 999);
+    navigate(`/txns`, { replace: true, state: { month: monthToShow, linkedFilters: { categories: [], txnDateMin, txnDateMax } }});
   }
 
   const maxSum = Math.max(...reportData.map((day) => day.sum));
@@ -62,7 +92,7 @@ export default function Reports () {
         <BarChart width="100%" height="100%" data={newData}>
           <XAxis dataKey="date" tickSize={'0'} tickMargin={'5'} tick={{fontSize: '0.7em'}}/>
           <YAxis type="number" domain={[0, maxSum]} hide/>
-          <Bar dataKey="sum" fill="#8f49f8"/>
+          <Bar dataKey="sum" fill="#8f49f8" onClick={handleBarClick} />
         </BarChart>
       </ResponsiveContainer>
     </Box>
