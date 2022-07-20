@@ -11,10 +11,13 @@ import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
 import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
+import { useLocation } from "react-router-dom";
 
 export default function Breakdown () {
-  const [month, setMonth] = useState(new Date());
-  const [tabFocus, setTabFocus] = useState("expenses")
+  let location = useLocation(); 
+
+  const [month, setMonth] = useState(location.state ? location.state.month : new Date());
+  const [tabFocus, setTabFocus] = useState(location.state ? location.state.tabFocus : "expenses")
 
   const { data, isLoading } = useTxns(getTxnQueryParams("breakdown", tabFocus, "month", month));
 
@@ -36,16 +39,12 @@ export default function Breakdown () {
         justifyContent: 'space-between'
       }}>
         <PageHeader pageTitle={`Breakdown`} />
-        <Box>
-          <GenerateIcon name={'tune'} />
-          <GenerateIcon name={'sort'} />
-        </Box>
       </Box>
       <CatReportsNav setTabFocus={setTabFocus} tabValue={tabFocus}/>
       <TxnsNav month={month} setMonth={setMonth}/>
       <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false} height={"25%"}/>
       <TotalValuePrimary value={data.totalAmount} />
-      <ListCategory categories={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} />
+      <ListCategory categories={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} month={month}/>
       <NavBar />
     </Box>
   );
