@@ -17,11 +17,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 
 export default function Transactions () {
-  const [month, setMonth] = useState(new Date());
+  let location = useLocation(); 
+  console.log(location.state);
+
+  const [month, setMonth] = useState(location.state ? location.state.month : new Date());
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [filters, setFilters] = useState(null);
+  const [filters, setFilters] = useState(location.state ? location.state.linkedFilters : null);
 
   const handleClickSearch = () => {
     setSearchMode(!searchMode);
@@ -29,7 +32,7 @@ export default function Transactions () {
 
   const { data, isLoading } = useTxns(getTxnQueryParams("transactions", null, "month", month, filters));
 
-  let location = useLocation(); 
+
   
   if (isLoading) return <Loading />;
   
