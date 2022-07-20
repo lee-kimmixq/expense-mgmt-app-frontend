@@ -99,7 +99,7 @@ export default function SignupForm () {
         {(!isValidEmail && email !== "") && <FormAlert alertSeverity={'warning'} alertLabel={'Please use a valid email'} />}
         {showFormValidationError && <FormAlert alertSeverity={'error'} alertLabel={'Please fill in all fields'} />}
         {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match'} />}
-        <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'username'} isRequired={true} handleChange={handleUsernameChange} inputError={usernameInputError}/>
+        <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'display name'} isRequired={true} handleChange={handleUsernameChange} inputError={usernameInputError}/>
         <InputField fieldName={'signupMobile'} fieldType={'tel'} fieldAttribute={'required'} fieldLabel={'contact number'} isRequired={true} handleChange={handleContactChange} inputError={contactInputError}/>
         <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'email'} isRequired={true} handleChange={handleEmailChange} inputError={emailInputError}/>
         <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
