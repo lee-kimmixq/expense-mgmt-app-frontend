@@ -19,7 +19,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 export default function Transactions () {
   let location = useLocation(); 
 
-  const [month, setMonth] = useState(location.state ? location.state.month : new Date());
+  const [month, setMonth] = useState((location.state && location.state.month ) ? location.state.month : new Date());
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -108,7 +108,7 @@ export default function Transactions () {
         }}>
           {txnAddSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction added'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
           {txnDeleteSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Transaction deleted'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
-          {txnEditSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Edit transaction success'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+          {txnEditSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={' Transaction saved'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
           <NavBar />
         </Box>
     </Box>
