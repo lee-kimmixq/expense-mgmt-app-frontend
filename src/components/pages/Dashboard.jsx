@@ -11,9 +11,12 @@ import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import BudgetCards from "../UI/molecules/BudgetCards.jsx";
 import Box from "@mui/material/Box"
-
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard () {
+
+  let navigate = useNavigate();
+
   const [tabFocus, setTabFocus] = useState("expenses");
   
   const { data, isLoading } = useTxns(getTxnQueryParams("dashboard", tabFocus, "month"));
@@ -90,7 +93,7 @@ export default function Dashboard () {
           justifyContent: 'space-between'
         }}>
         <PageHeader pageTitle={`Budgeting`} />
-        <LinkTxt linkText={'More'} linkURL={'/budgets'} />
+        <LinkTxt linkText={'More'} onClickCallback={()=>{navigate('/budgets', {replace: true})}} />
       </Box>
       <Box
         sx={{
