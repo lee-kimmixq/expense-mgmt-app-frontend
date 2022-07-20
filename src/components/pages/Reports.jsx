@@ -5,15 +5,17 @@ import NavBar from "../UI/organisms/NavBar.jsx";
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
 import { Grid } from "@mui/material";
-import { Link } from 'react-router-dom';
 import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
 import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
+import { useNavigate } from "react-router-dom";
 
 export default function Reports () {
+  let navigate = useNavigate();
+
   const [month, setMonth] = useState(new Date());
   const [tabFocus, setTabFocus] = useState("day");
 
@@ -67,31 +69,31 @@ export default function Reports () {
 
     <Grid container spacing={2}>
       <Grid item xs={6}>
-        <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
           <Box sx={{
             height: 150,
             // backgroundColor: '#CF65F2',
             display: "flex",
-            alignItems: "center"}}>
+            alignItems: "center"}}
+            onClick={()=>{navigate(`/breakdown`, { replace: true, state: { month: month, tabFocus: "expenses" }})}}
+            >
               <ChartPie data={expenseData.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false}/>
           </Box>
           <p style={{marginBottom: 0, fontWeight: 'bold'}}>Expense</p>
           <p style={{marginTop: 0}}>$ {expenseData.totalAmount}</p>
-        </Link>
       </Grid>
 
       <Grid item xs={6}>
-          <Link to={`/breakdown`} style={{ textDecoration: 'none' }} className={'link'}>
             <Box sx={{
               height: 150,
               // backgroundColor: '#27A37A',
               display: "flex",
-              alignItems: "center"}}>
+              alignItems: "center"}}
+              onClick={()=>{navigate(`/breakdown`, { replace: true, state: { month: month, tabFocus: "income" }})}}
+              >
               <ChartPie data={incomeData.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false}/>
             </Box>
             <p style={{marginBottom: 0, fontWeight: 'bold'}}>Income</p>
             <p style={{marginTop: 0}}>$ {incomeData.totalAmount}</p>
-          </Link>
         </Grid>
     </Grid>   
     <NavBar />

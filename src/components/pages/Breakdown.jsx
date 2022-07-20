@@ -11,10 +11,13 @@ import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
 import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
+import { useLocation } from "react-router-dom";
 
 export default function Breakdown () {
-  const [month, setMonth] = useState(new Date());
-  const [tabFocus, setTabFocus] = useState("expenses")
+  let location = useLocation(); 
+
+  const [month, setMonth] = useState(location.state ? location.state.month : new Date());
+  const [tabFocus, setTabFocus] = useState(location.state ? location.state.tabFocus : "expenses")
 
   const { data, isLoading } = useTxns(getTxnQueryParams("breakdown", tabFocus, "month", month));
 
