@@ -9,7 +9,7 @@ import Switch from '@mui/material/Switch';
 import categories from "../../../utils/categories.js";
 
 
-export default function ListBudgets ({budgets , pinMode, setShowEditDialog, handlePinChange}) {
+export default function ListBudgets ({ budgets, pinMode, setShowEditDialog, handlePinChange}) {
 
   const dummyTotalExpense = 200;
 
@@ -24,7 +24,7 @@ export default function ListBudgets ({budgets , pinMode, setShowEditDialog, hand
           key={`budgetList${budget.id}`}
           >
             <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-              { pinMode && <Switch checked={budget.showInDashboard} onChange={() => { handlePinChange(budget.id, !budget.showInDashboard) }}/> }
+              { pinMode && <Switch checked={budget.showInDashboard} onChange={() => { handlePinChange(budget.id, !budget.showInDashboard) }} onClick={(e) => e.stopPropagation()}/> }
               <ListItemAvatar>
                 <CategoryAvatar categoryName={budget["category.name"]}/>
               </ListItemAvatar>
