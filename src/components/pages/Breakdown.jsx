@@ -39,10 +39,6 @@ export default function Breakdown () {
         justifyContent: 'space-between'
       }}>
         <PageHeader pageTitle={`Breakdown`} />
-        <Box>
-          <GenerateIcon name={'tune'} />
-          <GenerateIcon name={'sort'} />
-        </Box>
       </Box>
       <CatReportsNav setTabFocus={setTabFocus} tabValue={tabFocus}/>
       <TxnsNav month={month} setMonth={setMonth}/>
