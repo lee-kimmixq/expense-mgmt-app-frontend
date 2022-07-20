@@ -34,8 +34,7 @@ export default function Breakdown () {
   const handlePinChange = async (id, newState) => {
     const { data: putData } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/budgets/${id}`, { showInDashboard: newState })
     if (!putData.update) return setShowPinErrorAlert(true);
-    const [ budgetChanged ] = data.budgets.filter(budget => budget.id === id);
-    mutate({ budgets : [...data.budgets, {...budgetChanged, showInDashboard: newState }]});
+    mutate();
   }
 
   const handleEditBudget = async (reqBody, isAdd) => {
