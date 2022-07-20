@@ -15,45 +15,77 @@ export default function SignupForm () {
   const [retypePassword, setRetypePassword] = useState("");
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
   const [shouldFetch, setShouldFetch] = useState(false); 
+  const [showFormValidationError, setShowFormValidationError] = useState(false);
+  const [usernameInputError, setUsernameInputError] = useState(false);
+  const [contactInputError, setContactInputError] = useState(false);
+  const [emailInputError, setEmailInputError] = useState(false);
+  const [passwordInputError, setPasswordInputError] = useState(false);
+  const [retypePasswordInputError, setRetypePasswordInputError] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
 
   let navigate = useNavigate();
+
+  const validateEmail = (email) => {
+    return email.match(
+      //eslint-disable-next-line
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
 
   const onSuccess = (data) => {
     setShouldFetch(false);
     if (data.signup) navigate("/login", { replace: true, state: {signupSuccess: true} });
-  }
+  };
 
   const onError = (error) => {
     setShouldFetch(false);
-  }
+  };
 
   useSWR(isPasswordMatch && shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/signup`, { username, contact, email, password }] : null, fetcher.post, {onSuccess, onError});
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
-  }
+    setShowFormValidationError(false);
+    setUsernameInputError(false);
+  };
 
   const handleContactChange = (e) => {
     setContact(e.target.value);
-  }
+    setShowFormValidationError(false);
+    setContactInputError(false);
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-  }
+    setShowFormValidationError(false);
+    setEmailInputError(false);
+    setIsValidEmail(validateEmail(email));
+  };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setShowFormValidationError(false);
+    setPasswordInputError(false);
     setIsPasswordMatch(e.target.value === retypePassword);
-  }
+  };
 
   const handleRetypePasswordChange = (e) => {
     setRetypePassword(e.target.value);
+    setShowFormValidationError(false);
+    setRetypePasswordInputError(false);
     setIsPasswordMatch(password === e.target.value);
-  }
+  };
 
   const handleSignupFormSubmit = () => {
-    setShouldFetch(true);
-  }
+    (username && contact && email && password && retypePassword) ? setShouldFetch(true) : setShowFormValidationError(true);
+    (!username && setUsernameInputError(true));
+    (!contact && setContactInputError(true));
+    (!email && setEmailInputError(true));
+    (!password && setPasswordInputError(true));
+    (!retypePassword && setRetypePasswordInputError(true));
+    setIsPasswordMatch(true);
+  };
 
   return (
     <Box
@@ -64,12 +96,14 @@ export default function SignupForm () {
         rowGap: '10px',
       }}
       >
+        {(!isValidEmail && email !== "") && <FormAlert alertSeverity={'warning'} alertLabel={'Please use a valid email'} />}
+        {showFormValidationError && <FormAlert alertSeverity={'error'} alertLabel={'Please fill in all fields'} />}
         {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match'} />}
-        <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'username'} isRequired={true} handleChange={handleUsernameChange}/>
-        <InputField fieldName={'signupMobile'} fieldType={'tel'} fieldAttribute={'required'} fieldLabel={'contact number'} isRequired={true} handleChange={handleContactChange}/>
-        <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'email'} isRequired={true} handleChange={handleEmailChange}/>
-        <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'password'} isRequired={true} handleChange={handlePasswordChange}/>
-        <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'re-type password'} isRequired={true} handleChange={handleRetypePasswordChange}/>
+        <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'username'} isRequired={true} handleChange={handleUsernameChange} inputError={usernameInputError}/>
+        <InputField fieldName={'signupMobile'} fieldType={'tel'} fieldAttribute={'required'} fieldLabel={'contact number'} isRequired={true} handleChange={handleContactChange} inputError={contactInputError}/>
+        <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'email'} isRequired={true} handleChange={handleEmailChange} inputError={emailInputError}/>
+        <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
+        <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'re-type password'} isRequired={true} handleChange={handleRetypePasswordChange} inputError={retypePasswordInputError}/>
         <PrimaryBtn marginTop={'20px'} buttonLabel={'Create Account'} onClickCallback={handleSignupFormSubmit}/>
       </Box>
       
