@@ -23,52 +23,6 @@ export default function Dashboard () {
 
   if (isLoading) return <Loading />;
 
-  const dummyBudgets = 
-  [
-      {
-          "id": 1,
-          "userId": 1,
-          "categoryId": 1,
-          "categories": [{
-            "name": "Food & Drinks",
-            "color": "#5948D3",
-            "icon": "restaurant"
-          }],
-          "amount": "500.00",
-          "showInDashboard": true,
-          "createdAt": "2022-07-13T11:52:45.818Z",
-          "updatedAt": "2022-07-13T11:52:45.818Z"
-      },
-      {
-          "id": 2,
-          "userId": 1,
-          "categoryId": 4,
-          "categories": [{
-            "name": "Shopping",
-            "color": "#7e57c2",
-            "icon": "shopping_bag",
-          }],
-          "amount": "750.00",
-          "showInDashboard": true,
-          "createdAt": "2022-07-13T11:52:45.818Z",
-          "updatedAt": "2022-07-13T11:52:45.818Z"
-      },
-      {
-          "id": 3,
-          "userId": 1,
-          "categoryId": 2,
-            "categories": [{
-            "name": "Taxi",
-            "color": "#CF65F2",
-            "icon": "hail",
-          }],
-          "amount": "300.00",
-          "showInDashboard": false,
-          "createdAt": "2022-07-13T11:52:45.818Z",
-          "updatedAt": "2022-07-13T11:52:45.818Z"
-      }
-  ]
-
   return (
     <Box
     sx={{
@@ -102,7 +56,7 @@ export default function Dashboard () {
           justifyContent: 'space-between'
         }}
       >
-        <BudgetCards pinnedBudgets={dummyBudgets} /> 
+        <BudgetCards /> 
       </Box>
       <br />
       <br />
