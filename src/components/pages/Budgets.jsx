@@ -31,11 +31,8 @@ export default function Breakdown () {
     const [ budgetChanged ] = data.budgets.filter(budget => budget.id === id);
     const newBudgets = [...data.budgets, {...budgetChanged, showInDashboard: newState }];
     const { data: putData } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/budgets/${id}`, { showInDashboard: newState })
-    if (putData.update) {
-      mutate({ budgets : newBudgets});
-    } else {
-      setShowPinErrorAlert(true);
-    }
+    if (!putData.update) return setShowPinErrorAlert(true);
+    mutate({ budgets : newBudgets});
   }
 
 
