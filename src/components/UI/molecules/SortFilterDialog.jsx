@@ -17,7 +17,7 @@ import getDateObj from '../../../utils/getDateObj.mjs'
 export default function SortFilterDialog ({handleOpen, setHandleOpen, name, alertDescription, yesBtnLabel, noBtnLabel, filters, setFilters} ) {
   const {firstDate, lastDate} = getFirstLastDates();
 
-  const [sortValue, setSortValue] = useState(filters ? filters.sort : 'txnDate:DESC')
+  const [sortValue, setSortValue] = useState(filters && filters.sort ? filters.sort : 'txnDate:DESC')
   const [txnDateFilter, setTxnDateFilter] = useState({txnDateMin: filters ? filters.txnDateMin : firstDate, txnDateMax: filters ? filters.txnDateMax :lastDate})
   const [amountFilter, setAmountFilter] = useState({amountMin: filters ? filters.amountMin : '', amountMax: filters ? filters.amountMax : ''});
   const [categoryId, setCategoryId] = useState(filters ? filters.categories : []);
