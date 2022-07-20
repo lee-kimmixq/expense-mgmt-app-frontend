@@ -5,34 +5,28 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import TxnAmtField from "../atoms/TxnAmtField.jsx";
 import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
-import useSWR, {useSWRConfig} from "swr";
+import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 
 
-export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTitle, handleSubmit, handleDelete, budgetAmt, category }) {
+export default function ThreeBtnFormDialog ({ budget, setShowEditDialog, handleEditBudget, handleDelete }) {
 
-    const { mutate } = useSWRConfig();
+  const [amount, setAmount] = useState(budget.amount);
+  const [categoryId, setCategoryId] = useState(budget.categoryId);
+  const [shouldDelete, setShouldDelete] = useState(false);
 
-  const [amount, setAmount] = useState(budgetAmt);
-  const [categoryId, setCategoryId] = useState(category);
-  const [shouldPost, setShouldPost] = useState(false);
-
-  const onSuccess = (data) => {
+  const onDeleteSuccess = (data) => {
     if (data) {
-      mutate(`${process.env.REACT_APP_BACKEND_URL}/budgets`);
-      setOpen(false);
-      setShouldPost(false);
+      // mutate(`${process.env.REACT_APP_BACKEND_URL}/budgets`, true);
+      setShowEditDialog(false);
+      setShouldDelete(false);
     }
   }
 
-  useSWR(shouldPost ? [`${process.env.REACT_APP_BACKEND_URL}/budgets`, { amount, categoryId }] : null, fetcher.post, { onSuccess })
-
-  const handleSave = () => {
-    setShouldPost(true);
-  }
+  useSWR(shouldDelete ? `${process.env.REACT_APP_BACKEND_URL}/budgets/${budget.id}` : null, fetcher.delete, {onSuccess: onDeleteSuccess})
 
   const handleClose = () => {
-    setOpen(false);
+    setShowEditDialog(false);
   };
 
   const handleAmountChange = (e) => {
@@ -50,15 +44,12 @@ export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTit
         maxWidth={'sm'}
         PaperProps={{
           style: {
-            // backgroundColor: "#eeeeee",
             boxShadow: "none",
           },
         }}
-        open={Boolean(handleClickOpen)} 
+        open={Boolean(budget)} 
         onClose={handleClose}>
-        {/* <DialogTitle>{dialogTitle}</DialogTitle> */}
         <DialogContent>
-         
           <CategoryDropdown filterValues={'isIncome=false'} selectValue={categoryId} handleChange={handleCategoryIdChange}/>
           <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldValue={amount} isRequired={true} handleChange={handleAmountChange}/>
 
@@ -66,7 +57,7 @@ export default function ThreeBtnFormDialog ({handleClickOpen, setOpen, dialogTit
         <DialogActions>
           <Button variant="outlined" sx={{color: '#efefef', borderColor: '#999999'}} onClick={handleClose}>Cancel</Button>
           <Button variant="outlined" color="warning" onClick={handleDelete}>Delete</Button>
-          <Button variant="contained" sx={{color: ''}} onClick={handleSave}>Save</Button>
+          <Button variant="contained" sx={{color: ''}} onClick={() => {handleEditBudget({ amount, categoryId })}}>Save</Button>
         </DialogActions>
       </Dialog>
 

@@ -17,6 +17,8 @@ export default function Breakdown () {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [pinMode, setPinMode] = useState(false);
   const [showPinErrorAlert, setShowPinErrorAlert] = useState(false);
+  const [showAddSuccessAlert, setShowAddSuccessAlert] = useState(false);
+  const [showEditSuccessAlert, setShowEditSuccessAlert] = useState(false);
 
   const handleClickPin = () => {
     setPinMode(!pinMode);
@@ -39,6 +41,16 @@ export default function Breakdown () {
     if (postData.newBudget) {
       mutate()
       setShowAddDialog(false);
+      setShowAddSuccessAlert(true);
+    }
+  }
+
+  const handleEditBudget = async (reqBody) => {
+    const { data: postData } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/budgets`, reqBody);
+    if (postData.newBudget) {
+      mutate()
+      setShowEditDialog(false);
+      setShowEditSuccessAlert(true);
     }
   }
 
@@ -53,6 +65,8 @@ export default function Breakdown () {
       }}
     >
       {showPinErrorAlert && <AlertSnackbar alertSeverity={'error'} alertLabel={'Unable to pin category - You already have 3 pinned categories'} displayAlert={true}/>}
+      {showAddSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully added new budget'} displayAlert={true}/>}
+      {showEditSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully edited budget'} displayAlert={true}/>}
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
@@ -75,15 +89,13 @@ export default function Breakdown () {
           onClickCallback={()=>{setShowAddDialog(true)}} 
           />
       {showAddDialog && <FormDialog 
-        // handleDeleteConfirmation={handleTxnDelete} 
         handleClickOpen={showAddDialog} 
         setOpen={setShowAddDialog} handleAddBudget={handleAddBudget}/>} 
       
       <ListBudgets budgets={data.budgets} pinMode={pinMode} setShowEditDialog={setShowEditDialog} handlePinChange={handlePinChange}/>
       {showEditDialog && <ThreeBtnFormDialog 
         // handleDeleteConfirmation={handleTxnDelete} 
-        handleClickOpen={showEditDialog} 
-        setOpen={setShowEditDialog} setShowEditDialog={setShowEditDialog} budgetAmt={showEditDialog.amount} category={showEditDialog.categoryId} showEditDialog={showEditDialog}/>
+        budget={showEditDialog} setShowEditDialog={setShowEditDialog} handleEditBudget={handleEditBudget}/>
       } 
       <NavBar />
     </Box>
