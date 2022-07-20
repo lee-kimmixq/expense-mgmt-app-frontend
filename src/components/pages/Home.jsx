@@ -45,9 +45,9 @@ export default function Home ({successAlert, failAlert}) {
             }}
           >make cents.</h1>
 
-          { successAlert  ?
-            (<FormAlert alertSeverity={'success'} alertLabel={'Account confirmed'} />) : (<FormAlert alertSeverity={'warning'} alertLabel={'No user found'} />)
-          }
+          { successAlert && (<FormAlert alertSeverity={'success'} alertLabel={'Account confirmed'} />) }
+          { failAlert && (<FormAlert alertSeverity={'warning'} alertLabel={'User not found'} />) }
+          
           
           <PrimaryBtn buttonLabel={'Login'} onClickCallback={()=>{navigate('/login', {replace: true})}} />
           <PrimaryBtn buttonLabel={'Register'} buttonColorPalette="light" onClickCallback={()=>{navigate('/signup', {replace: true})}}/>

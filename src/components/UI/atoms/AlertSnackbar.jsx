@@ -6,7 +6,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function AlertSnackbar ({alertSeverity, alertLabel, displayAlert}) {
+export default function AlertSnackbar ({alertSeverity, alertLabel, displayAlert, customPositionFrmBtm}) {
  
   const [open, setOpen] = React.useState(displayAlert);
 
@@ -19,7 +19,7 @@ export default function AlertSnackbar ({alertSeverity, alertLabel, displayAlert}
 
   return (
     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-    sx={{ bottom: { xs: 90, sm: 0 } }}
+    sx={{position: 'fixed', bottom: `${customPositionFrmBtm}`}}
     > 
       <Alert onClose={handleClose} severity={alertSeverity} sx={{ width: '100%' }} >
         {alertLabel}
