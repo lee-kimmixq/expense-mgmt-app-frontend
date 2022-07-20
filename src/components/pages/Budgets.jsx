@@ -34,7 +34,6 @@ export default function Breakdown () {
     if (putData.update) {
       mutate({ budgets : newBudgets});
     } else {
-      console.log('fail');
       setShowPinErrorAlert(true);
     }
   }
