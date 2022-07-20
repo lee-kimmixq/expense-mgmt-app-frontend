@@ -7,7 +7,7 @@ import TxnAmtField from "../atoms/TxnAmtField.jsx";
 import CategoryDropdown from "../molecules/CategoryDropdown.jsx";
 
 
-export default function ThreeBtnFormDialog ({ budget, setShowEditDialog, handleEditBudget, handleDeleteBudget }) {
+export default function ThreeBtnFormDialog ({ budget, setShowEditDialog, handleEditBudget, setShowConfirmDeleteDialog }) {
 
   const [amount, setAmount] = useState(budget.amount);
   const [categoryId, setCategoryId] = useState(budget.categoryId);
@@ -15,6 +15,10 @@ export default function ThreeBtnFormDialog ({ budget, setShowEditDialog, handleE
   const handleClose = () => {
     setShowEditDialog(false);
   };
+
+  const handleDelete = () => {
+    setShowConfirmDeleteDialog(true);
+  }
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -43,7 +47,7 @@ export default function ThreeBtnFormDialog ({ budget, setShowEditDialog, handleE
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" sx={{color: '#efefef', borderColor: '#999999'}} onClick={handleClose}>Cancel</Button>
-          <Button variant="outlined" color="warning" onClick={() => {handleDeleteBudget(budget.id)}}>Delete</Button>
+          <Button variant="outlined" color="warning" onClick={handleDelete}>Delete</Button>
           <Button variant="contained" sx={{color: ''}} onClick={() => {handleEditBudget({ amount, categoryId })}}>Save</Button>
         </DialogActions>
       </Dialog>

@@ -10,11 +10,13 @@ import useBudgets from "../../utils/useBudgets.js";
 import Loading from "./Loading"
 import axios from "axios";
 import AlertSnackbar from "../UI/atoms/AlertSnackbar"
+import DeleteBudgetAlertDialog from "../UI/molecules/DeleteBudgetAlertDialog"
 
 export default function Breakdown () {
 
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
   const [pinMode, setPinMode] = useState(false);
   const [showPinErrorAlert, setShowPinErrorAlert] = useState(false);
   const [showAddSuccessAlert, setShowAddSuccessAlert] = useState(false);
@@ -51,12 +53,13 @@ export default function Breakdown () {
     }
   }
 
-  const handleDeleteBudget = async (id) => {
-    const { data: deleteData } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/budgets/${id}`);
+  const handleDeleteBudget = async () => {
+    const { data: deleteData } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/budgets/${showEditDialog.id}`);
     if (deleteData.deactivate) {
       mutate();
       setShowEditDialog(false);
       setShowDeleteSuccessAlert(true);
+      setShowConfirmDeleteDialog(false);
     } 
   }
 
@@ -74,6 +77,7 @@ export default function Breakdown () {
       {showAddSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully added new budget'} displayAlert={true}/>}
       {showEditSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully edited budget'} displayAlert={true}/>}
       {showDeleteSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully deleted budget'} displayAlert={true}/>}
+      {showConfirmDeleteDialog && <DeleteBudgetAlertDialog handleDeleteConfirmation={handleDeleteBudget} showDialog={showConfirmDeleteDialog} setShowDialog={setShowConfirmDeleteDialog} />} 
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
@@ -101,7 +105,7 @@ export default function Breakdown () {
       
       <ListBudgets budgets={data.budgets} pinMode={pinMode} setShowEditDialog={setShowEditDialog} handlePinChange={handlePinChange}/>
       {showEditDialog && <ThreeBtnFormDialog
-        budget={showEditDialog} setShowEditDialog={setShowEditDialog} handleEditBudget={handleEditBudget} handleDeleteBudget={handleDeleteBudget}/>
+        budget={showEditDialog} setShowEditDialog={setShowEditDialog} handleEditBudget={handleEditBudget} setShowConfirmDeleteDialog={setShowConfirmDeleteDialog}/>
       } 
       <NavBar />
     </Box>
