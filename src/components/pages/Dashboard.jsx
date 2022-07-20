@@ -76,7 +76,7 @@ export default function Dashboard () {
         marginTop: '10vmin'
       }}
     >
-      <PageHeader pageTitle={`Hello ${data.user}`} />
+      <PageHeader pageTitle={`Hello ${data.user}`} customCss={'animate__slideInLeft'} />
       <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={true} height={220}/>
       <TotalValuePrimary value={`$ ${data.totalAmount}`} />
       <ExpIncNav setTabFocus={setTabFocus} currentValue={tabFocus}/>
