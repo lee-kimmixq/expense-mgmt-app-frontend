@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Box from "@mui/material/Box"
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import GenerateIcon from "../atoms/GenerateIcon.jsx";
 import PrimaryBtn from "../atoms/PrimaryBtn.jsx";
 import Modal from '@mui/material/Modal';

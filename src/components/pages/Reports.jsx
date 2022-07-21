@@ -4,7 +4,7 @@ import Box from "@mui/material/Box"
 import NavBar from "../UI/organisms/NavBar.jsx";
 import TxnsNav from "../UI/molecules/TxnsNav.jsx";
 import ReportsNav from "../UI/molecules/ReportsNav.jsx";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import ChartPie from "../UI/atoms/ChartPie.jsx"
 import useTxns from "../../utils/useTxns.js";
 import getTxnQueryParams from "../../utils/getTxnQueryParams.js";

@@ -12,7 +12,7 @@ import Loading from "../pages/Loading.jsx"
 import GenerateIconBtn from "../UI/atoms/GenerateIconBtn.jsx";
 import SortFilterDialog from "../UI/molecules/SortFilterDialog.jsx";
 import { TextField } from "@mui/material";
-import { Search } from "@mui/icons-material";
+import Search from "@mui/icons-material/Search";
 import InputAdornment from '@mui/material/InputAdornment';
 
 

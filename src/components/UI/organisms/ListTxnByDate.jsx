@@ -7,7 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import CategoryAvatar from "../molecules/CategoryAvatar.jsx";
 import ListTxnText from "../atoms/ListTxnText.jsx";
 import TxnDate from "../atoms/TxnDate.jsx";
-import { Icon } from "@mui/material";
+import Icon from "@mui/material/Icon";
 
 export default function ListTxnsByDate ({txns}) {
   let previousDate = "";

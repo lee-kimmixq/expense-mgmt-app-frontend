@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Box from "@mui/material/Box";
 
 export default function ReportsNav ({tabName, tabValue, setTabFocus}) {
   const [value, setValue] = useState(tabValue);

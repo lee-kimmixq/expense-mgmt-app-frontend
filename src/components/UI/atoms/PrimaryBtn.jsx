@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import GenerateIcon from "./GenerateIcon";
 
 export default function PrimaryBtn ({buttonLabel, onClickCallback, marginTop, buttonColorPalette, icon, iconColor, btnType}) {

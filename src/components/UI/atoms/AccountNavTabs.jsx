@@ -1,5 +1,8 @@
 import React from "react";
-import { ListItem, ListItemAvatar, ListItemText, Box } from "@mui/material"
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
 import GenerateIcon from "./GenerateIcon"
 import GenerateIconBtn from "./GenerateIconBtn";
 
