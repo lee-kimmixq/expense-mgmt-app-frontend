@@ -6,6 +6,7 @@ import Box from "@mui/material/Box"
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 import FormAlert from "../atoms/FormAlert";
+import SignupSuccessDialog from "../organisms/SignupSuccessDialog";
 
 export default function SignupForm () {
   const [username, setUsername] = useState("");
@@ -22,6 +23,7 @@ export default function SignupForm () {
   const [passwordInputError, setPasswordInputError] = useState(false);
   const [retypePasswordInputError, setRetypePasswordInputError] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [signupSuccess, setSignupSuccess] = useState(false);
 
 
   let navigate = useNavigate();
@@ -35,7 +37,9 @@ export default function SignupForm () {
 
   const onSuccess = (data) => {
     setShouldFetch(false);
-    if (data.signup) navigate("/login", { replace: true, state: {signupSuccess: true} });
+    if (data.signup) 
+    setSignupSuccess(true);
+    navigate("/signup", { replace: true });
   };
 
   const onError = (error) => {
@@ -88,6 +92,10 @@ export default function SignupForm () {
     setIsPasswordMatch(true);
   };
 
+  const handleCloseSuccessDialog = () => {
+    navigate("/login", { replace: true, state: {signupSuccess: true} });
+  }
+
   return (
     <Box
       component="form"
@@ -97,6 +105,7 @@ export default function SignupForm () {
         rowGap: '10px',
       }}
       >
+        {signupSuccess && <SignupSuccessDialog setShowDialog={setSignupSuccess} showDialog={signupSuccess} handleConfirm={handleCloseSuccessDialog}/>}
         {(!isValidEmail && email !== "") && <FormAlert alertSeverity={'warning'} alertLabel={'Please use a valid email'} />}
         {showFormValidationError && <FormAlert alertSeverity={'error'} alertLabel={'Please fill in all fields'} />}
         {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match'} />}
