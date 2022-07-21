@@ -7,6 +7,8 @@ import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
 import { useAuth } from "../../../authentication/AuthContext.js"
+import FormControl from '@mui/material/FormControl';
+
 
 export default function LoginForm () {
   const [email, setEmail] = useState("");
@@ -42,7 +44,8 @@ export default function LoginForm () {
     setPassword(e.target.value);
   };
 
-  const handleLoginFormSubmit = () => {
+  const handleLoginFormSubmit = (e) => {
+    e.preventDefault();
     setShouldFetch(true);
   };
 
@@ -55,11 +58,12 @@ export default function LoginForm () {
         rowGap: '10px',
       }}
       >
-        {isError && <AlertSnackbar alertSeverity={'error'} alertLabel={'Wrong username or password'} displayAlert={true}/>}
-        {signupSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Account verification email sent'} displayAlert={true}/> }
-        <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange}/>
-        <InputField fieldName={'loginPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange}/>
-        <PrimaryBtn buttonLabel={'Login'} onClickCallback={handleLoginFormSubmit}/>
+          {isError && <AlertSnackbar alertSeverity={'error'} alertLabel={'Wrong username or password'} displayAlert={true}/>}
+          {signupSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Account verification email sent'} displayAlert={true}/> }
+          <InputField fieldName={'loginEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange}/>
+          <InputField fieldName={'loginPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange} />
+          <PrimaryBtn btnType={'submit'} buttonLabel={'Login'} onClickCallback={handleLoginFormSubmit}/>
+        
         <p
           style={{fontSize: '0.75em'}}
         >
