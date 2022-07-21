@@ -24,11 +24,8 @@ export default function Reports () {
   const { data: incomeData, isLoading: isIncLoading } = useTxns(getTxnQueryParams("reports", "income", "month", month));
 
   if (isRepLoading || isExpLoading || isIncLoading) return <Loading />;
-
-  // format reportData
+  
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  const isCurrentMonth = new Date().getMonth() === month.getMonth();
 
   let newData = [];
   if (tabFocus === "day") {
