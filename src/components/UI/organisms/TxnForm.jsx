@@ -25,7 +25,7 @@ export default function TxnForm ({ isEditForm, photo, setPhoto, amount, setAmoun
   }
 
   const handleCategoryIdChange = (_, val) => {
-    setCategoryId(val.id);
+    val && setCategoryId(val.id);
   }
 
   const handleFileUpload = (e) => {
@@ -35,7 +35,7 @@ export default function TxnForm ({ isEditForm, photo, setPhoto, amount, setAmoun
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setShouldPost(true);
-  }
+  }     
 
   return (
     <Box
