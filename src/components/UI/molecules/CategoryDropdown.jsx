@@ -35,6 +35,7 @@ export default function CategoryDropdown ({selectValue, handleChange, filterValu
       onChange={handleChange}
       size="small"
       isOptionEqualToValue={(option, value) => option.id === value.id}
+      autoHighlight={true}
     />
   );
 }
