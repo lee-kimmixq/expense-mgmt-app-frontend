@@ -57,7 +57,7 @@ export default function LoginForm () {
       }}
       >
           {isError && <AlertSnackbar alertSeverity={'error'} alertLabel={'Wrong username or password'} displayAlert={true}/>}
-          {signupSuccess && <AlertSnackbar alertSeverity={'success'} alertLabel={'Account verification email sent'} displayAlert={true}/> }
+          {signupSuccess && <AlertSnackbar alertSeverity={'info'} alertLabel={'Activate your account via email'} displayAlert={true}/> }
           <InputField fieldName={'loginEmail'} fieldType={'email'} autoComplete={'username'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange}/>
           <InputField fieldName={'loginPwd'} autoComplete={'new-password'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange} />
           <PrimaryBtn btnType={'submit'} buttonLabel={'Login'} onClickCallback={handleLoginFormSubmit}/>
