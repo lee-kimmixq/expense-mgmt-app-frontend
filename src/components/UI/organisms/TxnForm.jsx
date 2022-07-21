@@ -67,7 +67,7 @@ export default function TxnForm ({ isEditForm, photo, setPhoto, amount, setAmoun
       >
         {isEditForm ? <ViewReceiptBtn photo={photo} imageUrl={imageUrl} handleFileUpload={handleFileUpload}/> : <UploadReceiptBtn photo={photo} handleFileUpload={handleFileUpload} buttonText={'Upload Receipt'}/>}
         {showFormValidationError && <FormAlert alertSeverity={'error'} alertLabel={'Please fill in all fields'} />}
-        <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldLabel={amount ? amount : '0.00'} fieldValue={amount} isShrink={false} isRequired={true} handleChange={handleAmountChange} inputError={amountInputError}/>
+        <TxnAmtField fieldName={'txnAmt'} fieldType={'number'} fieldAttribute={'required'} fieldLabel={amount ? amount : '0.00'} fieldValue={!amount ? '' : amount} isShrink={false} isRequired={true} handleChange={handleAmountChange} inputError={amountInputError}/>
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange} inputError={txnDateInputError}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange} inputError={titleInputError}/>
         <CategoryDropdown selectValue={categoryId} handleChange={handleCategoryIdChange} inputError={categoryIdInputError}/>
