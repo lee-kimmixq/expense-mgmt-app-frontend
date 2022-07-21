@@ -102,9 +102,9 @@ export default function SignupForm () {
         {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match'} />}
         <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'Display Name'} isRequired={true} handleChange={handleUsernameChange} inputError={usernameInputError}/>
         <InputField fieldName={'signupMobile'} fieldType={'tel'} fieldAttribute={'required'} fieldLabel={'Contact Number'} isRequired={true} handleChange={handleContactChange} inputError={contactInputError}/>
-        <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange} inputError={emailInputError}/>
-        <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
-        <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Re-type Password'} isRequired={true} handleChange={handleRetypePasswordChange} inputError={retypePasswordInputError}/>
+        <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} autoComplete={'username'} isRequired={true} handleChange={handleEmailChange} inputError={emailInputError}/>
+        <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} autoComplete={'new-password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
+        <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Re-type Password'} autoComplete={'new-password'} isRequired={true} handleChange={handleRetypePasswordChange} inputError={retypePasswordInputError}/>
         <PrimaryBtn marginTop={'20px'} buttonLabel={'Create Account'} onClickCallback={handleSignupFormSubmit} btnType={'submit'}/>
 
         <p
