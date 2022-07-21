@@ -31,16 +31,23 @@ export default function Transactions () {
 
   const { data, isLoading } = useTxns(getTxnQueryParams("transactions", null, "month", month, filters));
 
-
-  
   if (isLoading) return <Loading />;
   
   let txnAddSuccess = false;
   let txnDeleteSuccess = false;
   let txnEditSuccess = false;
-  if (location.state && location.state.txnAddSuccess) txnAddSuccess = true;
-  if (location.state && location.state.txnDeleteSuccess) txnDeleteSuccess = true;
-  if (location.state && location.state.txnEditSuccess) txnEditSuccess = true;
+  if (location.state && location.state.txnAddSuccess) {
+    txnAddSuccess = true;
+    window.history.replaceState({}, document.title)
+  }
+  if (location.state && location.state.txnDeleteSuccess) {
+    txnDeleteSuccess = true;
+    window.history.replaceState({}, document.title)
+  }
+  if (location.state && location.state.txnEditSuccess) {
+    txnEditSuccess = true;
+    window.history.replaceState({}, document.title)
+  }
 
   const filteredTransactions = data.transactions.filter((txn) => {
     const pattern = new RegExp(searchText, "i")
