@@ -71,11 +71,11 @@ export default function Breakdown () {
         marginTop: '10vmin'
       }}
     >
-      {showPinErrorAlert && <AlertSnackbar alertSeverity={'error'} alertLabel={'Unable to pin category - You already have 3 pinned categories'} displayAlert={true}/>}
-      {showAddSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully added new budget'} displayAlert={true}/>}
-      {showEditSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully edited budget'} displayAlert={true}/>}
-      {showDeleteSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully deleted budget'} displayAlert={true}/>}
-      {showConfirmDeleteDialog && <DeleteBudgetAlertDialog handleDeleteConfirmation={handleDeleteBudget} showDialog={showConfirmDeleteDialog} setShowDialog={setShowConfirmDeleteDialog} />} 
+      {showPinErrorAlert && <AlertSnackbar alertSeverity={'error'} alertLabel={'Unable to pin category - You already have 3 pinned categories'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+      {showAddSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully added new budget'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+      {showEditSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully edited budget'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+      {showDeleteSuccessAlert && <AlertSnackbar alertSeverity={'success'} alertLabel={'Successfully deleted budget'} displayAlert={true} customPositionFrmBtm={'60px'}/>}
+      {showConfirmDeleteDialog && <DeleteBudgetAlertDialog handleDeleteConfirmation={handleDeleteBudget} showDialog={showConfirmDeleteDialog} setShowDialog={setShowConfirmDeleteDialog} customPositionFrmBtm={'60px'} />} 
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
