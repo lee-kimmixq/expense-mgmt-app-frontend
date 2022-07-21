@@ -56,8 +56,8 @@ export default function SortFilterDialog ({handleOpen, setHandleOpen, name, aler
     setAmountFilter({...amountFilter, amountMax: e.target.value})
   }
 
-  const handleCategoryIdChange = (_, val) => {
-    setCategoryId([...categoryId, val[val.length - 1]]);
+  const handleCategoryIdChange = (_, val, reason) => {
+    setCategoryId(val);
   }
 
   return (
