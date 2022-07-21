@@ -77,7 +77,8 @@ export default function SignupForm () {
     setIsPasswordMatch(password === e.target.value);
   };
 
-  const handleSignupFormSubmit = () => {
+  const handleSignupFormSubmit = (e) => {
+    e.preventDefault();
     (username && contact && email && password && retypePassword) ? setShouldFetch(true) : setShowFormValidationError(true);
     (!username && setUsernameInputError(true));
     (!contact && setContactInputError(true));
@@ -104,7 +105,7 @@ export default function SignupForm () {
         <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange} inputError={emailInputError}/>
         <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
         <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Re-type Password'} isRequired={true} handleChange={handleRetypePasswordChange} inputError={retypePasswordInputError}/>
-        <PrimaryBtn marginTop={'20px'} buttonLabel={'Create Account'} onClickCallback={handleSignupFormSubmit}/>
+        <PrimaryBtn marginTop={'20px'} buttonLabel={'Create Account'} onClickCallback={handleSignupFormSubmit} btnType={'submit'}/>
 
         <p
           style={{fontSize: '0.75em'}}
