@@ -9,7 +9,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import "typeface-poppins";
 import "animate.css";
 import theme from "./utils/theme.js"
-
 dotenv.config();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
