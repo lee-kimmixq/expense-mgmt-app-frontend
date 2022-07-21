@@ -7,8 +7,6 @@ import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 import AlertSnackbar from "../atoms/AlertSnackbar.jsx";
 import { useAuth } from "../../../authentication/AuthContext.js"
-import FormControl from '@mui/material/FormControl';
-
 
 export default function LoginForm () {
   const [email, setEmail] = useState("");
