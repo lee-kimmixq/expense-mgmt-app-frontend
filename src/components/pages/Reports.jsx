@@ -28,14 +28,39 @@ export default function Reports () {
   // format reportData
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  let newData = {};
+  const isCurrentMonth = new Date().getMonth() === month.getMonth();
+
+  let newData = [];
   if (tabFocus === "day") {
-    newData = reportData.map((day) => {return {...day, date: new Date(day.date).getDate()}});
+    const tempObj = {}
+    const maxDate = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate() ;
+    for(let i = 1; i <= maxDate; i += 1) {
+      tempObj[i] = {date: i, sum: '0.00'}
+    }
+    reportData.forEach((day) => { tempObj[new Date(day.date).getDate()] = {...day, date: new Date(day.date).getDate()}})
+    newData = Object.values(tempObj);
   } else if (tabFocus === "week") {
-    newData = reportData.map((day) => {return {...day, date: `${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`}});
+    const tempObj = {};
+    for (let i = 0; i <= new Date(month.getFullYear(), month.getMonth(), 0).getDate(); i += 1) {
+      const date = new Date(month.getFullYear(), month.getMonth(), i);
+      if (date.getDay() === 1) {tempObj[`${new Date(date).getDate().toString()}/${Number(new Date(date).getMonth()) + 1}`] = {date: `${new Date(date).getDate().toString()}/${Number(new Date(date).getMonth()) + 1}`, sum: '0.00'}};
+    }
+    reportData.forEach((day) => {tempObj[`${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`] = {...day, date: `${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`}});
+    newData = Object.values(tempObj);
+    newData.sort((a, b) => {
+      if (a.date.split('/')[1] < b.date.split('/')[1]) return -1;
+      return a.date.split('/')[0] - b.date.split('/')[0];
+    })
   } else if (tabFocus === "month") {
-    newData = reportData.map((day) => {return {...day, date: `${monthNames[new Date(day.date).getMonth()]}`}});
+    const tempObj = {}
+    monthNames.forEach((mth) => {
+      tempObj[mth] = {date: mth, sum: '0.00'}
+    })
+    reportData.forEach((day) => { tempObj[`${monthNames[new Date(day.date).getMonth()]}`] = {...day, date: `${monthNames[new Date(day.date).getMonth()]}`}});
+    newData = Object.values(tempObj);
   }
+
+  // console.log(newData);
 
   const handleBarClick = (data) => {
     let txnDateMin, txnDateMax;
@@ -82,7 +107,7 @@ export default function Reports () {
       }}>
       <ResponsiveContainer width='100%' height='100%' >
         <BarChart width="100%" height="100%" data={newData}>
-          <XAxis dataKey="date" tickSize={'0'} tickMargin={'5'} tick={{fontSize: '0.7em'}}/>
+          <XAxis dataKey="date" tickSize={'0'} interval={0} tickMargin={'5'} tick={{fontSize: '0.45em'}}/>
           <YAxis type="number" domain={[0, maxSum]} hide/>
           <Bar dataKey="sum" fill="#8f49f8" onClick={handleBarClick} />
         </BarChart>
