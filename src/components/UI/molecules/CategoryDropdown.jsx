@@ -8,7 +8,7 @@ export default function CategoryDropdown ({selectValue, handleChange, filterValu
   const [categories, setCategories] = useState([]);
   const [shouldFetch, setShouldFetch] = useState(true); 
 
-  const {data, error} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/categories?${filterValues ? filterValues : ''}`] : null, fetcher.get);
+  const {data} = useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/categories?${filterValues ? filterValues : ''}`] : null, fetcher.get);
 
   if (data) {
       setShouldFetch(false);
