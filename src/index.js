@@ -4,49 +4,13 @@ import dotenv from "dotenv";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import "typeface-poppins";
 import "animate.css";
+import theme from "./utils/theme.js"
 
 dotenv.config();
-
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#5948D3",
-      contrastText: "#EFEFEF",
-    },
-    secondary: {
-      main: "#CF65F2",
-    },
-    background: {
-      default: "#262431",
-    },
-    text: {
-      primary: "#EFEFEF",
-      disabled: "#B4B4B4",
-      secondary: "#B4B4B4",
-      hint: "#EFEFEF",
-    },
-    info: {
-      main: "#CF65F2",
-    },
-    light: {
-      main: "#efefef",
-      contrastText: "rgba(1, 0, 6, 0.8)"
-    }
-  },
-  typography: {
-    fontFamily: "Poppins",
-    fontSize: 15,
-    button: {
-      textTransform: "none",
-      fontSize: 15,
-    },
-  },
-});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 document.getElementById("root").style.height = "100%";
