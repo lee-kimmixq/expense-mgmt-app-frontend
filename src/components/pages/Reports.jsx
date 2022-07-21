@@ -10,7 +10,7 @@ import useTxns from "../../utils/useTxns.js";
 import getTxnQueryParams from "../../utils/getTxnQueryParams.js";
 import Loading from "../pages/Loading.jsx"
 import useReports from "../../utils/useReports.js";
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar} from 'recharts';
+import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Cell } from 'recharts';
 import { useNavigate } from "react-router-dom";
 
 export default function Reports () {
@@ -38,14 +38,30 @@ export default function Reports () {
       tempObj[i] = {date: i, sum: '0.00'}
     }
     reportData.forEach((day) => { tempObj[new Date(day.date).getDate()] = {...day, date: new Date(day.date).getDate()}})
+    if (month.getMonth() === new Date().getMonth()) {
+      tempObj[new Date().getDate()] = {...tempObj[new Date().getDate()], active: true};
+    }
     newData = Object.values(tempObj);
   } else if (tabFocus === "week") {
     const tempObj = {};
+    let lastAdded = "";
     for (let i = 0; i <= new Date(month.getFullYear(), month.getMonth(), 0).getDate(); i += 1) {
       const date = new Date(month.getFullYear(), month.getMonth(), i);
-      if (date.getDay() === 1) {tempObj[`${new Date(date).getDate().toString()}/${Number(new Date(date).getMonth()) + 1}`] = {date: `${new Date(date).getDate().toString()}/${Number(new Date(date).getMonth()) + 1}`, sum: '0.00'}};
+      if (date.getDay() === 1) {
+        tempObj[`${new Date(date).getDate().toString()}/${Number(new Date(date).getMonth()) + 1}`] = {date: `${new Date(date).getDate().toString()}/${Number(new Date(date).getMonth()) + 1}`, sum: '0.00'};
+        lastAdded = `${new Date(date).getDate().toString()}/${Number(new Date(date).getMonth()) + 1}`
+      };
+      if (month.getMonth() === new Date().getMonth() && new Date().getDate() === date.getDate()) {
+        tempObj[lastAdded].active = true;
+      }
     }
-    reportData.forEach((day) => {tempObj[`${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`] = {...day, date: `${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`}});
+    reportData.forEach((day) => {
+      if (tempObj[`${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`]) {
+        tempObj[`${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`].sum = day.sum;
+      } else {
+        tempObj[`${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`] = {...day, date: `${new Date(day.date).getDate().toString()}/${Number(new Date(day.date).getMonth()) + 1}`}
+      }
+    });
     newData = Object.values(tempObj);
     newData.sort((a, b) => {
       if (a.date.split('/')[1] < b.date.split('/')[1]) return -1;
@@ -57,10 +73,9 @@ export default function Reports () {
       tempObj[mth] = {date: mth, sum: '0.00'}
     })
     reportData.forEach((day) => { tempObj[`${monthNames[new Date(day.date).getMonth()]}`] = {...day, date: `${monthNames[new Date(day.date).getMonth()]}`}});
+    tempObj[monthNames[month.getMonth()]] = {...tempObj[monthNames[month.getMonth()]], active: true};
     newData = Object.values(tempObj);
   }
-
-  // console.log(newData);
 
   const handleBarClick = (data) => {
     let txnDateMin, txnDateMax;
@@ -109,7 +124,11 @@ export default function Reports () {
         <BarChart width="100%" height="100%" data={newData}>
           <XAxis dataKey="date" tickSize={'0'} interval={0} tickMargin={'5'} tick={{fontSize: '0.45em'}}/>
           <YAxis type="number" domain={[0, maxSum]} hide/>
-          <Bar dataKey="sum" fill="#8f49f8" onClick={handleBarClick} />
+          <Bar dataKey="sum" fill="#8f49f8" onClick={handleBarClick}>
+            {newData.map((entry, index) => (
+                <Cell cursor="pointer" fill={entry.active ? "#cf65f2" : "#8f49f8"} key={`cell-${index}`} />
+              ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </Box>
