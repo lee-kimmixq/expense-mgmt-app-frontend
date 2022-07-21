@@ -1,7 +1,8 @@
-import { List, ListItem } from "@mui/material";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Box from "@mui/material/Box";
 import React from "react";
 import ListTxnText from "../atoms/ListTxnText";
-import { Box } from "@mui/system";
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import CategoryAvatar from "../molecules/CategoryAvatar.jsx";
 import LinearProgressBar from "../atoms/LinearProgressBar";

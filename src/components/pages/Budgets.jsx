@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box"
+import Box from "@mui/material/Box";
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
-import NavBar from "../UI/organisms/NavBar.jsx"
+import NavBar from "../UI/organisms/NavBar.jsx";
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import FormDialog from "../UI/organisms/FormDialog.jsx";
 import ThreeBtnFormDialog from "../UI/organisms/ThreeBtnFormDialog.jsx";
 import ListBudgets from "../UI/molecules/ListBudgets.jsx";
 import useBudgets from "../../utils/useBudgets.js";
-import Loading from "./Loading"
+import Loading from "./Loading";
 import axios from "axios";
-import AlertSnackbar from "../UI/atoms/AlertSnackbar"
-import DeleteBudgetAlertDialog from "../UI/molecules/DeleteBudgetAlertDialog"
+import AlertSnackbar from "../UI/atoms/AlertSnackbar";
+import DeleteBudgetAlertDialog from "../UI/molecules/DeleteBudgetAlertDialog";
 
 export default function Breakdown () {
 

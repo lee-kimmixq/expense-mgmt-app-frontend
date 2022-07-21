@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import GenerateIcon from "./GenerateIcon";
 import Box from "@mui/material/Box";
 

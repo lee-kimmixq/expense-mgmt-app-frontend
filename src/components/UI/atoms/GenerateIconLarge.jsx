@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from "@mui/material";
+import Icon from "@mui/material/Icon";
 import Box from "@mui/material/Box"
 
 

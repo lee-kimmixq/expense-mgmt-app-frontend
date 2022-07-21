@@ -1,9 +1,9 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box"
-import { List } from "@mui/material";
+import List from "@mui/material/List";
 import useBudgets from "../../../utils/useBudgets.js";
 import Loading from "../../pages/Loading"
 import categories from "../../../utils/categories.js";

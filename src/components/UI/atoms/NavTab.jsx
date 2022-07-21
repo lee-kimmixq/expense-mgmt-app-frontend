@@ -1,5 +1,5 @@
 import React from "react";
-import { Tab } from "@mui/material";
+import Tab from "@mui/material/Tab";
 
 export default function NavTab ({tabName, tabValue}) {
 
