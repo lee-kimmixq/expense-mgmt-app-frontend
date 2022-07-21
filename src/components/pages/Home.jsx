@@ -3,7 +3,7 @@ import Box from "@mui/material/Box"
 import PrimaryBtn from "../UI/atoms/PrimaryBtn.jsx";
 import Image from "../../assets/giphy.webp";
 import { useNavigate } from "react-router-dom";
-import FormAlert from "../UI/atoms/FormAlert.jsx";
+import AlertSnackbar from "../UI/atoms/AlertSnackbar.jsx";
 
 export default function Home ({successAlert, failAlert}) {
 
@@ -46,8 +46,8 @@ export default function Home ({successAlert, failAlert}) {
             className="animate__animated animate__bounceInDown"
           >make cents.</h1>
 
-          { successAlert && (<FormAlert alertSeverity={'success'} alertLabel={'Account confirmed'} />) }
-          { failAlert && (<FormAlert alertSeverity={'warning'} alertLabel={'User not found'} />) }
+          { successAlert && (<AlertSnackbar alertSeverity={'success'} alertLabel={'Account confirmed'} displayAlert={true} />) }
+          { failAlert && (<AlertSnackbar alertSeverity={'warning'} alertLabel={'User not found'} displayAlert={true} />) }
           
           
           <PrimaryBtn buttonLabel={'Login'} onClickCallback={()=>{navigate('/login', {replace: true})}} />

@@ -41,7 +41,7 @@ export default function NewTxnForm () {
           marginTop: '-10%'
         }}
       >
-      <GenerateIconLarge name={'paid'}/>
+      <GenerateIconLarge name={'paid'} color={'#e0e0e0'} />
       <TxnForm isEditForm={false} photo={photo} setPhoto={setPhoto} amount={amount} setAmount={setAmount} txnDate={txnDate} setTxnDate={setTxnDate} title={title} setTitle={setTitle} categoryId={categoryId} setCategoryId={setCategoryId} setShouldPost={setShouldPost}/>
       <NavBar />
     </Box>

@@ -6,6 +6,7 @@ import Box from "@mui/material/Box"
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher.mjs";
 import FormAlert from "../atoms/FormAlert";
+import SignupSuccessDialog from "../organisms/SignupSuccessDialog";
 
 export default function SignupForm () {
   const [username, setUsername] = useState("");
@@ -22,6 +23,7 @@ export default function SignupForm () {
   const [passwordInputError, setPasswordInputError] = useState(false);
   const [retypePasswordInputError, setRetypePasswordInputError] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [signupSuccess, setSignupSuccess] = useState(false);
 
 
   let navigate = useNavigate();
@@ -35,7 +37,9 @@ export default function SignupForm () {
 
   const onSuccess = (data) => {
     setShouldFetch(false);
-    if (data.signup) navigate("/login", { replace: true, state: {signupSuccess: true} });
+    if (data.signup) 
+    setSignupSuccess(true);
+    navigate("/signup", { replace: true });
   };
 
   const onError = (error) => {
@@ -88,6 +92,10 @@ export default function SignupForm () {
     setIsPasswordMatch(true);
   };
 
+  const handleCloseSuccessDialog = () => {
+    navigate("/login", { replace: true, state: {signupSuccess: true} });
+  }
+
   return (
     <Box
       component="form"
@@ -97,14 +105,15 @@ export default function SignupForm () {
         rowGap: '10px',
       }}
       >
+        {signupSuccess && <SignupSuccessDialog setShowDialog={setSignupSuccess} showDialog={signupSuccess} handleConfirm={handleCloseSuccessDialog}/>}
         {(!isValidEmail && email !== "") && <FormAlert alertSeverity={'warning'} alertLabel={'Please use a valid email'} />}
         {showFormValidationError && <FormAlert alertSeverity={'error'} alertLabel={'Please fill in all fields'} />}
         {!isPasswordMatch && <FormAlert alertSeverity={'warning'} alertLabel={'Passwords do not match'} />}
         <InputField fieldName={'signupUsername'} fieldType={'text'} fieldAttribute={'required'} fieldLabel={'Display Name'} isRequired={true} handleChange={handleUsernameChange} inputError={usernameInputError}/>
         <InputField fieldName={'signupMobile'} fieldType={'tel'} fieldAttribute={'required'} fieldLabel={'Contact Number'} isRequired={true} handleChange={handleContactChange} inputError={contactInputError}/>
-        <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} isRequired={true} handleChange={handleEmailChange} inputError={emailInputError}/>
-        <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
-        <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Re-type Password'} isRequired={true} handleChange={handleRetypePasswordChange} inputError={retypePasswordInputError}/>
+        <InputField fieldName={'signupEmail'} fieldType={'email'} fieldAttribute={'required'} fieldLabel={'Email'} autoComplete={'username'} isRequired={true} handleChange={handleEmailChange} inputError={emailInputError}/>
+        <InputField fieldName={'signupPwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Password'} autoComplete={'new-password'} isRequired={true} handleChange={handlePasswordChange} inputError={passwordInputError}/>
+        <InputField fieldName={'signupRetypePwd'} fieldType={'password'} fieldAttribute={'required'} fieldLabel={'Re-type Password'} autoComplete={'new-password'} isRequired={true} handleChange={handleRetypePasswordChange} inputError={retypePasswordInputError}/>
         <PrimaryBtn marginTop={'20px'} buttonLabel={'Create Account'} onClickCallback={handleSignupFormSubmit} btnType={'submit'}/>
 
         <p

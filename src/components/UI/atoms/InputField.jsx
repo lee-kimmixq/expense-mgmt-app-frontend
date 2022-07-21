@@ -1,11 +1,12 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 
-export default function InputField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange, fieldValue, inputError}) {
+export default function InputField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange, fieldValue, inputError, autoComplete}) {
 
   return (
       <TextField 
         error={inputError}
+        autoComplete={autoComplete}
         InputLabelProps={{ 
           required: false,
         }}

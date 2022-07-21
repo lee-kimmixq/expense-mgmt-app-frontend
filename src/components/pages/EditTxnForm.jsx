@@ -83,7 +83,7 @@ export default function NewTxnForm () {
           marginTop: '-10%'
         }}
       >
-      <GenerateIconLarge name={'paid'}/>
+      <GenerateIconLarge name={'paid'} color={'#e0e0e0'} />
       <TxnForm isEditForm={true} photo={photo} setPhoto={setPhoto} amount={amount} setAmount={setAmount} txnDate={txnDate} setTxnDate={setTxnDate} title={title} setTitle={setTitle} categoryId={categoryId} setCategoryId={setCategoryId} imageUrl={imageUrl} setShouldPost={setShouldPost}/>
       <NavBar />
       {txnId !== "add" && <PrimaryBtn buttonLabel={'Delete'} buttonColorPalette={'error'} onClickCallback={()=>{setShowDialog(true)}} />}
