@@ -1,10 +1,11 @@
 import React from "react";
 import { TextField } from "@mui/material";
 
-export default function TxnAmtField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange, fieldValue, isShrink}) {
+export default function TxnAmtField ({fieldName, fieldType, isRequired, fieldLabel, fieldHelperText, handleChange, fieldValue, isShrink, inputError}) {
 
   return (
       <TextField 
+        error={inputError}
         InputLabelProps={{ 
           required: false,
           style: {
