@@ -25,16 +25,17 @@ export default function TxnForm ({ isEditForm, photo, setPhoto, amount, setAmoun
   }
 
   const handleCategoryIdChange = (_, val) => {
-    setCategoryId(val.id);
+    val && setCategoryId(val.id);
   }
 
   const handleFileUpload = (e) => {
     setPhoto(e.target.files[0]);
   }
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     setShouldPost(true);
-  }
+  }     
 
   return (
     <Box
@@ -50,7 +51,7 @@ export default function TxnForm ({ isEditForm, photo, setPhoto, amount, setAmoun
         <InputField fieldName={'txnDate'} fieldType={'date'} fieldAttribute={'required'} fieldValue={(new Date(txnDate - tzOffset)).toISOString().split('T')[0]} isRequired={true} handleChange={handleTxnDateChange}/>
         <InputField fieldName={'txnName'} fieldType={'text'} fieldAttribute={'required'} fieldValue={title} fieldLabel={'Expense Name'} isRequired={true} handleChange={handleTitleChange}/>
         <CategoryDropdown selectValue={categoryId} handleChange={handleCategoryIdChange}/>
-        <PrimaryBtn buttonLabel={'Save'} onClickCallback={handleFormSubmit}/>
+        <PrimaryBtn btnType={'submit'} buttonLabel={'Save'} onClickCallback={handleFormSubmit}/>
       </Box>
       
   );
