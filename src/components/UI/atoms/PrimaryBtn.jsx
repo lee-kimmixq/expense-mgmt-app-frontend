@@ -2,7 +2,8 @@ import React from "react";
 import { Button } from "@mui/material";
 import GenerateIcon from "./GenerateIcon";
 
-export default function PrimaryBtn ({buttonLabel, onClickCallback, marginTop, buttonColorPalette, icon, iconColor}) {
+export default function PrimaryBtn ({buttonLabel, onClickCallback, marginTop, buttonColorPalette, icon, iconColor, btnType}) {
+
   return (
       <Button 
         sx={{
@@ -14,6 +15,7 @@ export default function PrimaryBtn ({buttonLabel, onClickCallback, marginTop, bu
         variant="contained"
         startIcon={icon ? <GenerateIcon name={icon} color={iconColor} /> : ''}
         onClick={onClickCallback}
+        type={btnType}
       >
         {buttonLabel ? buttonLabel : ''}
       </Button>
