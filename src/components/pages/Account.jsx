@@ -1,35 +1,29 @@
-import React, {useState} from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import PageHeader from "../UI/atoms/PageHeader.jsx"; 
 import Box from "@mui/material/Box"
 import NavBar from "../UI/organisms/NavBar.jsx";
-import useSWR from "swr";
-import fetcher from "../../utils/fetcher.mjs";
 import { useAuth } from "../../authentication/AuthContext.js"
 import Divider from "@mui/material/Divider";
 import AccountProfileHeader from "../UI/atoms/AccountProfileHeader.jsx";
 import AccountNavTabs from "../UI/atoms/AccountNavTabs.jsx";
+import useUsers from "../../utils/useUsers.js";
+import Loading from "./Loading";
+import axios from "axios";
 
 
 export default function Account () {
-  const [shouldFetch, setShouldFetch] = useState(false);
-
   let navigate = useNavigate();
   const { logout } = useAuth();
 
-  const onSuccess = (data) => {
-    setShouldFetch(false);
+  const { data: userData, isLoading } = useUsers();
+
+  if (isLoading) return <Loading />;
+
+  const handleLogOutSubmit = async () => {
+    const { data } = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/users/logout`);
     if (data.logout) logout().then(() => {navigate("/", { replace: true }) });
-  }
 
-  const onError = (error) => {
-    setShouldFetch(false);
-  }
-
-  useSWR(shouldFetch ? [`${process.env.REACT_APP_BACKEND_URL}/users/logout`] : null, fetcher.delete, {onSuccess, onError});
-
-  const handleLogOutSubmit = () => {
-    setShouldFetch(true);
   }
 
   return (
@@ -50,7 +44,7 @@ export default function Account () {
           <PageHeader pageTitle={`Account`} />
       </Box>
       <Divider />
-      <AccountProfileHeader handleLogOutSubmit={handleLogOutSubmit} username={'John Tan'} />
+      <AccountProfileHeader handleLogOutSubmit={handleLogOutSubmit} username={userData.username} />
       <Divider /> 
       <AccountNavTabs navName={'Profile'} navIcon={'person'} />
       <AccountNavTabs navName={'Settings'} navIcon={'settings'} />
