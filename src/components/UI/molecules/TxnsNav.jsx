@@ -23,13 +23,15 @@ export default function TxnsNav ({ month, setMonth, filters, setFilters, page })
     }
   }
 
+  const isValidDate = (month.getFullYear() < new Date().getFullYear() || (month.getFullYear() === new Date().getFullYear() && month.getMonth() < new Date().getMonth()))
+
   return (
     <Box
       sx={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}
     >
         <Box onClick={selectPreviousMonth}><GenerateIcon name={'arrow_back_ios_new'} /></Box>
         <MonthPicker month={month} setMonth={setMonth} />
-        <Box onClick={selectNextMonth}><GenerateIcon name={'arrow_forward_ios'} /></Box>
+        <Box onClick={isValidDate ? selectNextMonth : null}><GenerateIcon name={isValidDate ? 'arrow_forward_ios' : ''} /></Box>
     </Box>
       
   );
