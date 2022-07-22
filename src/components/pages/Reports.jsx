@@ -71,7 +71,15 @@ export default function Reports () {
     })
     reportData.forEach((day) => { tempObj[`${monthNames[new Date(day.date).getMonth()]}`] = {...day, date: `${monthNames[new Date(day.date).getMonth()]}`}});
     tempObj[monthNames[month.getMonth()]] = {...tempObj[monthNames[month.getMonth()]], active: true};
-    newData = Object.values(tempObj);
+    const tempArr = Object.values(tempObj);
+    let currIdx;
+    tempArr.forEach((mth, idx) => {
+      if (month.getFullYear() === new Date().getFullYear() && monthNames[new Date().getMonth()] === mth.date) currIdx = idx;
+    })
+    newData = [...tempArr.slice(currIdx+1), ...tempArr.slice(0, currIdx+1)]; 
+    if (month.getFullYear() > new Date().getFullYear() || (month.getFullYear() === new Date().getFullYear() && month.getMonth() > new Date().getMonth())) {
+      newData = [];
+    }
   }
 
   const handleBarClick = (data) => {
@@ -109,7 +117,7 @@ export default function Reports () {
       }}
     >
     <PageHeader pageTitle={`Reports`} />
-    <TxnsNav month={month} setMonth={setMonth}/>
+    <TxnsNav month={month} setMonth={setMonth} page={'reports'}/>
     <ReportsNav setTabFocus={setTabFocus} tabValue={tabFocus}/>
 
     <Box sx={{

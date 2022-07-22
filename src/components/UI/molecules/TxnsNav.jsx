@@ -4,20 +4,26 @@ import GenerateIcon from "../atoms/GenerateIcon";
 import MonthPicker from "../atoms/MonthPicker";
 import getFirstLastDates from "../../../utils/getFirstLastDates.mjs";
 
-export default function TxnsNav ({ month, setMonth, filters, setFilters }) {
+export default function TxnsNav ({ month, setMonth, filters, setFilters, page }) {
   const selectPreviousMonth = () => {
     const newDate = new Date(month.setMonth(month.getMonth()-1))
     setMonth(newDate);
-    const { firstDate, lastDate } = getFirstLastDates("month", newDate)
-    setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    if (page === 'txns') {
+      const { firstDate, lastDate } = getFirstLastDates("month", newDate)
+      setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    }
   }
 
   const selectNextMonth = () => {
     const newDate = new Date(month.setMonth(month.getMonth()+1))
     setMonth(newDate);
-    const { firstDate, lastDate } = getFirstLastDates("month", newDate)
-    setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    if (page === 'txns') {
+      const { firstDate, lastDate } = getFirstLastDates("month", newDate)
+      setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    }
   }
+
+  const isValidDate = (month.getFullYear() < new Date().getFullYear() || (month.getFullYear() === new Date().getFullYear() && month.getMonth() < new Date().getMonth()))
 
   return (
     <Box
@@ -25,7 +31,7 @@ export default function TxnsNav ({ month, setMonth, filters, setFilters }) {
     >
         <Box onClick={selectPreviousMonth}><GenerateIcon name={'arrow_back_ios_new'} /></Box>
         <MonthPicker month={month} setMonth={setMonth} />
-        <Box onClick={selectNextMonth}><GenerateIcon name={'arrow_forward_ios'} /></Box>
+        <Box onClick={isValidDate ? selectNextMonth : null}><GenerateIcon name={isValidDate ? 'arrow_forward_ios' : ''} /></Box>
     </Box>
       
   );

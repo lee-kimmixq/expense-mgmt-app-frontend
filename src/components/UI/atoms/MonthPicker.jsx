@@ -16,7 +16,7 @@ export default function MonthPicker ({ month, setMonth }) {
           }}
           disableOpenPicker={true}
           minDate={new Date('2012-03-01')}
-          maxDate={new Date('2023-06-01')}
+          maxDate={new Date()}
           
           value={month}
           onChange={(newValue) => {

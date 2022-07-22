@@ -23,7 +23,7 @@ export default function Transactions () {
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [filters, setFilters] = useState(location.state ? location.state.linkedFilters : null);
+  const [filters, setFilters] = useState(location.state ? location.state.linkedFilters : { categories: []});
 
   const handleClickSearch = () => {
     setSearchMode(!searchMode);
@@ -86,7 +86,7 @@ export default function Transactions () {
             </Box>
           </Box>
           
-          <TxnsNav month={month} setMonth={setMonth} filters={filters} setFilters={setFilters}/>
+          <TxnsNav month={month} setMonth={setMonth} filters={filters} setFilters={setFilters} page={'txns'}/>
           {searchMode && 
             <TextField
               size="small"
