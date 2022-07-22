@@ -44,6 +44,10 @@ export default function Breakdown () {
       <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false} height={200}/>
       <TotalValuePrimary value={`$ ${data.totalAmount}`} />
       <ListCategory categories={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} month={month}/>
+      <br />
+      <br />
+      <br />
+      <br />
       <NavBar />
     </Box>
   );
