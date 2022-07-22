@@ -4,19 +4,23 @@ import GenerateIcon from "../atoms/GenerateIcon";
 import MonthPicker from "../atoms/MonthPicker";
 import getFirstLastDates from "../../../utils/getFirstLastDates.mjs";
 
-export default function TxnsNav ({ month, setMonth, filters, setFilters }) {
+export default function TxnsNav ({ month, setMonth, filters, setFilters, page }) {
   const selectPreviousMonth = () => {
     const newDate = new Date(month.setMonth(month.getMonth()-1))
     setMonth(newDate);
-    const { firstDate, lastDate } = getFirstLastDates("month", newDate)
-    setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    if (page === 'txns') {
+      const { firstDate, lastDate } = getFirstLastDates("month", newDate)
+      setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    }
   }
 
   const selectNextMonth = () => {
     const newDate = new Date(month.setMonth(month.getMonth()+1))
     setMonth(newDate);
-    const { firstDate, lastDate } = getFirstLastDates("month", newDate)
-    setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    if (page === 'txns') {
+      const { firstDate, lastDate } = getFirstLastDates("month", newDate)
+      setFilters({...filters, txnDateMin: firstDate,txnDateMax: lastDate})
+    }
   }
 
   return (

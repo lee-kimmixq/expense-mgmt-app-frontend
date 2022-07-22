@@ -109,7 +109,7 @@ export default function Reports () {
       }}
     >
     <PageHeader pageTitle={`Reports`} />
-    <TxnsNav month={month} setMonth={setMonth}/>
+    <TxnsNav month={month} setMonth={setMonth} page={'reports'}/>
     <ReportsNav setTabFocus={setTabFocus} tabValue={tabFocus}/>
 
     <Box sx={{

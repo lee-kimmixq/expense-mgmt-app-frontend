@@ -86,7 +86,7 @@ export default function Transactions () {
             </Box>
           </Box>
           
-          <TxnsNav month={month} setMonth={setMonth} filters={filters} setFilters={setFilters}/>
+          <TxnsNav month={month} setMonth={setMonth} filters={filters} setFilters={setFilters} page={'txns'}/>
           {searchMode && 
             <TextField
               size="small"
