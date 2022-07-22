@@ -41,7 +41,7 @@ export default function Breakdown () {
       </Box>
       <CatReportsNav setTabFocus={setTabFocus} tabValue={tabFocus}/>
       <TxnsNav month={month} setMonth={setMonth}/>
-      <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false} height={"25%"}/>
+      <ChartPie data={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} hasTooltip={false} height={200}/>
       <TotalValuePrimary value={data.totalAmount} />
       <ListCategory categories={data.breakdown.map((category) => { return {...category, total: Number(category.total)}})} month={month}/>
       <NavBar />
