@@ -1,10 +1,17 @@
 import * as React from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip} from 'recharts';
+import Box from "@mui/material/Box"
 import categories from "../../../utils/categories.js";
 
 export default function ChartPie ({ data, hasTooltip, height }) {
 
-  if (data.length === 0) return <>No Transactions Available</>
+  if (data.length === 0) return <Box sx={{
+        display: 'inline-flex',
+        flexDirection: 'column',
+        alignItems: 'center',     
+        justifyContent: 'center',     
+        minHeight: height,
+      }}>No Transactions Available</Box>
 
   return (
   <ResponsiveContainer width='100%' height={height || '100%'} >
