@@ -27,6 +27,7 @@ export default function Transactions () {
 
   const handleClickSearch = () => {
     setSearchMode(!searchMode);
+    if (searchMode) setSearchText("");
   };
 
   const { data, isLoading } = useTxns(getTxnQueryParams("transactions", null, "month", month, filters));
