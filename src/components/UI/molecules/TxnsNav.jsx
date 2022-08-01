@@ -30,7 +30,7 @@ export default function TxnsNav ({ month, setMonth, filters, setFilters, page })
       sx={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}
     >
         <Box onClick={selectPreviousMonth}><GenerateIcon name={'arrow_back_ios_new'} /></Box>
-        <MonthPicker month={month} setMonth={setMonth} />
+        <MonthPicker month={month} setMonth={setMonth} page={'txns'} filters={filters} setFilters={setFilters}   />
         <Box onClick={isValidDate ? selectNextMonth : null}><GenerateIcon name={isValidDate ? 'arrow_forward_ios' : ''} /></Box>
     </Box>
       
