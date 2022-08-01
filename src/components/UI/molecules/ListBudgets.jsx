@@ -30,7 +30,7 @@ export default function ListBudgets ({ budgets, pinMode, setShowEditDialog, hand
               <ListTxnText textValue={budget["category.name"]}/>
             </Box>
           </ListItem>
-          <LinearProgressBar categoryColor={categories.filter(category => category.name === budget["category.name"])[0].color} totalExp={budget.total <= budget.amount ? budget.total : budget.amount} budgetAmt={budget.amount} />
+          <LinearProgressBar categoryColor={categories.filter(category => category.name === budget["category.name"])[0].color} totalExp={Number(budget.total) <= Number(budget.amount) ? budget.total : budget.amount} budgetAmt={budget.amount} />
       </Box>
     )
     return listBudgetJsx;

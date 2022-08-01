@@ -25,7 +25,7 @@ export default function BudgetCards () {
       >
         <Box sx={{ position: 'relative', display: 'inline-flex', color: categories.filter(category => category.name === budget["category.name"])[0].color }}>
           <CircularProgress variant="determinate" value={100} size={90} thickness={6} color={'light'}/>
-          <CircularProgress variant="determinate" value={budget.total < budget.amount ? budget.total/budget.amount*100 : 100} size={90} thickness={6} color={'inherit'} sx={{position: 'absolute'}}/>
+          <CircularProgress variant="determinate" value={Number(budget.total) <= Number(budget.amount) ? budget.total/budget.amount*100 : 100} size={90} thickness={6} color={'inherit'} sx={{position: 'absolute'}}/>
           <Box
             sx={{
               top: 0,
